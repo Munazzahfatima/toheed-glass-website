@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --navy: #0b2d5b;
+  --gold: #d4a64a;
+}
+
+html { scroll-behavior: smooth; }
+
+body { @apply bg-white text-navy font-sans antialiased; }
+h1, h2, h3, h4 { @apply font-serif; }
+
+.glass-panel { @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-luxury; }
+.gold-divider { @apply h-px w-16 bg-gold; }
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-navy px-7 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:bg-navy-light hover:shadow-luxury;
+}
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-gold px-7 py-3 text-sm font-medium tracking-wide text-navy transition-all duration-300 hover:bg-gold hover:text-white hover:shadow-gold;
+}
+.section-eyebrow { @apply text-xs font-semibold tracking-[0.25em] text-gold uppercase; }
+.container-luxe { @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10; }
+.card-luxe { @apply rounded-2xl border border-navy/5 bg-white shadow-luxury transition-all duration-300 hover:-translate-y-1 hover:shadow-gold; }
+
+::selection { background: var(--gold); color: white; }
+input, textarea, select { @apply outline-none; }
