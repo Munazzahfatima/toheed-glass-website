@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/require-admin";
 import { slugify } from "@/lib/slugify";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   const colors = await prisma.ledColor.findMany({ orderBy: { sortOrder: "asc" } });
   return NextResponse.json(colors);

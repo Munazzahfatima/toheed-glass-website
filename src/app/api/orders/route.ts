@@ -4,6 +4,8 @@ import { requireAdmin } from "@/lib/require-admin";
 import { calculateProductCost, calculateDeliveryCost, generateOrderNumber } from "@/lib/pricing";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
+
 const schema = z.object({
   productId: z.string(),
   colorId: z.string().optional(),
