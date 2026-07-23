@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { prisma } from "@/lib/prisma";
-import { MessageCircle, CheckCircle, Star, Phone } from "lucide-react";
+import { MessageCircle, Star, Phone } from "lucide-react";
 import { getWhatsappLink } from "@/lib/whatsapp";
 import HeroSlider from "@/components/HeroSlider";
 
@@ -57,40 +57,59 @@ export default async function HomePage() {
       </section>
 
       {/* 3 ── WHY CHOOSE US */}
-      <section className="bg-navy py-16">
-        <div className="container-luxe grid items-center gap-10 lg:grid-cols-2">
+      <section className="py-16" style={{ background: "linear-gradient(135deg, #1a3c6e 0%, #2a5298 100%)" }}>
+        <div className="container-luxe grid items-center gap-12 lg:grid-cols-2">
+          {/* Left — text + rounded feature cards */}
           <div>
-            <h2 className="font-serif text-3xl font-bold text-white sm:text-4xl">
+            <p className="text-xs font-semibold uppercase tracking-widest text-gold">Why Choose Us</p>
+            <h2 className="mt-3 font-serif text-3xl font-bold text-white sm:text-4xl">
               Why Choose New Toheed Glass?
             </h2>
-            <ul className="mt-8 space-y-3">
+            <p className="mt-4 text-sm leading-relaxed text-white/60">
+              We combine decades of expertise with premium materials and modern techniques to deliver glass solutions that exceed expectations.
+            </p>
+            {/* Rounded feature pills */}
+            <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
               {[
-                "Trusted glass manufacturer and supplier across Pakistan",
-                "Over 10 years of experience in glass design, supply, and installation",
-                "Certified for quality and reliability — residential & commercial",
-                "Transparent pricing with warranty-backed services",
-                "Nationwide service coverage – Lahore, Karachi, Islamabad & more",
+                { icon: "🏆", text: "Trusted manufacturer across Pakistan" },
+                { icon: "⏱️", text: "10+ years of glass design experience" },
+                { icon: "✅", text: "Certified quality & reliability" },
+                { icon: "💰", text: "Transparent & warranty-backed pricing" },
+                { icon: "🚚", text: "Nationwide service coverage" },
+                { icon: "🔧", text: "Professional installation team" },
               ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-white/80">
-                  <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
-                  {item}
-                </li>
+                <div key={item.text}
+                     className="flex items-center gap-3 rounded-2xl bg-white/10 px-4 py-3 backdrop-blur-sm">
+                  <span className="text-xl">{item.icon}</span>
+                  <span className="text-sm font-medium text-white/90">{item.text}</span>
+                </div>
               ))}
-            </ul>
+            </div>
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link href="/contact" className="btn-secondary">Get a Consultation</Link>
+              <Link href="/contact"
+                    className="rounded-full border-2 border-white px-7 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-navy">
+                Get a Consultation
+              </Link>
               <a href={wa} target="_blank" rel="noopener noreferrer" className="btn-wa">
                 <MessageCircle className="h-4 w-4" /> Chat on WhatsApp
               </a>
             </div>
           </div>
-          <div className="relative mx-auto w-full max-w-md overflow-hidden rounded-2xl shadow-hover">
-            <Image
-              src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85"
-              alt="Glass building architecture"
-              width={600} height={450}
-              className="h-full w-full object-cover"
-            />
+          {/* Right — image with rounded corners */}
+          <div className="relative mx-auto w-full max-w-lg">
+            <div className="overflow-hidden rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
+              <Image
+                src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85"
+                alt="Glass building architecture"
+                width={600} height={450}
+                className="h-full w-full object-cover"
+              />
+            </div>
+            {/* Floating stat badge */}
+            <div className="absolute -bottom-5 -left-5 rounded-2xl bg-white px-6 py-4 shadow-hover">
+              <p className="font-serif text-3xl font-bold text-navy">500+</p>
+              <p className="text-xs text-gray-500">Projects Completed</p>
+            </div>
           </div>
         </div>
       </section>
@@ -103,47 +122,49 @@ export default async function HomePage() {
             <h2 className="mt-2 font-serif text-3xl font-bold text-navy sm:text-4xl">Our Core Services</h2>
             <div className="divider-blue" />
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {[
               {
                 title: "Architectural Glass",
                 items: ["Curtain Wall Glass & ACP Cladding", "Glass Façades & Shopfronts", "Skylights, Stairs & Railings"],
                 href: "/products?category=ARCHITECTURAL_GLASS",
-                img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=400&q=80",
+                icon: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=200&q=80",
               },
               {
                 title: "Decorative Glass Designs",
                 items: ["Beveled Mirror Walls", "Stained & Frosted Glass", "LED Smart Mirrors"],
                 href: "/products?category=DECORATIVE_GLASS",
-                img: "https://images.unsplash.com/photo-1548263594-a71ea65a8598?w=400&q=80",
+                icon: "https://images.unsplash.com/photo-1548263594-a71ea65a8598?w=200&q=80",
               },
               {
                 title: "Residential Glass",
                 items: ["Frameless Shower Cabins", "Sliding & Folding Doors", "Staircase Railings"],
                 href: "/products?category=ARCHITECTURAL_GLASS",
-                img: "https://images.unsplash.com/photo-1558618047-f4e80ccacd02?w=400&q=80",
+                icon: "https://images.unsplash.com/photo-1558618047-f4e80ccacd02?w=200&q=80",
               },
               {
                 title: "Commercial Glass",
                 items: ["Office Glass Partitions", "Atrium Glazing", "Decorative Wall Features"],
                 href: "/products?category=ARCHITECTURAL_GLASS",
-                img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80",
+                icon: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=200&q=80",
               },
             ].map((s) => (
-              <div key={s.title} className="card-product flex flex-col text-center">
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image src={s.img} alt={s.title} fill className="object-cover" />
+              <div key={s.title}
+                   className="group flex flex-col items-center rounded-2xl border border-gray-100 bg-white px-6 pb-8 pt-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                {/* Circular icon image */}
+                <div className="relative h-24 w-24 overflow-hidden rounded-full border-4 border-gray-100 bg-gray-50 shadow-sm">
+                  <Image src={s.icon} alt={s.title} fill className="object-cover" />
                 </div>
-                <div className="flex flex-1 flex-col p-5">
-                  <h3 className="font-serif text-base font-bold text-navy">{s.title}</h3>
-                  <ul className="mt-3 flex-1 space-y-1 text-sm text-gray-500">
-                    {s.items.map((i) => <li key={i}>{i}</li>)}
-                  </ul>
-                  <Link href={s.href}
-                        className="mt-4 inline-flex items-center justify-center gap-1 text-sm font-semibold text-navy underline-offset-2 hover:text-gold hover:underline">
-                    LEARN MORE →
-                  </Link>
-                </div>
+                <h3 className="mt-5 font-serif text-base font-bold text-[#2563eb]">{s.title}</h3>
+                <ul className="mt-3 flex-1 space-y-1.5">
+                  {s.items.map((i) => (
+                    <li key={i} className="text-sm text-gray-500">{i}</li>
+                  ))}
+                </ul>
+                <Link href={s.href}
+                      className="mt-5 inline-flex items-center gap-1 text-sm font-bold text-[#2563eb] transition hover:gap-3 hover:text-navy">
+                  LEARN MORE →
+                </Link>
               </div>
             ))}
           </div>
@@ -198,24 +219,53 @@ export default async function HomePage() {
       )}
 
       {/* 7 ── PROCESS */}
-      <section className="section-bg py-14">
+      <section className="section-bg py-16">
         <div className="container-luxe">
           <div className="mb-12 text-center">
             <h2 className="font-serif text-3xl font-bold text-navy">Our Process</h2>
             <div className="divider-blue" />
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
             {[
-              { icon: "💬", title: "Consultation",      desc: "Understanding your project vision" },
-              { icon: "📐", title: "Design & Mock-ups", desc: "Customized CAD drawings & proposals" },
-              { icon: "⚙️", title: "Fabrication",       desc: "Precision cutting, tempering & finishing" },
-              { icon: "🔧", title: "Installation",      desc: "Expert installation with guaranteed quality" },
-              { icon: "🛡️", title: "Support",           desc: "After-sales service & warranty maintenance" },
+              {
+                icon: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=120&q=80",
+                emoji: "💬",
+                title: "Consultation",
+                desc: "Understanding your project vision",
+              },
+              {
+                icon: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=120&q=80",
+                emoji: "📐",
+                title: "Design & Mock-ups",
+                desc: "Customized CAD drawings & proposals",
+              },
+              {
+                icon: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=120&q=80",
+                emoji: "⚙️",
+                title: "Fabrication",
+                desc: "Precision cutting, tempering & finishing",
+              },
+              {
+                icon: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=120&q=80",
+                emoji: "🔧",
+                title: "Installation",
+                desc: "Expert installation with guaranteed quality",
+              },
+              {
+                icon: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=120&q=80",
+                emoji: "🛡️",
+                title: "Support",
+                desc: "After-sales service & warranty maintenance",
+              },
             ].map((s) => (
-              <div key={s.title} className="card-product p-6 text-center">
-                <div className="text-4xl">{s.icon}</div>
-                <h3 className="mt-3 font-serif text-base font-bold text-navy">{s.title}</h3>
-                <p className="mt-2 text-xs text-gray-500">{s.desc}</p>
+              <div key={s.title}
+                   className="flex flex-col items-center rounded-2xl border border-gray-200 bg-white px-5 pb-7 pt-6 text-center shadow-sm transition hover:shadow-md">
+                {/* Circular icon */}
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#eef2ff] text-4xl">
+                  {s.emoji}
+                </div>
+                <h3 className="mt-4 font-serif text-base font-bold text-[#2563eb]">{s.title}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-gray-500">{s.desc}</p>
               </div>
             ))}
           </div>
