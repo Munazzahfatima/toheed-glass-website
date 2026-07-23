@@ -118,51 +118,57 @@ export default async function HomePage() {
       <section className="py-16">
         <div className="container-luxe">
           <div className="mb-12 text-center">
-            <p className="section-tag">Popular Categories</p>
+            <p className="section-tag">Popular Faculties</p>
             <h2 className="mt-2 font-serif text-3xl font-bold text-navy sm:text-4xl">Our Core Services</h2>
             <div className="divider-blue" />
           </div>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
               {
                 title: "Architectural Glass",
-                items: ["Curtain Wall Glass & ACP Cladding", "Glass Façades & Shopfronts", "Skylights, Stairs & Railings"],
+                items: ["Curtain Wall Glass & ACP Cladding", "Glass Façades & Shopfronts", "Skylights, Canopies & Structural Installations"],
                 href: "/products?category=ARCHITECTURAL_GLASS",
-                icon: "https://images.unsplash.com/photo-1541976590-713941681591?w=200&q=80",
+                img: "https://images.unsplash.com/photo-1541976590-713941681591?w=300&q=80",
               },
               {
                 title: "Decorative Glass Designs",
-                items: ["Beveled Mirror Walls", "Stained & Frosted Glass", "LED Smart Mirrors"],
+                items: ["Beveled Mirror Walls", "Stained & Frosted Glass", "LED Smart Mirrors & Digital Glass Walls"],
                 href: "/products?category=DECORATIVE_GLASS",
-                icon: "https://images.unsplash.com/photo-1548263594-a71ea65a8598?w=200&q=80",
+                img: "https://images.unsplash.com/photo-1548263594-a71ea65a8598?w=300&q=80",
               },
               {
-                title: "Residential Glass",
-                items: ["Frameless Shower Cabins", "Sliding & Folding Doors", "Staircase Railings"],
+                title: "Residential Glass Solutions",
+                items: ["Frameless Shower Cabins", "Sliding & Folding Glass Doors", "Staircase Railings & Balustrades"],
                 href: "/products?category=ARCHITECTURAL_GLASS",
-                icon: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=200&q=80",
+                img: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=300&q=80",
               },
               {
-                title: "Commercial Glass",
+                title: "Commercial Glass Solutions",
                 items: ["Office Glass Partitions", "Atrium Glazing", "Decorative Wall Features"],
                 href: "/products?category=ARCHITECTURAL_GLASS",
-                icon: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=200&q=80",
+                img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=300&q=80",
               },
             ].map((s) => (
               <div key={s.title}
-                   className="group flex flex-col items-center rounded-2xl border border-gray-100 bg-white px-6 pb-8 pt-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                {/* Circular icon image */}
-                <div className="relative h-24 w-24 overflow-hidden rounded-full border-4 border-gray-100 bg-gray-50 shadow-sm">
-                  <Image src={s.icon} alt={s.title} fill className="object-cover" />
-                </div>
-                <h3 className="mt-5 font-serif text-base font-bold text-[#2563eb]">{s.title}</h3>
-                <ul className="mt-3 flex-1 space-y-1.5">
+                   className="relative flex flex-col overflow-hidden rounded-2xl bg-white px-6 pb-7 pt-7 shadow-sm transition hover:shadow-md"
+                   style={{ backgroundImage: "radial-gradient(circle, #e8eeff 1px, transparent 1px)", backgroundSize: "18px 18px" }}>
+                {/* Title at top */}
+                <h3 className="font-serif text-base font-bold text-[#2563eb]">{s.title}</h3>
+                {/* Items */}
+                <ul className="mt-3 space-y-1">
                   {s.items.map((i) => (
                     <li key={i} className="text-sm text-gray-500">{i}</li>
                   ))}
                 </ul>
+                {/* Circular image at bottom */}
+                <div className="mt-6 flex justify-center">
+                  <div className="relative h-28 w-28 overflow-hidden rounded-full border-4 border-[#e8eeff] shadow-sm">
+                    <Image src={s.img} alt={s.title} fill className="object-cover" />
+                  </div>
+                </div>
+                {/* Learn more */}
                 <Link href={s.href}
-                      className="mt-5 inline-flex items-center gap-1 text-sm font-bold text-[#2563eb] transition hover:gap-3 hover:text-navy">
+                      className="mt-5 flex items-center gap-1 text-sm font-bold text-[#2563eb] transition hover:gap-3 hover:text-navy">
                   LEARN MORE →
                 </Link>
               </div>
