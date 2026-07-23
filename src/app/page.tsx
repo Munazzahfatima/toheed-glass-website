@@ -128,7 +128,7 @@ export default async function HomePage() {
                 title: "Architectural Glass",
                 items: ["Curtain Wall Glass & ACP Cladding", "Glass Façades & Shopfronts", "Skylights, Stairs & Railings"],
                 href: "/products?category=ARCHITECTURAL_GLASS",
-                icon: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=200&q=80",
+                icon: "https://images.unsplash.com/photo-1541976590-713941681591?w=200&q=80",
               },
               {
                 title: "Decorative Glass Designs",
@@ -140,7 +140,7 @@ export default async function HomePage() {
                 title: "Residential Glass",
                 items: ["Frameless Shower Cabins", "Sliding & Folding Doors", "Staircase Railings"],
                 href: "/products?category=ARCHITECTURAL_GLASS",
-                icon: "https://images.unsplash.com/photo-1558618047-f4e80ccacd02?w=200&q=80",
+                icon: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=200&q=80",
               },
               {
                 title: "Commercial Glass",
@@ -219,53 +219,104 @@ export default async function HomePage() {
       )}
 
       {/* 7 ── PROCESS */}
-      <section className="section-bg py-16">
+      <section className="py-16" style={{ background: "#f0f4ff" }}>
         <div className="container-luxe">
           <div className="mb-12 text-center">
-            <h2 className="font-serif text-3xl font-bold text-navy">Our Process</h2>
+            <h2 className="font-serif text-3xl font-bold text-navy sm:text-4xl">Our Process</h2>
             <div className="divider-blue" />
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+
+          {/* Row 1 — 3 cards */}
+          <div className="grid gap-5 sm:grid-cols-3">
             {[
               {
-                icon: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=120&q=80",
-                emoji: "💬",
+                svg: (
+                  <svg viewBox="0 0 64 64" className="h-10 w-10" fill="none" stroke="#1a3c6e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="20" cy="20" r="8"/><circle cx="44" cy="20" r="8"/>
+                    <path d="M4 52c0-8.837 7.163-16 16-16h24c8.837 0 16 7.163 16 16"/>
+                    <path d="M32 28v8M28 36h8"/>
+                  </svg>
+                ),
                 title: "Consultation",
                 desc: "Understanding your project vision",
               },
               {
-                icon: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=120&q=80",
-                emoji: "📐",
+                svg: (
+                  <svg viewBox="0 0 64 64" className="h-10 w-10" fill="none" stroke="#1a3c6e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="8" y="8" width="48" height="36" rx="3"/>
+                    <path d="M16 52h32M32 44v8"/>
+                    <rect x="16" y="16" width="14" height="10" rx="1"/>
+                    <rect x="34" y="16" width="14" height="4" rx="1"/>
+                    <rect x="34" y="24" width="14" height="4" rx="1"/>
+                    <path d="M16 32h32"/>
+                  </svg>
+                ),
                 title: "Design & Mock-ups",
                 desc: "Customized CAD drawings & proposals",
               },
               {
-                icon: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=120&q=80",
-                emoji: "⚙️",
+                svg: (
+                  <svg viewBox="0 0 64 64" className="h-10 w-10" fill="none" stroke="#1a3c6e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="12" y="8" width="40" height="48" rx="4"/>
+                    <path d="M20 8v48M44 8v48M12 28h40M12 38h40"/>
+                    <circle cx="32" cy="18" r="3"/>
+                  </svg>
+                ),
                 title: "Fabrication",
                 desc: "Precision cutting, tempering & finishing",
               },
+            ].map((s) => (
+              <div key={s.title}
+                   className="relative flex flex-col items-center overflow-hidden rounded-2xl bg-white px-6 pb-8 pt-8 text-center shadow-sm"
+                   style={{ backgroundImage: "radial-gradient(circle, #e8eeff 1px, transparent 1px)", backgroundSize: "20px 20px" }}>
+                {/* Lavender circle with icon */}
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#e8eeff]">
+                  {s.svg}
+                </div>
+                <h3 className="mt-5 font-serif text-base font-bold text-[#2563eb]">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-500">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Row 2 — 2 cards centered */}
+          <div className="mt-5 grid gap-5 sm:grid-cols-2 sm:px-24">
+            {[
               {
-                icon: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=120&q=80",
-                emoji: "🔧",
+                svg: (
+                  <svg viewBox="0 0 64 64" className="h-10 w-10" fill="none" stroke="#1a3c6e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="18" y="10" width="28" height="40" rx="2"/>
+                    <path d="M32 10V6M26 58h12M32 50v8"/>
+                    <circle cx="48" cy="18" r="8" fill="none"/>
+                    <path d="M44 18l3 3 5-5"/>
+                    <path d="M18 26H8M18 38H8"/>
+                  </svg>
+                ),
                 title: "Installation",
                 desc: "Expert installation with guaranteed quality",
               },
               {
-                icon: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=120&q=80",
-                emoji: "🛡️",
+                svg: (
+                  <svg viewBox="0 0 64 64" className="h-10 w-10" fill="none" stroke="#1a3c6e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="32" cy="20" r="12"/>
+                    <path d="M32 8v4M32 28v4M20 20h4M40 20h4"/>
+                    <path d="M16 44c0-8.837 7.163-16 16-16s16 7.163 16 16"/>
+                    <path d="M24 52h16M28 56h8"/>
+                    <path d="M26 44l3 4 6-6"/>
+                  </svg>
+                ),
                 title: "Support",
                 desc: "After-sales service & warranty maintenance",
               },
             ].map((s) => (
               <div key={s.title}
-                   className="flex flex-col items-center rounded-2xl border border-gray-200 bg-white px-5 pb-7 pt-6 text-center shadow-sm transition hover:shadow-md">
-                {/* Circular icon */}
-                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#eef2ff] text-4xl">
-                  {s.emoji}
+                   className="relative flex flex-col items-center overflow-hidden rounded-2xl bg-white px-6 pb-8 pt-8 text-center shadow-sm"
+                   style={{ backgroundImage: "radial-gradient(circle, #e8eeff 1px, transparent 1px)", backgroundSize: "20px 20px" }}>
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#e8eeff]">
+                  {s.svg}
                 </div>
-                <h3 className="mt-4 font-serif text-base font-bold text-[#2563eb]">{s.title}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-gray-500">{s.desc}</p>
+                <h3 className="mt-5 font-serif text-base font-bold text-[#2563eb]">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-500">{s.desc}</p>
               </div>
             ))}
           </div>
