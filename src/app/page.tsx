@@ -99,8 +99,8 @@ export default async function HomePage() {
           <div className="relative mx-auto w-full max-w-lg">
             <div className="overflow-hidden rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
               <Image
-                src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=85"
-                alt="Glass building architecture"
+                src="/images/glass-5.jpeg"
+                alt="New Toheed Glass project"
                 width={600} height={450}
                 className="h-full w-full object-cover"
               />
@@ -128,25 +128,25 @@ export default async function HomePage() {
                 title: "Architectural Glass",
                 items: ["Curtain Wall Glass & ACP Cladding", "Glass Façades & Shopfronts", "Skylights, Canopies & Structural Installations"],
                 href: "/products?category=ARCHITECTURAL_GLASS",
-                img: "https://images.unsplash.com/photo-1541976590-713941681591?w=300&q=80",
+                img: "/images/glass-3.jpeg",
               },
               {
                 title: "Decorative Glass Designs",
                 items: ["Beveled Mirror Walls", "Stained & Frosted Glass", "LED Smart Mirrors & Digital Glass Walls"],
                 href: "/products?category=DECORATIVE_GLASS",
-                img: "https://images.unsplash.com/photo-1548263594-a71ea65a8598?w=300&q=80",
+                img: "/images/glass-1.jpeg",
               },
               {
                 title: "Residential Glass Solutions",
                 items: ["Frameless Shower Cabins", "Sliding & Folding Glass Doors", "Staircase Railings & Balustrades"],
                 href: "/products?category=ARCHITECTURAL_GLASS",
-                img: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=300&q=80",
+                img: "/images/glass-4.jpeg",
               },
               {
                 title: "Commercial Glass Solutions",
                 items: ["Office Glass Partitions", "Atrium Glazing", "Decorative Wall Features"],
                 href: "/products?category=ARCHITECTURAL_GLASS",
-                img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=300&q=80",
+                img: "/images/glass-2.jpeg",
               },
             ].map((s) => (
               <div key={s.title}
@@ -344,9 +344,17 @@ export default async function HomePage() {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-              {gallery.map((g) => (
-                <div key={g.id} className="group relative aspect-square overflow-hidden rounded-lg bg-gray-100">
-                  <Image src={g.imageUrl} alt={g.title} fill
+              {/* Use client's own photos first, then gallery items */}
+              {[
+                { src: "/images/glass-1.jpeg", title: "Decorative Glass Installation" },
+                { src: "/images/glass-2.jpeg", title: "Mirror Wall Project" },
+                { src: "/images/glass-3.jpeg", title: "Architectural Glass Work" },
+                { src: "/images/glass-4.jpeg", title: "Glass Railing Project" },
+                { src: "/images/glass-5.jpeg", title: "Commercial Glass Solution" },
+                ...gallery.slice(0, 3).map((g) => ({ src: g.imageUrl, title: g.title })),
+              ].slice(0, 8).map((g, i) => (
+                <div key={i} className="group relative aspect-square overflow-hidden rounded-lg bg-gray-100">
+                  <Image src={g.src} alt={g.title} fill
                          className="object-cover transition duration-500 group-hover:scale-105" />
                   <div className="absolute inset-0 flex items-end bg-gradient-to-t from-navy/60 to-transparent p-3 opacity-0 transition group-hover:opacity-100">
                     <p className="text-xs font-medium text-white">{g.title}</p>

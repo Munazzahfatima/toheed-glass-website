@@ -14,7 +14,7 @@ const slides = [
     desc:  "Integrated LED lighting with customizable colors. Designed for modern bathrooms, salons, and luxury interiors. Available in any size.",
     cta:   { label: "Order Online",         href: "/products/decorative-led-smart-mirror" },
     view:  { label: "View Decorative Glass", href: "/products?category=DECORATIVE_GLASS" },
-    img:   "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&q=85",
+    img:   "/images/glass-1.jpeg",
   },
   {
     tag:   "Decorative Glass",
@@ -23,7 +23,7 @@ const slides = [
     desc:  "Premium beveled mirror walls crafted in custom panel sizes for hotels, homes and commercial spaces.",
     cta:   { label: "Order Online",         href: "/products/decorative-beveled-mirror-wall" },
     view:  { label: "View Mirror Walls",    href: "/products?category=DECORATIVE_GLASS" },
-    img:   "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=85",
+    img:   "/images/glass-2.jpeg",
   },
   {
     tag:   "Architectural Glass",
@@ -32,7 +32,7 @@ const slides = [
     desc:  "Structural glass curtain wall systems for office buildings and hotels across Pakistan.",
     cta:   { label: "Explore Solutions",       href: "/products?category=ARCHITECTURAL_GLASS" },
     view:  { label: "View Architectural Glass", href: "/products?category=ARCHITECTURAL_GLASS" },
-    img:   "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=85",
+    img:   "/images/glass-3.jpeg",
   },
   {
     tag:   "Architectural Glass",
@@ -41,7 +41,7 @@ const slides = [
     desc:  "Frameless shower cabins, staircase railings, terrace balustrades and office glass partitions.",
     cta:   { label: "Browse Products",     href: "/products?category=ARCHITECTURAL_GLASS" },
     view:  { label: "View All Products",   href: "/products" },
-    img:   "https://images.unsplash.com/photo-1558618047-f4e80ccacd02?w=1200&q=85",
+    img:   "/images/glass-4.jpeg",
   },
 ];
 
