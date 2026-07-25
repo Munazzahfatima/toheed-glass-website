@@ -57,9 +57,10 @@ export default async function HomePage() {
       </section>
 
       {/* 3 ── WHY CHOOSE US */}
-      <section className="py-16" style={{ background: "linear-gradient(135deg, #1a3c6e 0%, #2a5298 100%)" }}>
+      <section className="pt-20 pb-16"
+               style={{ background: "linear-gradient(135deg, #1a3c6e 0%, #2a5298 100%)", borderRadius: "3rem 3rem 0 0" }}>
         <div className="container-luxe grid items-center gap-12 lg:grid-cols-2">
-          {/* Left — text + rounded feature cards */}
+          {/* Left — text + rounded feature pills */}
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-gold">Why Choose Us</p>
             <h2 className="mt-3 font-serif text-3xl font-bold text-white sm:text-4xl">
@@ -68,7 +69,7 @@ export default async function HomePage() {
             <p className="mt-4 text-sm leading-relaxed text-white/60">
               We combine decades of expertise with premium materials and modern techniques to deliver glass solutions that exceed expectations.
             </p>
-            {/* Rounded feature pills */}
+            {/* Oval compact pills */}
             <div className="mt-8 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               {[
                 { icon: "🏆", text: "Trusted manufacturer across Pakistan" },
@@ -79,15 +80,15 @@ export default async function HomePage() {
                 { icon: "🔧", text: "Professional installation team" },
               ].map((item) => (
                 <div key={item.text}
-                     className="flex items-center gap-2.5 rounded-full border border-white/20 bg-white/10 px-5 py-2 backdrop-blur-sm">
-                  <span className="text-base leading-none">{item.icon}</span>
-                  <span className="text-xs font-medium text-white/90">{item.text}</span>
+                     className="flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 backdrop-blur-sm">
+                  <span className="shrink-0 text-sm leading-none">{item.icon}</span>
+                  <span className="text-xs font-medium leading-tight text-white/90">{item.text}</span>
                 </div>
               ))}
             </div>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/contact"
-                    className="rounded-full border-2 border-white px-7 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-navy">
+                    className="rounded-full border-2 border-white px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-white hover:text-navy">
                 Get a Consultation
               </Link>
               <a href={wa} target="_blank" rel="noopener noreferrer" className="btn-wa">
@@ -95,19 +96,18 @@ export default async function HomePage() {
               </a>
             </div>
           </div>
-          {/* Right — image with rounded corners */}
-          <div className="relative mx-auto w-full max-w-lg">
+          {/* Right — image */}
+          <div className="relative mx-auto w-full max-w-sm">
             <div className="overflow-hidden rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
               <Image
                 src="/images/glass-5.jpeg"
-                alt="New Toheed Glass project"
-                width={600} height={450}
+                alt="New Toheed Glass LED Mirror"
+                width={500} height={420}
                 className="h-full w-full object-cover"
               />
             </div>
-            {/* Floating stat badge */}
-            <div className="absolute -bottom-5 -left-5 rounded-2xl bg-white px-6 py-4 shadow-hover">
-              <p className="font-serif text-3xl font-bold text-navy">500+</p>
+            <div className="absolute -bottom-5 -left-5 rounded-2xl bg-white px-5 py-3 shadow-hover">
+              <p className="font-serif text-2xl font-bold text-navy">500+</p>
               <p className="text-xs text-gray-500">Projects Completed</p>
             </div>
           </div>

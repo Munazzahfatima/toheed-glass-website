@@ -49,12 +49,12 @@ export default function Navbar() {
         <div className="container-luxe flex h-20 items-center justify-between">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
-            <Image src="/images/logo.png" alt="New Toheed Glass" width={52} height={52}
-                   className="h-12 w-12 object-contain" />
-            <div className="leading-tight">
-              <p className="font-serif text-[17px] font-bold text-navy">New Toheed Glass</p>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold">
+          <Link href="/" className="flex shrink-0 items-center gap-2">
+            <Image src="/images/logo.png" alt="New Toheed Glass" width={44} height={44}
+                   className="h-10 w-10 shrink-0 object-contain" />
+            <div className="leading-tight min-w-0">
+              <p className="font-serif text-[15px] font-bold text-navy leading-none truncate">New Toheed Glass</p>
+              <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-gold truncate">
                 &amp; Accessories
               </p>
             </div>
