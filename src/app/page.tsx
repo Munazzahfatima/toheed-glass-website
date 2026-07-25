@@ -79,8 +79,8 @@ export default async function HomePage() {
                 { icon: "🔧", text: "Professional installation team" },
               ].map((item) => (
                 <div key={item.text}
-                     className="flex items-center gap-3 rounded-2xl bg-white/10 px-4 py-3 backdrop-blur-sm">
-                  <span className="text-xl">{item.icon}</span>
+                     className="flex items-center gap-2.5 rounded-full bg-white/10 px-4 py-2.5 backdrop-blur-sm">
+                  <span className="text-lg">{item.icon}</span>
                   <span className="text-sm font-medium text-white/90">{item.text}</span>
                 </div>
               ))}
@@ -95,14 +95,13 @@ export default async function HomePage() {
               </a>
             </div>
           </div>
-          {/* Right — oval portrait image */}
-          <div className="relative mx-auto w-full max-w-xs">
-            <div className="overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
-                 style={{ borderRadius: "50% / 40%", aspectRatio: "3/4" }}>
+          {/* Right — image with rounded corners */}
+          <div className="relative mx-auto w-full max-w-lg">
+            <div className="overflow-hidden rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
               <Image
                 src="/images/glass-5.jpeg"
                 alt="New Toheed Glass project"
-                width={400} height={530}
+                width={600} height={450}
                 className="h-full w-full object-cover"
               />
             </div>
