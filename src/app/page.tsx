@@ -95,13 +95,14 @@ export default async function HomePage() {
               </a>
             </div>
           </div>
-          {/* Right — image with rounded corners */}
-          <div className="relative mx-auto w-full max-w-lg">
-            <div className="overflow-hidden rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
+          {/* Right — oval portrait image */}
+          <div className="relative mx-auto w-full max-w-xs">
+            <div className="overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
+                 style={{ borderRadius: "50% / 40%", aspectRatio: "3/4" }}>
               <Image
                 src="/images/glass-5.jpeg"
                 alt="New Toheed Glass project"
-                width={600} height={450}
+                width={400} height={530}
                 className="h-full w-full object-cover"
               />
             </div>
