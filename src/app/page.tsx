@@ -69,7 +69,7 @@ export default async function HomePage() {
               We combine decades of expertise with premium materials and modern techniques to deliver glass solutions that exceed expectations.
             </p>
             {/* Rounded feature pills */}
-            <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="mt-8 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               {[
                 { icon: "🏆", text: "Trusted manufacturer across Pakistan" },
                 { icon: "⏱️", text: "10+ years of glass design experience" },
@@ -79,9 +79,9 @@ export default async function HomePage() {
                 { icon: "🔧", text: "Professional installation team" },
               ].map((item) => (
                 <div key={item.text}
-                     className="flex items-center gap-2.5 rounded-full bg-white/10 px-4 py-2.5 backdrop-blur-sm">
-                  <span className="text-lg">{item.icon}</span>
-                  <span className="text-sm font-medium text-white/90">{item.text}</span>
+                     className="flex items-center gap-2.5 rounded-full border border-white/20 bg-white/10 px-5 py-2 backdrop-blur-sm">
+                  <span className="text-base leading-none">{item.icon}</span>
+                  <span className="text-xs font-medium text-white/90">{item.text}</span>
                 </div>
               ))}
             </div>
