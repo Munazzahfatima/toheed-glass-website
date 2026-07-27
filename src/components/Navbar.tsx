@@ -5,16 +5,51 @@ import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 
-const decorativeItems = [
-  "Ceiling Glass","Texture Crystal Door Panel","Texture Crystal Window Panel",
-  "Beveled Mirror Wall","LED Smart Mirror","Frosted Glass",
-  "Original Stained Glass","Privacy Frosted Glass","Artistic Stained Glass",
-];
-const architecturalItems = [
-  "ACP Wall Cladding","Double Glazed Glass","Glass Curtain Wall",
-  "Glass Shop Front","Office Glass Partition","Shower Cabin",
-  "Skylight Glass","Single Glass Door","Stairs Glass Railing",
-  "Tempered Glass","Terrace Glass Railing",
+type NavProduct = { name: string; slug: string };
+
+const categoryGroups: { key: string; label: string; items: NavProduct[] }[] = [
+  {
+    key: "DECORATIVE",
+    label: "Decorative",
+    items: [
+      { name: "Ceiling Glass", slug: "ceiling-glass" },
+      { name: "Texture Crystal Glass Door Panel", slug: "texture-crystal-glass-door-panel" },
+      { name: "Texture Crystal Glass Window Panel", slug: "texture-crystal-glass-window-panel" },
+      { name: "Decorative Beveled Mirror Wall", slug: "decorative-beveled-mirror-wall" },
+      { name: "Decorative LED Smart Mirror", slug: "decorative-led-smart-mirror" },
+      { name: "Frosted Glass", slug: "frosted-glass" },
+    ],
+  },
+  {
+    key: "RESIDENTIAL",
+    label: "Residential",
+    items: [
+      { name: "Shower Cabin", slug: "shower-cabin" },
+      { name: "Skylight Glass", slug: "skylight-glass" },
+      { name: "Single Glass Door", slug: "single-glass-door" },
+      { name: "Stairs Glass Railing", slug: "stairs-glass-railing" },
+      { name: "Terrace Glass Railing", slug: "terrace-glass-railing" },
+    ],
+  },
+  {
+    key: "COMMERCIAL",
+    label: "Commercial",
+    items: [
+      { name: "ACP Wall Cladding", slug: "acp-wall-cladding" },
+      { name: "Double Glazed Glass", slug: "double-glazed-glass" },
+      { name: "Glass Curtain Wall", slug: "glass-curtain-wall" },
+      { name: "Glass Shop Front", slug: "glass-shop-front" },
+      { name: "Office Glass Partition", slug: "office-glass-partition" },
+    ],
+  },
+  {
+    key: "SAFETY",
+    label: "Safety",
+    items: [
+      { name: "Tempered Glass", slug: "tempered-glass" },
+      { name: "Double Glazed Glass", slug: "double-glazed-glass" },
+    ],
+  },
 ];
 
 export default function Navbar() {
@@ -82,36 +117,24 @@ export default function Navbar() {
 
               {prodOpen && (
                 <div onMouseLeave={() => setProdOpen(false)}
-                     className="absolute left-0 top-full z-50 mt-1 w-[480px] rounded-xl border border-gray-100 bg-white shadow-hover">
-                  <div className="grid grid-cols-2 divide-x divide-gray-100">
-                    <div className="p-4">
-                      <Link href="/products?category=DECORATIVE_GLASS"
-                            onClick={() => setProdOpen(false)}
-                            className="mb-2 block text-xs font-bold uppercase tracking-widest text-gold hover:underline">
-                        DECORATIVE GLASS
-                      </Link>
-                      {decorativeItems.map((i) => (
-                        <Link key={i} href="/products?category=DECORATIVE_GLASS"
+                     className="absolute left-1/2 top-full z-50 mt-1 w-[820px] max-w-[92vw] -translate-x-1/2 rounded-xl border border-gray-100 bg-white shadow-hover">
+                  <div className="grid grid-cols-4 divide-x divide-gray-100">
+                    {categoryGroups.map((group) => (
+                      <div key={group.key} className="p-4">
+                        <Link href={`/products?category=${group.key}`}
                               onClick={() => setProdOpen(false)}
-                              className="block rounded py-1.5 px-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-navy">
-                          {i}
+                              className="mb-2 block text-xs font-bold uppercase tracking-widest text-gold hover:underline">
+                          {group.label}
                         </Link>
-                      ))}
-                    </div>
-                    <div className="p-4">
-                      <Link href="/products?category=ARCHITECTURAL_GLASS"
-                            onClick={() => setProdOpen(false)}
-                            className="mb-2 block text-xs font-bold uppercase tracking-widest text-gold hover:underline">
-                        ARCHITECTURAL GLASS
-                      </Link>
-                      {architecturalItems.map((i) => (
-                        <Link key={i} href="/products?category=ARCHITECTURAL_GLASS"
-                              onClick={() => setProdOpen(false)}
-                              className="block rounded py-1.5 px-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-navy">
-                          {i}
-                        </Link>
-                      ))}
-                    </div>
+                        {group.items.map((i) => (
+                          <Link key={i.slug} href={`/products/${i.slug}`}
+                                onClick={() => setProdOpen(false)}
+                                className="block rounded py-1.5 px-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-navy">
+                            {i.name}
+                          </Link>
+                        ))}
+                      </div>
+                    ))}
                   </div>
                   <div className="border-t border-gray-100 bg-gray-50 px-4 py-2 text-right">
                     <Link href="/products" onClick={() => setProdOpen(false)}
@@ -155,15 +178,17 @@ export default function Navbar() {
                   Products <ChevronDown className="h-4 w-4 text-gold" />
                 </summary>
                 <div className="bg-gray-50 px-4 py-3">
-                  <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-gold">Decorative Glass</p>
-                  {decorativeItems.map((i) => (
-                    <Link key={i} href="/products?category=DECORATIVE_GLASS" onClick={() => setOpen(false)}
-                          className="block py-1 pl-2 text-sm text-gray-600">{i}</Link>
-                  ))}
-                  <p className="mb-1 mt-3 text-[10px] font-bold uppercase tracking-widest text-gold">Architectural Glass</p>
-                  {architecturalItems.map((i) => (
-                    <Link key={i} href="/products?category=ARCHITECTURAL_GLASS" onClick={() => setOpen(false)}
-                          className="block py-1 pl-2 text-sm text-gray-600">{i}</Link>
+                  {categoryGroups.map((group) => (
+                    <div key={group.key} className="mb-3">
+                      <Link href={`/products?category=${group.key}`} onClick={() => setOpen(false)}
+                            className="mb-1 block text-[10px] font-bold uppercase tracking-widest text-gold">
+                        {group.label}
+                      </Link>
+                      {group.items.map((i) => (
+                        <Link key={i.slug} href={`/products/${i.slug}`} onClick={() => setOpen(false)}
+                              className="block py-1 pl-2 text-sm text-gray-600">{i.name}</Link>
+                      ))}
+                    </div>
                   ))}
                 </div>
               </details>

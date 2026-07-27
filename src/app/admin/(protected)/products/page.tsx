@@ -68,7 +68,7 @@ export default function AdminProductsPage() {
                 <td className="p-4 font-medium text-navy">
                   {p.name} {p.isFeatured && <Star className="inline h-3.5 w-3.5 fill-gold text-gold" />}
                 </td>
-                <td className="p-4 text-navy/60">{p.category.replaceAll("_", " ")}</td>
+                <td className="p-4 text-navy/60">{(p.categories || []).join(", ")}</td>
                 <td className="p-4 text-navy/60">
                   {p.pricingType === "PER_SQFT" ? `PKR ${formatPKR(Number(p.pricePerSqft))}/sqft` : `PKR ${formatPKR(Number(p.fixedPrice))}`}
                 </td>

@@ -23,8 +23,10 @@ model Admin {
 }
 
 enum ProductCategory {
-  DECORATIVE_GLASS
-  ARCHITECTURAL_GLASS
+  DECORATIVE
+  RESIDENTIAL
+  COMMERCIAL
+  SAFETY
 }
 
 enum PricingType {
@@ -43,7 +45,7 @@ model Product {
   id            String          @id @default(cuid())
   name          String
   slug          String          @unique
-  category      ProductCategory
+  categories    ProductCategory[] @default([])
   description   String
   pricingType   PricingType     @default(PER_SQFT)
   pricePerSqft  Decimal?        @db.Decimal(10, 2)

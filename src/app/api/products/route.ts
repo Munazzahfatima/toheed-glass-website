@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 
   const products = await prisma.product.findMany({
     where: {
-      ...(category ? { category: category as any } : {}),
+      ...(category ? { categories: { has: category as any } } : {}),
       ...(activeOnly ? { isActive: true } : {}),
     },
     include: { images: { orderBy: { sortOrder: "asc" } }, colors: { include: { color: true } } },
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
     data: {
       name: body.name,
       slug: `${slug}-${Math.floor(Math.random() * 9000 + 1000)}`,
-      category: body.category,
+      categories: body.categories || [],
       description: body.description,
       pricingType: body.pricingType,
       pricePerSqft: body.pricingType === "PER_SQFT" ? body.pricePerSqft : null,

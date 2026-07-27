@@ -20,7 +20,7 @@ type Product = {
   name: string;
   slug: string;
   description: string;
-  category: string;
+  categories: string[];
   pricingType: "PER_SQFT" | "FIXED";
   pricePerSqft: number | null;
   fixedPrice: number | null;
@@ -108,7 +108,7 @@ Order #: ${data.order.orderNumber}
 *City:* ${details.city}
 *Address:* ${details.address}
 
-*Product Category:* ${product.category.replaceAll("_", " ")}
+*Product Category:* ${product.categories.join(" / ")}
 *Design:* ${product.name}
 ${!isFixed ? `*Dimensions:* ${selectedSize.label} inches (${shape})\n` : ""}${
         selectedColor ? `*LED Color:* ${selectedColor.name}\n` : ""

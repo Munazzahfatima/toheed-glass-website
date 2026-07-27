@@ -10,6 +10,34 @@ function slugify(str: string): string {
     .replace(/^-|-$/g, "");
 }
 
+// The 4 storefront groups. A product can belong to more than one
+// (e.g. Double Glazed Glass is both Commercial and Safety).
+const categoryMap: Record<string, ("DECORATIVE" | "RESIDENTIAL" | "COMMERCIAL" | "SAFETY")[]> = {
+  "ceiling-glass": ["DECORATIVE"],
+  "texture-crystal-glass-door-panel": ["DECORATIVE"],
+  "texture-crystal-glass-window-panel": ["DECORATIVE"],
+  "decorative-beveled-mirror-wall": ["DECORATIVE"],
+  "decorative-led-smart-mirror": ["DECORATIVE"],
+  "frosted-glass": ["DECORATIVE"],
+  "privacy-frosted-glass": ["DECORATIVE"],
+  "original-stained-glass": ["DECORATIVE"],
+  "artistic-stained-glass": ["DECORATIVE"],
+
+  "shower-cabin": ["RESIDENTIAL"],
+  "skylight-glass": ["RESIDENTIAL"],
+  "single-glass-door": ["RESIDENTIAL"],
+  "stairs-glass-railing": ["RESIDENTIAL"],
+  "terrace-glass-railing": ["RESIDENTIAL"],
+
+  "acp-wall-cladding": ["COMMERCIAL"],
+  "glass-curtain-wall": ["COMMERCIAL"],
+  "glass-shop-front": ["COMMERCIAL"],
+  "office-glass-partition": ["COMMERCIAL"],
+  "double-glazed-glass": ["COMMERCIAL", "SAFETY"],
+
+  "tempered-glass": ["SAFETY"],
+};
+
 async function main() {
   // ── Admin ──────────────────────────────────────────────────────────────
   const hashedPassword = await bcrypt.hash("Admin@12345", 10);
@@ -232,14 +260,19 @@ async function main() {
       }
       await prisma.product.update({
         where: { slug: p.slug },
-        data: { hasCheckout: p.hasCheckout, isFeatured: p.isFeatured, sortOrder: i },
+        data: {
+          hasCheckout: p.hasCheckout,
+          isFeatured: p.isFeatured,
+          sortOrder: i,
+          categories: (categoryMap[p.slug] || ["DECORATIVE"]) as any,
+        },
       });
     } else {
       await prisma.product.create({
         data: {
           name: p.name,
           slug: p.slug,
-          category: "DECORATIVE_GLASS",
+          categories: (categoryMap[p.slug] || ["DECORATIVE"]) as any,
           description: p.description,
           pricingType: p.pricingType,
           pricePerSqft: p.pricePerSqft,
@@ -382,14 +415,18 @@ async function main() {
       }
       await prisma.product.update({
         where: { slug: p.slug },
-        data: { isFeatured: p.isFeatured, sortOrder: i },
+        data: {
+          isFeatured: p.isFeatured,
+          sortOrder: i,
+          categories: (categoryMap[p.slug] || ["COMMERCIAL"]) as any,
+        },
       });
     } else {
       await prisma.product.create({
         data: {
           name: p.name,
           slug: p.slug,
-          category: "ARCHITECTURAL_GLASS",
+          categories: (categoryMap[p.slug] || ["COMMERCIAL"]) as any,
           description: p.description,
           pricingType: "PER_SQFT",
           pricePerSqft: 1500,

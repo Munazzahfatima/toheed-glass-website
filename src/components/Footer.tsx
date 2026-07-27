@@ -38,31 +38,48 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Decorative Glass */}
+        {/* Popular Products — each links straight to its own product page */}
         <div>
-          <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-gold">Decorative Glass</h4>
+          <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-gold">Popular Products</h4>
           <ul className="space-y-2">
-            {["Ceiling Glass","LED Smart Mirror","Beveled Mirror Wall","Frosted Glass",
-              "Privacy Frosted Glass","Original Stained Glass","Artistic Stained Glass"].map((i) => (
-              <li key={i}>
-                <Link href="/products?category=DECORATIVE_GLASS"
-                      className="text-sm text-white/50 transition hover:text-gold">{i}</Link>
+            {[
+              { name: "Decorative LED Smart Mirror", slug: "decorative-led-smart-mirror" },
+              { name: "Decorative Beveled Mirror Wall", slug: "decorative-beveled-mirror-wall" },
+              { name: "Frosted Glass", slug: "frosted-glass" },
+              { name: "Shower Cabin", slug: "shower-cabin" },
+              { name: "Stairs Glass Railing", slug: "stairs-glass-railing" },
+              { name: "Glass Curtain Wall", slug: "glass-curtain-wall" },
+              { name: "Office Glass Partition", slug: "office-glass-partition" },
+              { name: "Tempered Glass", slug: "tempered-glass" },
+            ].map((i) => (
+              <li key={i.slug}>
+                <Link href={`/products/${i.slug}`}
+                      className="text-sm text-white/50 transition hover:text-gold">{i.name}</Link>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Architectural Glass */}
+        {/* Shop by Category */}
         <div>
-          <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-gold">Architectural Glass</h4>
+          <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-gold">Shop by Category</h4>
           <ul className="space-y-2">
-            {["ACP Wall Cladding","Double Glazed Glass","Glass Curtain Wall","Glass Shop Front",
-              "Office Glass Partition","Shower Cabin","Stairs Glass Railing","Terrace Glass Railing","Tempered Glass"].map((i) => (
-              <li key={i}>
-                <Link href="/products?category=ARCHITECTURAL_GLASS"
-                      className="text-sm text-white/50 transition hover:text-gold">{i}</Link>
+            {[
+              { name: "Decorative", value: "DECORATIVE" },
+              { name: "Residential", value: "RESIDENTIAL" },
+              { name: "Commercial", value: "COMMERCIAL" },
+              { name: "Safety", value: "SAFETY" },
+            ].map((c) => (
+              <li key={c.value}>
+                <Link href={`/products?category=${c.value}`}
+                      className="text-sm text-white/50 transition hover:text-gold">{c.name}</Link>
               </li>
             ))}
+            <li>
+              <Link href="/products" className="text-sm font-semibold text-gold transition hover:text-white">
+                View All Products →
+              </Link>
+            </li>
           </ul>
         </div>
 

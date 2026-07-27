@@ -37,13 +37,15 @@ export default async function ProductDetailPage({
 
   const settings = await prisma.settings.findUnique({ where: { id: "settings" } });
 
-  const categoryLabel =
-    product.category === "DECORATIVE_GLASS" ? "Decorative Glass" : "Architectural Glass";
-
-  const categoryHref =
-    product.category === "DECORATIVE_GLASS"
-      ? "/products?category=DECORATIVE_GLASS"
-      : "/products?category=ARCHITECTURAL_GLASS";
+  const categoryNames: Record<string, string> = {
+    DECORATIVE: "Decorative",
+    RESIDENTIAL: "Residential",
+    COMMERCIAL: "Commercial",
+    SAFETY: "Safety",
+  };
+  const primaryCategory = product.categories[0] || "DECORATIVE";
+  const categoryLabel = product.categories.map((c) => categoryNames[c] || c).join(" / ") || "Products";
+  const categoryHref = `/products?category=${primaryCategory}`;
 
   const waLink = getWhatsappLink(
     `Hi, I'm interested in "${product.name}". Please share pricing and availability.`
@@ -67,7 +69,7 @@ export default async function ProductDetailPage({
             name: product.name,
             slug: product.slug,
             description: product.description,
-            category: product.category,
+            categories: product.categories,
             pricingType: product.pricingType,
             pricePerSqft: product.pricePerSqft ? Number(product.pricePerSqft) : null,
             fixedPrice: product.fixedPrice ? Number(product.fixedPrice) : null,

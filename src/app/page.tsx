@@ -4,23 +4,27 @@ import { prisma } from "@/lib/prisma";
 import { MessageCircle, Star, Phone } from "lucide-react";
 import { getWhatsappLink } from "@/lib/whatsapp";
 import HeroSlider from "@/components/HeroSlider";
+import WhyChooseUs from "@/components/WhyChooseUs";
 
 async function getData() {
   try {
-    const [decorative, architectural, gallery] = await Promise.all([
+    const [decorative, other, gallery] = await Promise.all([
       prisma.product.findMany({
-        where: { category: "DECORATIVE_GLASS", isActive: true, isFeatured: true },
+        where: { categories: { has: "DECORATIVE" }, isActive: true, isFeatured: true },
         include: { images: { take: 1, orderBy: { sortOrder: "asc" } } },
         take: 4, orderBy: { sortOrder: "asc" },
       }),
       prisma.product.findMany({
-        where: { category: "ARCHITECTURAL_GLASS", isActive: true, isFeatured: true },
+        where: {
+          categories: { hasSome: ["RESIDENTIAL", "COMMERCIAL", "SAFETY"] },
+          isActive: true, isFeatured: true,
+        },
         include: { images: { take: 1, orderBy: { sortOrder: "asc" } } },
         take: 4, orderBy: { sortOrder: "asc" },
       }),
       prisma.galleryItem.findMany({ take: 8, orderBy: { sortOrder: "asc" } }),
     ]);
-    return { decorative, architectural, gallery };
+    return { decorative, architectural: other, gallery };
   } catch { return { decorative: [], architectural: [], gallery: [] }; }
 }
 
@@ -57,62 +61,7 @@ export default async function HomePage() {
       </section>
 
       {/* 3 ── WHY CHOOSE US */}
-      <section className="pt-20 pb-16"
-               style={{ background: "linear-gradient(135deg, #1a3c6e 0%, #2a5298 100%)", borderRadius: "3rem 3rem 0 0" }}>
-        <div className="container-luxe grid items-center gap-12 lg:grid-cols-2">
-          {/* Left — text + rounded feature pills */}
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-gold">Why Choose Us</p>
-            <h2 className="mt-3 font-serif text-3xl font-bold text-white sm:text-4xl">
-              Why Choose New Toheed Glass?
-            </h2>
-            <p className="mt-4 text-sm leading-relaxed text-white/60">
-              We combine decades of expertise with premium materials and modern techniques to deliver glass solutions that exceed expectations.
-            </p>
-            {/* Oval compact pills */}
-            <div className="mt-8 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-              {[
-                { icon: "🏆", text: "Trusted manufacturer across Pakistan" },
-                { icon: "⏱️", text: "10+ years of glass design experience" },
-                { icon: "✅", text: "Certified quality & reliability" },
-                { icon: "💰", text: "Transparent & warranty-backed pricing" },
-                { icon: "🚚", text: "Nationwide service coverage" },
-                { icon: "🔧", text: "Professional installation team" },
-              ].map((item) => (
-                <div key={item.text}
-                     className="flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 backdrop-blur-sm">
-                  <span className="shrink-0 text-sm leading-none">{item.icon}</span>
-                  <span className="text-xs font-medium leading-tight text-white/90">{item.text}</span>
-                </div>
-              ))}
-            </div>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/contact"
-                    className="rounded-full border-2 border-white px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-white hover:text-navy">
-                Get a Consultation
-              </Link>
-              <a href={wa} target="_blank" rel="noopener noreferrer" className="btn-wa">
-                <MessageCircle className="h-4 w-4" /> Chat on WhatsApp
-              </a>
-            </div>
-          </div>
-          {/* Right — image */}
-          <div className="relative mx-auto w-full max-w-sm">
-            <div className="overflow-hidden rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
-              <Image
-                src="/images/glass-5.jpeg"
-                alt="New Toheed Glass LED Mirror"
-                width={500} height={420}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-5 -left-5 rounded-2xl bg-white px-5 py-3 shadow-hover">
-              <p className="font-serif text-2xl font-bold text-navy">500+</p>
-              <p className="text-xs text-gray-500">Projects Completed</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <WhyChooseUs />
 
       {/* 4 ── CORE SERVICES */}
       <section className="py-16">
@@ -125,28 +74,28 @@ export default async function HomePage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
               {
-                title: "Architectural Glass",
-                items: ["Curtain Wall Glass & ACP Cladding", "Glass Façades & Shopfronts", "Skylights, Canopies & Structural Installations"],
-                href: "/products?category=ARCHITECTURAL_GLASS",
-                img: "/images/glass-curtain-wall.jpeg",
-              },
-              {
-                title: "Decorative Glass Designs",
-                items: ["Beveled Mirror Walls", "Stained & Frosted Glass", "LED Smart Mirrors & Digital Glass Walls"],
-                href: "/products?category=DECORATIVE_GLASS",
+                title: "Decorative",
+                items: ["Ceiling Glass & Texture Crystal Panels", "Beveled Mirror Walls", "LED Smart Mirrors & Frosted Glass"],
+                href: "/products?category=DECORATIVE",
                 img: "/images/beveled-mirror-wall.jpeg",
               },
               {
-                title: "Residential Glass Solutions",
-                items: ["Frameless Shower Cabins", "Sliding & Folding Glass Doors", "Staircase Railings & Balustrades"],
-                href: "/products?category=ARCHITECTURAL_GLASS",
+                title: "Residential",
+                items: ["Frameless Shower Cabins", "Skylight Glass & Single Glass Doors", "Stairs & Terrace Glass Railings"],
+                href: "/products?category=RESIDENTIAL",
                 img: "/images/shower-cabin.jpeg",
               },
               {
-                title: "Commercial Glass Solutions",
-                items: ["Office Glass Partitions", "Atrium Glazing", "Decorative Wall Features"],
-                href: "/products?category=ARCHITECTURAL_GLASS",
+                title: "Commercial",
+                items: ["ACP Wall Cladding & Curtain Walls", "Glass Shop Fronts", "Office Glass Partitions"],
+                href: "/products?category=COMMERCIAL",
                 img: "/images/office-glass-partition.jpeg",
+              },
+              {
+                title: "Safety",
+                items: ["Tempered Safety Glass", "Double Glazed Glass", "Warranty-backed installation"],
+                href: "/products?category=SAFETY",
+                img: "/images/tempered-glass.jpeg",
               },
             ].map((s) => (
               <div key={s.title}
@@ -195,7 +144,7 @@ export default async function HomePage() {
               {decorative.map((p) => <ProductCard key={p.id} product={p} />)}
             </div>
             <div className="mt-8 text-center">
-              <Link href="/products?category=DECORATIVE_GLASS" className="btn-primary">
+              <Link href="/products?category=DECORATIVE" className="btn-primary">
                 View All Decorative Glass
               </Link>
             </div>
@@ -208,7 +157,7 @@ export default async function HomePage() {
         <section className="py-14">
           <div className="container-luxe">
             <div className="mb-10 text-center">
-              <p className="section-tag">Architectural Glass</p>
+              <p className="section-tag">Residential, Commercial &amp; Safety Glass</p>
               <h2 className="mt-2 font-serif text-3xl font-bold text-navy">Featured Products</h2>
               <div className="divider-blue" />
             </div>
@@ -216,8 +165,8 @@ export default async function HomePage() {
               {architectural.map((p) => <ProductCard key={p.id} product={p} />)}
             </div>
             <div className="mt-8 text-center">
-              <Link href="/products?category=ARCHITECTURAL_GLASS" className="btn-primary">
-                View All Architectural Glass
+              <Link href="/products" className="btn-primary">
+                View All Products
               </Link>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
 export const metadata = { title: "Project References" };
@@ -7,25 +8,52 @@ export default async function GalleryPage() {
   const items = await prisma.galleryItem.findMany({ orderBy: { sortOrder: "asc" } });
 
   return (
-    <section className="container-luxe py-20">
+    <section className="container-luxe py-16">
       <div className="mb-12 text-center">
-        <span className="section-eyebrow">Portfolio</span>
-        <h1 className="mt-3 text-4xl font-bold text-navy sm:text-5xl">Project References</h1>
-        <p className="mx-auto mt-4 max-w-xl text-navy/60">
+        <p className="section-tag">Portfolio</p>
+        <h1 className="mt-2 font-serif text-4xl font-bold text-navy sm:text-5xl">Project References</h1>
+        <div className="divider-blue" />
+        <p className="mx-auto mt-4 max-w-xl text-sm text-gray-500">
           A showcase of our completed decorative glass, architectural glass, and glass installation projects across Pakistan.
         </p>
       </div>
 
-      <div className="columns-2 gap-4 sm:columns-3 lg:columns-4 [&>*]:mb-4">
-        {items.length === 0 && <p className="text-center text-navy/50">Gallery items will appear here once uploaded by the admin.</p>}
+      {items.length === 0 && (
+        <p className="text-center text-gray-400">No gallery items yet.</p>
+      )}
+
+      {/* Grid — 4 columns, all same square size */}
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
         {items.map((g) => (
-          <div key={g.id} className="relative break-inside-avoid overflow-hidden rounded-xl bg-navy/5 shadow-luxury">
-            <Image src={g.imageUrl} alt={g.title} width={500} height={500} className="w-full object-cover" />
-            <div className="absolute inset-x-0 bottom-0 bg-navy/70 p-3 text-xs text-white opacity-0 transition hover:opacity-100">
-              {g.title}
+          <div key={g.id}
+               className="group relative aspect-square overflow-hidden rounded-xl bg-gray-100 shadow-sm">
+            <Image
+              src={g.imageUrl}
+              alt={g.title}
+              fill
+              className="object-cover transition duration-500 group-hover:scale-105"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            />
+            {/* Overlay with title */}
+            <div className="absolute inset-0 flex items-end bg-gradient-to-t from-navy/80 via-navy/20 to-transparent p-4 opacity-0 transition duration-300 group-hover:opacity-100">
+              <p className="text-sm font-semibold text-white">{g.title}</p>
             </div>
           </div>
         ))}
+      </div>
+
+      {/* CTA */}
+      <div className="mt-14 rounded-2xl bg-navy px-8 py-12 text-center">
+        <h2 className="font-serif text-2xl font-bold text-white sm:text-3xl">
+          Want a Similar Project?
+        </h2>
+        <p className="mx-auto mt-3 max-w-lg text-sm text-white/60">
+          Contact us for a free consultation and quote tailored to your project.
+        </p>
+        <div className="mt-6 flex flex-wrap justify-center gap-4">
+          <Link href="/contact" className="btn-gold">Get Free Quote</Link>
+          <Link href="/products" className="btn-secondary">Browse Products</Link>
+        </div>
       </div>
     </section>
   );

@@ -23,7 +23,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     where: { id: params.id },
     data: {
       name: body.name,
-      category: body.category,
+      categories: body.categories || [],
       description: body.description,
       pricingType: body.pricingType,
       pricePerSqft: body.pricingType === "PER_SQFT" ? body.pricePerSqft : null,

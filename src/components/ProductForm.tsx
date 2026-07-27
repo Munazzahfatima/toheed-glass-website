@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const CATEGORIES = [
-  { value: "DECORATIVE_GLASS", label: "Decorative Glass" },
-  { value: "ARCHITECTURAL_GLASS", label: "Architectural Glass" },
+  { value: "DECORATIVE", label: "Decorative" },
+  { value: "RESIDENTIAL", label: "Residential" },
+  { value: "COMMERCIAL", label: "Commercial" },
+  { value: "SAFETY", label: "Safety" },
 ];
 
 const SHAPES = ["RECTANGLE", "SQUARE", "ROUND", "OVAL"];
@@ -15,7 +17,7 @@ export default function ProductForm({ initial, productId }: { initial?: any; pro
   const [colors, setColors] = useState<any[]>([]);
   const [form, setForm] = useState({
     name: initial?.name || "",
-    category: initial?.category || "DECORATIVE_GLASS",
+    categories: initial?.categories && initial.categories.length ? initial.categories : ["DECORATIVE"],
     description: initial?.description || "",
     pricingType: initial?.pricingType || "PER_SQFT",
     pricePerSqft: initial?.pricePerSqft || "",
@@ -69,10 +71,26 @@ export default function ProductForm({ initial, productId }: { initial?: any; pro
       </div>
 
       <div>
-        <label className="text-sm font-medium text-navy">Category</label>
-        <select value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className="mt-1 w-full rounded-xl border border-navy/10 px-4 py-3 text-sm focus:border-gold">
-          {CATEGORIES.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}
-        </select>
+        <label className="text-sm font-medium text-navy">Categories (select one or more)</label>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {CATEGORIES.map((c) => (
+            <button
+              type="button"
+              key={c.value}
+              onClick={() =>
+                setForm({
+                  ...form,
+                  categories: form.categories.includes(c.value)
+                    ? form.categories.filter((x: string) => x !== c.value)
+                    : [...form.categories, c.value],
+                })
+              }
+              className={`rounded-full border px-4 py-1.5 text-xs font-medium ${form.categories.includes(c.value) ? "border-gold bg-gold/10" : "border-navy/10"}`}
+            >
+              {c.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div>
