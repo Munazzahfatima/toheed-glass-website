@@ -128,25 +128,25 @@ export default async function HomePage() {
                 title: "Architectural Glass",
                 items: ["Curtain Wall Glass & ACP Cladding", "Glass Façades & Shopfronts", "Skylights, Canopies & Structural Installations"],
                 href: "/products?category=ARCHITECTURAL_GLASS",
-                img: "/images/glass-3.jpeg",
+                img: "/images/glass-curtain-wall.jpeg",
               },
               {
                 title: "Decorative Glass Designs",
                 items: ["Beveled Mirror Walls", "Stained & Frosted Glass", "LED Smart Mirrors & Digital Glass Walls"],
                 href: "/products?category=DECORATIVE_GLASS",
-                img: "/images/glass-1.jpeg",
+                img: "/images/beveled-mirror-wall.jpeg",
               },
               {
                 title: "Residential Glass Solutions",
                 items: ["Frameless Shower Cabins", "Sliding & Folding Glass Doors", "Staircase Railings & Balustrades"],
                 href: "/products?category=ARCHITECTURAL_GLASS",
-                img: "/images/glass-4.jpeg",
+                img: "/images/shower-cabin.jpeg",
               },
               {
                 title: "Commercial Glass Solutions",
                 items: ["Office Glass Partitions", "Atrium Glazing", "Decorative Wall Features"],
                 href: "/products?category=ARCHITECTURAL_GLASS",
-                img: "/images/glass-2.jpeg",
+                img: "/images/office-glass-partition.jpeg",
               },
             ].map((s) => (
               <div key={s.title}
@@ -344,15 +344,17 @@ export default async function HomePage() {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-              {/* Use client's own photos first, then gallery items */}
+              {/* Use client's own photos */}
               {[
-                { src: "/images/glass-1.jpeg", title: "Decorative Glass Installation" },
-                { src: "/images/glass-2.jpeg", title: "Mirror Wall Project" },
-                { src: "/images/glass-3.jpeg", title: "Architectural Glass Work" },
-                { src: "/images/glass-4.jpeg", title: "Glass Railing Project" },
-                { src: "/images/glass-5.jpeg", title: "Commercial Glass Solution" },
-                ...gallery.slice(0, 3).map((g) => ({ src: g.imageUrl, title: g.title })),
-              ].slice(0, 8).map((g, i) => (
+                { src: "/images/acp-wall-cladding.jpeg",       title: "ACP Wall Cladding" },
+                { src: "/images/beveled-mirror-wall.jpeg",     title: "Beveled Mirror Wall" },
+                { src: "/images/glass-curtain-wall.jpeg",      title: "Glass Curtain Wall" },
+                { src: "/images/office-glass-partition.jpeg",  title: "Office Glass Partition" },
+                { src: "/images/shower-cabin.jpeg",            title: "Shower Cabin" },
+                { src: "/images/stairs-glass-railing.jpeg",    title: "Stairs Glass Railing" },
+                { src: "/images/tempered-glass.jpeg",          title: "Tempered Glass" },
+                { src: "/images/terrace-glass-railing.jpeg",   title: "Terrace Glass Railing" },
+              ].map((g, i) => (
                 <div key={i} className="group relative aspect-square overflow-hidden rounded-lg bg-gray-100">
                   <Image src={g.src} alt={g.title} fill
                          className="object-cover transition duration-500 group-hover:scale-105" />

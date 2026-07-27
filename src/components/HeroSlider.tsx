@@ -14,7 +14,7 @@ const slides = [
     desc:  "Integrated LED lighting with customizable colors. Designed for modern bathrooms, salons, and luxury interiors. Available in any size.",
     cta:   { label: "Order Online",          href: "/products/decorative-led-smart-mirror" },
     view:  { label: "View Decorative Glass", href: "/products?category=DECORATIVE_GLASS" },
-    img:   "/images/glass-5.jpeg",  // LED mirror photo
+    img:   "/images/glass-5.jpeg",
   },
   {
     tag:   "Decorative Glass",
@@ -23,7 +23,7 @@ const slides = [
     desc:  "Premium beveled mirror walls crafted in custom panel sizes for hotels, homes and commercial spaces.",
     cta:   { label: "Order Online",      href: "/products/decorative-beveled-mirror-wall" },
     view:  { label: "View Mirror Walls", href: "/products?category=DECORATIVE_GLASS" },
-    img:   "/images/glass-4.jpeg",  // mirror/glass panel photo
+    img:   "/images/beveled-mirror-wall.jpeg",
   },
   {
     tag:   "Architectural Glass",
@@ -32,16 +32,16 @@ const slides = [
     desc:  "Structural glass curtain wall systems for office buildings and hotels across Pakistan.",
     cta:   { label: "Explore Solutions",        href: "/products?category=ARCHITECTURAL_GLASS" },
     view:  { label: "View Architectural Glass", href: "/products?category=ARCHITECTURAL_GLASS" },
-    img:   "/images/glass-1.jpeg",  // architectural glass photo
+    img:   "/images/glass-curtain-wall.jpeg",
   },
   {
     tag:   "Architectural Glass",
     title: "Stairs & Terrace Glass Railings",
     sub:   "Nationwide Professional Installation",
     desc:  "Frameless shower cabins, staircase railings, terrace balustrades and office glass partitions.",
-    cta:   { label: "Browse Products",  href: "/products?category=ARCHITECTURAL_GLASS" },
+    cta:   { label: "Browse Products",   href: "/products?category=ARCHITECTURAL_GLASS" },
     view:  { label: "View All Products", href: "/products" },
-    img:   "/images/glass-2.jpeg",  // railing/glass photo
+    img:   "/images/stairs-glass-railing.jpeg",
   },
 ];
 
