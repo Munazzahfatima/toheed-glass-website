@@ -3,7 +3,10 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
+import {
+  ChevronLeft, ChevronRight, MessageCircle,
+  ShoppingCart, LayoutGrid, Gem, Lock, PenTool, ShieldCheck,
+} from "lucide-react";
 import { getWhatsappLink } from "@/lib/whatsapp";
 
 type Slide = {
@@ -227,6 +230,13 @@ const slides: Slide[] = [
   },
 ];
 
+const trustBadges = [
+  { icon: Gem,         title: "Premium Quality",    desc: "High-grade crystal glass for lasting beauty" },
+  { icon: Lock,        title: "Enhanced Privacy",   desc: "Textured designs ensure elegance with privacy" },
+  { icon: PenTool,     title: "Custom Designs",     desc: "Wide range of patterns and customization" },
+  { icon: ShieldCheck, title: "Durable & Reliable",  desc: "Built to last with strength and safety" },
+];
+
 const wa = getWhatsappLink("Hi! I'd like a free consultation for glass solutions.");
 const AUTOPLAY_MS = 4500;
 
@@ -249,125 +259,146 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative overflow-hidden"
-      style={{ background: "linear-gradient(135deg, #0c1f3f 0%, #16335f 45%, #1a3c6e 75%, #234a86 100%)" }}
+      className="relative overflow-hidden bg-[#f7f5f1]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* faint decorative texture, not the product photo — keeps text legible always */}
+      {/* faint corner texture, matches the rest of the site's paper-like feel */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(45deg, transparent, transparent 38px, rgba(255,255,255,0.5) 38px, rgba(255,255,255,0.5) 39px)",
+            "repeating-linear-gradient(45deg, transparent, transparent 38px, rgba(26,60,110,0.6) 38px, rgba(26,60,110,0.6) 39px)",
         }}
       />
-      <div className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-gold/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-40 -left-20 h-[420px] w-[420px] rounded-full bg-navy-light/20 blur-3xl" />
+      <div className="pointer-events-none absolute left-0 top-0 h-2 w-40 bg-gold sm:w-56" style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }} />
 
-      <div className="container-luxe relative z-10 py-16 sm:py-20">
-        <div className="grid gap-10 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-14">
+      <div className="relative z-10 grid gap-10 pb-0 pt-10 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-0 lg:pt-14">
 
-          {/* Left — text, crossfades per slide */}
-          <div className="relative">
+        {/* Left — text, crossfades per slide */}
+        <div className="container-luxe relative lg:pr-10">
+          {slides.map((slide, i) => (
+            <div
+              key={i}
+              className={
+                i === cur
+                  ? "relative opacity-100 translate-y-0 transition-all duration-700 ease-out"
+                  : "absolute inset-0 opacity-0 translate-y-3 pointer-events-none transition-all duration-700 ease-out"
+              }
+            >
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold">{slide.tag}</p>
+
+              <h1 className="mt-3 font-serif text-4xl font-bold leading-[1.1] text-navy sm:text-5xl lg:text-[3.4rem]">
+                {slide.title}
+              </h1>
+              <p className="mt-3 font-serif text-xl italic text-gold">{slide.sub}</p>
+
+              <div className="mt-5 h-1 w-16 rounded bg-gold" />
+
+              <p className="mt-5 max-w-md text-[15px] leading-relaxed text-gray-500">{slide.desc}</p>
+
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <Link href={slide.cta.href}
+                      className="inline-flex items-center gap-2 rounded-full bg-navy px-6 py-3.5 text-sm font-semibold text-white shadow-hover transition hover:bg-navy-light">
+                  <ShoppingCart className="h-4 w-4" /> {slide.cta.label}
+                </Link>
+                <Link href={slide.view.href}
+                      className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-6 py-3.5 text-sm font-semibold text-navy transition hover:border-navy/30 hover:bg-gray-50">
+                  <LayoutGrid className="h-4 w-4" /> {slide.view.label}
+                </Link>
+                <a href={wa} target="_blank" rel="noopener noreferrer"
+                   className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-6 py-3.5 text-sm font-semibold text-navy transition hover:border-[#25D366]/40 hover:bg-gray-50">
+                  <MessageCircle className="h-4 w-4 text-[#25D366]" /> WhatsApp
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Right — full-bleed angled photo panel */}
+        <div className="relative h-[340px] w-full sm:h-[440px] lg:h-[560px]">
+          {/* gold outline shape, slightly larger, sits behind the photo */}
+          <div
+            className="absolute inset-0 bg-gold"
+            style={{ clipPath: "polygon(6% 0%, 100% 0%, 100% 100%, 6% 100%, 0% 50%)" }}
+          />
+          <div
+            className="absolute inset-[3px] overflow-hidden bg-navy-dark sm:inset-1"
+            style={{ clipPath: "polygon(7% 0%, 100% 0%, 100% 100%, 7% 100%, 1.2% 50%)" }}
+          >
             {slides.map((slide, i) => (
               <div
                 key={i}
-                className={
-                  i === cur
-                    ? "relative opacity-100 translate-y-0 transition-all duration-700 ease-out"
-                    : "absolute inset-0 opacity-0 translate-y-3 pointer-events-none transition-all duration-700 ease-out"
-                }
+                className={`absolute inset-0 transition-opacity duration-700 ease-out ${i === cur ? "opacity-100" : "opacity-0"}`}
               >
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/15 px-4 py-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-                  <span className="text-xs font-semibold uppercase tracking-widest text-gold">{slide.tag}</span>
-                </div>
-
-                <h1 className="font-serif text-4xl font-bold leading-tight text-white sm:text-5xl">
-                  {slide.title}
-                </h1>
-                <p className="mt-2 font-serif text-lg italic text-gold/80">{slide.sub}</p>
-
-                <div className="mt-5 h-0.5 w-16 rounded bg-gold" />
-
-                <p className="mt-4 max-w-md text-sm leading-relaxed text-white/65">{slide.desc}</p>
-
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <Link href={slide.cta.href} className="btn-gold">{slide.cta.label}</Link>
-                  <Link href={slide.view.href} className="btn-white">{slide.view.label}</Link>
-                  <a href={wa} target="_blank" rel="noopener noreferrer" className="btn-wa">
-                    <MessageCircle className="h-4 w-4" /> WhatsApp
-                  </a>
-                </div>
+                <Image
+                  src={slide.img}
+                  alt={slide.title}
+                  fill
+                  priority={i === 0}
+                  sizes="(min-width: 1024px) 55vw, 100vw"
+                  className="object-cover"
+                />
               </div>
             ))}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent" />
           </div>
 
-          {/* Right — framed photo card, contained so no image ever looks oddly cropped */}
-          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <div className="pointer-events-none absolute -inset-3 rounded-[28px] border border-gold/20" />
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-white/15 bg-navy-dark shadow-hover">
-              {slides.map((slide, i) => (
-                <div
-                  key={i}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-out ${i === cur ? "opacity-100" : "opacity-0"}`}
-                >
-                  <Image
-                    src={slide.img}
-                    alt={slide.title}
-                    fill
-                    priority={i === 0}
-                    sizes="(min-width: 1024px) 42vw, 90vw"
-                    className="object-cover"
-                  />
-                </div>
-              ))}
+          {/* Slide counter */}
+          <span className="absolute bottom-5 right-5 z-20 rounded-full border border-white/30 bg-black/30 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm sm:bottom-7 sm:right-8">
+            {String(cur + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+          </span>
 
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-navy-dark/90 to-transparent" />
-
-              <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 px-5 py-4">
-                <div>
-                  <p className="text-base font-bold leading-tight text-white sm:text-lg">{s.title}</p>
-                  <p className="text-xs font-medium text-gold/90">{s.tag}</p>
-                </div>
-                <span className="shrink-0 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
-                  {cur + 1} / {total}
-                </span>
-              </div>
-
-              <button
-                onClick={() => go(cur - 1)}
-                className="absolute left-3 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/25 p-2 text-white backdrop-blur transition hover:bg-black/45"
-                aria-label="Previous"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </button>
-              <button
-                onClick={() => go(cur + 1)}
-                className="absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/25 p-2 text-white backdrop-blur transition hover:bg-black/45"
-                aria-label="Next"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </button>
-            </div>
-          </div>
+          {/* Prev / Next */}
+          <button
+            onClick={() => go(cur - 1)}
+            className="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-full bg-navy p-2.5 text-white shadow-hover transition hover:bg-navy-light sm:left-4"
+            aria-label="Previous"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            onClick={() => go(cur + 1)}
+            className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-navy p-2.5 text-white shadow-hover transition hover:bg-navy-light sm:right-8"
+            aria-label="Next"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
         </div>
+      </div>
 
-        {/* Progress dots */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-1.5">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => go(i)}
-              className={`h-1.5 rounded-full transition-all duration-500 ${
-                i === cur ? "w-8 bg-gold" : "w-1.5 bg-white/25 hover:bg-white/50"
-              }`}
-              aria-label={`Slide ${i + 1}`}
-            />
+      {/* Progress dots */}
+      <div className="container-luxe relative z-10 mt-8 flex flex-wrap items-center justify-center gap-1.5 lg:mt-6">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => go(i)}
+            className={`h-1.5 rounded-full transition-all duration-500 ${
+              i === cur ? "w-8 bg-gold" : "w-1.5 bg-navy/15 hover:bg-navy/30"
+            }`}
+            aria-label={`Slide ${i + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* Trust badges — floating card, overlaps into the section below */}
+      <div className="container-luxe relative z-10 mt-10 lg:mt-8">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-8 rounded-2xl border border-gray-100 bg-white p-7 shadow-hover sm:grid-cols-4 sm:gap-8 sm:p-9">
+          {trustBadges.map((b) => (
+            <div key={b.title} className="flex items-start gap-4">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-navy">
+                <b.icon className="h-6 w-6 text-gold" />
+              </div>
+              <div>
+                <p className="text-base font-bold text-navy">{b.title}</p>
+                <p className="mt-1 text-sm leading-snug text-gray-500">{b.desc}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>
+
+      <div className="pb-14 sm:pb-16" />
     </section>
   );
 }
