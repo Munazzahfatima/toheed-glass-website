@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { prisma } from "@/lib/prisma";
-import { MessageCircle, Star, Phone } from "lucide-react";
+import { MessageCircle, Phone } from "lucide-react";
 import { getWhatsappLink } from "@/lib/whatsapp";
 import HeroSlider from "@/components/HeroSlider";
 import WhyChooseUs from "@/components/WhyChooseUs";
@@ -319,33 +319,6 @@ export default async function HomePage() {
           </div>
         </section>
       )}
-
-      {/* 9 ── TESTIMONIALS */}
-      <section className="section-bg py-14">
-        <div className="container-luxe">
-          <div className="mb-12 text-center">
-            <h2 className="font-serif text-3xl font-bold text-navy">What Clients Say</h2>
-            <div className="divider-blue" />
-          </div>
-          <div className="grid gap-6 md:grid-cols-2">
-            {[
-              { name: "Ms. Fatima", city: "Islamabad", text: "New Toheed Glass is truly the best architectural and decorative glass company in Pakistan. Their team transformed our commercial project with elegance and precision." },
-              { name: "Mr. Ahmed",  city: "Lahore",    text: "Our villa interiors look stunning with the glass partitions and decorative mirrors designed by New Toheed Glass. Highly recommended." },
-            ].map((t) => (
-              <div key={t.name} className="card-product p-6">
-                <div className="flex gap-1">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-gold text-gold" />)}
-                </div>
-                <p className="mt-3 text-sm italic text-gray-600">"{t.text}"</p>
-                <div className="mt-4 border-t border-gray-100 pt-4">
-                  <p className="font-semibold text-navy">{t.name}</p>
-                  <p className="text-xs text-gray-400">{t.city}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* 10 ── FINAL CTA */}
       <section className="py-14">
