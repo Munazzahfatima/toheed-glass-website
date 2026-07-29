@@ -89,9 +89,9 @@ export default function Footer() {
           <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-gold">Hotline Number</h4>
           <ul className="space-y-3">
             <li>
-              <a href="tel:+923015025862"
+              <a href="tel:+923366001040"
                  className="flex items-center gap-2 text-sm font-semibold text-white transition hover:text-gold">
-                <Phone className="h-4 w-4 text-gold" /> +92 301 502 5862
+                <Phone className="h-4 w-4 text-gold" /> +92 336 6001040
               </a>
             </li>
             <li>

@@ -332,14 +332,14 @@ export default async function HomePage() {
               Choose New Toheed Glass for premium designs, professional installation, and long-lasting glass solutions.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <Link href="/contact" className="btn-secondary">Get a Free Consultation</Link>
+              <Link href="/contact" className="btn-gold">Get a Free Consultation</Link>
               <a href={wa} target="_blank" rel="noopener noreferrer" className="btn-wa">
                 <MessageCircle className="h-4 w-4" /> Chat on WhatsApp
               </a>
             </div>
-            <a href="tel:+923015025862"
+            <a href="tel:+923366001040"
                className="mt-5 flex items-center justify-center gap-1.5 text-sm text-white/40 transition hover:text-white/70">
-              <Phone className="h-3.5 w-3.5" /> +92 301 502 5862
+              <Phone className="h-3.5 w-3.5" /> +92 336 6001040
             </a>
           </div>
         </div>

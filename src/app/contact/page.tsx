@@ -29,7 +29,7 @@ export default function ContactPage() {
               <Phone className="mt-1 h-5 w-5 text-gold" />
               <div>
                 <p className="font-semibold text-navy">Phone / WhatsApp</p>
-                <p className="text-sm text-navy/60">+92 301 5025862</p>
+                <p className="text-sm text-navy/60">+92 336 6001040</p>
               </div>
             </div>
             <div className="flex items-start gap-3">

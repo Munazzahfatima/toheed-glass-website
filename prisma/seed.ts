@@ -64,7 +64,7 @@ async function main() {
       freeDeliveryThreshold: 50000,
       estimatedProductionDays: 7,
       estimatedDeliveryDays: 3,
-      whatsappNumber: "923015025862",
+      whatsappNumber: "923366001040",
       ownerEmail: "mudassirchadhar789@gmail.com",
     },
   });

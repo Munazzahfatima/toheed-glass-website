@@ -73,18 +73,25 @@ export default function WhyChooseUs() {
           </div>
 
           {/* Right — photo collage */}
-          <div className="grid grid-cols-2 gap-4">
-            {photos.map((p) => (
-              <div key={p.label}
-                   className="group relative h-52 overflow-hidden rounded-2xl bg-white/5 sm:h-64 lg:h-72">
-                <Image src={p.src} alt={p.label} fill sizes="(min-width: 1024px) 25vw, 50vw"
-                       className="object-cover transition duration-500 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy/70 via-transparent to-transparent" />
-                <span className="absolute bottom-3 left-3 rounded-md bg-navy/80 px-3 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
-                  {p.label}
-                </span>
-              </div>
-            ))}
+          <div className="grid grid-cols-2 overflow-hidden rounded-2xl border border-white/10">
+            {photos.map((p, i) => {
+              const feature = features[i];
+              return (
+                <div key={p.label}
+                     className="group relative h-52 overflow-hidden sm:h-64 lg:h-72">
+                  <Image src={p.src} alt={p.label} fill sizes="(min-width: 1024px) 25vw, 50vw"
+                         className="object-cover transition duration-500 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/10 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 flex items-center gap-2.5 bg-navy/80 px-3.5 py-3 backdrop-blur-sm">
+                    <feature.icon className="h-4 w-4 shrink-0 text-gold" />
+                    <div>
+                      <p className="text-sm font-bold leading-tight text-white">{p.label}</p>
+                      <p className="hidden text-xs leading-snug text-white/55 sm:block">{feature.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
