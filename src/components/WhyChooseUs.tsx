@@ -1,18 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import {
-  DoorOpen, ShowerHead, Sparkles, Building2, ShieldCheck, Layers,
+  DoorOpen, Sparkles, Building2, ShieldCheck,
   LayoutGrid, MessageCircle, Trophy, Users, Smile,
 } from "lucide-react";
 import { getWhatsappLink } from "@/lib/whatsapp";
 
 const features = [
-  { icon: DoorOpen,     title: "Windows & Doors",   desc: "Aluminium & Glass Windows and Doors" },
-  { icon: ShowerHead,   title: "Shower Enclosures",  desc: "Frameless & Semi-Frameless Shower Cabins" },
-  { icon: Sparkles,     title: "LED Smart Mirrors",  desc: "Modern LED Mirrors for Bathrooms & Bedrooms" },
-  { icon: Building2,    title: "Office Partitions",  desc: "Glass Partitions for Offices & Commercial Spaces" },
-  { icon: ShieldCheck,  title: "Tempered Glass",     desc: "High Strength & Safety Tempered Glass" },
-  { icon: Layers,       title: "Glass Railings",     desc: "Staircase & Balcony Glass Railings" },
+  { icon: DoorOpen,    title: "Aluminium Windows & Doors", desc: "Custom Aluminium Windows & Doors" },
+  { icon: Building2,   title: "Glass Curtain Walls",       desc: "Modern Glass Façade Systems for Commercial Buildings" },
+  { icon: LayoutGrid,  title: "Office Glass Partitions",   desc: "Frameless Glass Partitions for Modern Workspaces" },
+  { icon: Sparkles,    title: "LED Smart Mirrors",         desc: "Illuminated Smart Mirrors for Bathrooms & Interiors" },
 ];
 
 const stats = [
@@ -23,12 +21,10 @@ const stats = [
 ];
 
 const photos = [
-  { src: "/images/shower-cabin.jpeg",           label: "Shower Enclosures" },
-  { src: "/images/office-glass-partition.jpeg", label: "Office Partitions" },
-  { src: "/images/glass-curtain-wall.jpeg",     label: "Aluminium Doors & Windows" },
-  { src: "/images/stairs-glass-railing.jpeg",   label: "Glass Railings" },
-  { src: "/images/acp-wall-cladding.jpeg",      label: "Shop Front Glass" },
-  { src: "/images/led-mirror-luxury.jpeg",      label: "LED Smart Mirrors" },
+  { src: "/images/aluminium-windows-doors.png",       label: "Aluminium Windows & Doors" },
+  { src: "/images/glass-curtain-walls-fb.png",        label: "Glass Curtain Walls" },
+  { src: "/images/office-glass-partitions-fb.png",    label: "Office Glass Partitions" },
+  { src: "/images/led-smart-mirrors-fb.png",          label: "LED Smart Mirrors" },
 ];
 
 export default function WhyChooseUs() {
@@ -50,7 +46,7 @@ export default function WhyChooseUs() {
             </p>
 
             {/* Feature cards */}
-            <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
+            <div className="mt-8 grid grid-cols-2 gap-3">
               {features.map((f) => (
                 <div key={f.title}
                      className="rounded-2xl border border-white/15 bg-white/[0.04] p-4 backdrop-blur-sm">
@@ -78,9 +74,9 @@ export default function WhyChooseUs() {
 
           {/* Right — photo collage */}
           <div className="grid grid-cols-2 gap-3">
-            {photos.map((p, i) => (
+            {photos.map((p) => (
               <div key={p.label}
-                   className={`group relative overflow-hidden rounded-2xl bg-white/5 ${i < 2 ? "aspect-[4/3]" : "aspect-square"}`}>
+                   className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-white/5">
                 <Image src={p.src} alt={p.label} fill
                        className="object-cover transition duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/70 via-transparent to-transparent" />

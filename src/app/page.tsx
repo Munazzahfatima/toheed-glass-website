@@ -371,6 +371,31 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* 11 ── FIND US ON THE MAP */}
+      <section className="pb-14">
+        <div className="container-luxe">
+          <div className="mb-8 text-center">
+            <p className="section-tag">Visit Us</p>
+            <h2 className="mt-2 font-serif text-3xl font-bold text-navy">Find Us on the Map</h2>
+            <div className="divider-blue" />
+            <p className="mx-auto mt-3 max-w-xl text-sm text-gray-500">
+              109-A Satellite Town, Sargodha, Pakistan
+            </p>
+          </div>
+          <div className="overflow-hidden rounded-2xl border border-gray-100 shadow-sm">
+            <iframe
+              title="New Toheed Glass & Accessories Location"
+              src="https://maps.google.com/maps?q=109-A%20Satellite%20Town%2C%20Sargodha%2C%20Pakistan&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="420"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

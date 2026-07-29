@@ -81,12 +81,12 @@ export default function Navbar() {
 
       {/* Main header */}
       <header className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${scrolled ? "shadow-md" : "border-b border-gray-100"}`}>
-        <div className="container-luxe flex h-20 items-center justify-between">
+        <div className="container-luxe flex h-24 items-center justify-between">
 
           {/* Logo */}
           <Link href="/" className="flex shrink-0 items-center gap-2">
-            <Image src="/images/logo.png" alt="New Toheed Glass" width={44} height={44}
-                   className="h-10 w-10 shrink-0 object-contain" />
+            <Image src="/images/logo.png" alt="New Toheed Glass" width={72} height={72}
+                   className="h-16 w-16 shrink-0 object-contain" />
             <div className="leading-tight min-w-0">
               <p className="font-serif text-[15px] font-bold text-navy leading-none truncate">New Toheed Glass</p>
               <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-gold truncate">

@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "923015025862";
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "923366001040";
 
 export function getWhatsappLink(message: string, number: string = WHATSAPP_NUMBER) {
   const encoded = encodeURIComponent(message);
