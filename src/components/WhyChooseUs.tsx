@@ -72,21 +72,33 @@ export default function WhyChooseUs() {
             </div>
           </div>
 
-          {/* Right — photo collage */}
-          <div className="grid grid-cols-2 overflow-hidden rounded-2xl border border-white/10">
+          {/* Right — photo cards */}
+          <div className="grid grid-cols-2 gap-4 sm:gap-5">
             {photos.map((p, i) => {
               const feature = features[i];
               return (
                 <div key={p.label}
-                     className="group relative h-52 overflow-hidden sm:h-64 lg:h-72">
-                  <Image src={p.src} alt={p.label} fill sizes="(min-width: 1024px) 25vw, 50vw"
-                         className="object-cover transition duration-500 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/10 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 flex items-center gap-2.5 bg-navy/80 px-3.5 py-3 backdrop-blur-sm">
-                    <feature.icon className="h-4 w-4 shrink-0 text-gold" />
-                    <div>
-                      <p className="text-sm font-bold leading-tight text-white">{p.label}</p>
-                      <p className="hidden text-xs leading-snug text-white/55 sm:block">{feature.desc}</p>
+                     className="group relative overflow-hidden rounded-2xl border border-white/10 bg-navy-dark shadow-hover">
+                  {/* Photo */}
+                  <div className="relative h-36 w-full overflow-hidden sm:h-44 lg:h-48">
+                    <Image src={p.src} alt={p.label} fill sizes="(min-width: 1024px) 25vw, 50vw"
+                           className="object-cover transition duration-500 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/90 via-transparent to-transparent" />
+                  </div>
+
+                  {/* Caption panel */}
+                  <div className="relative bg-navy-dark px-4 pb-4 pt-8">
+                    {/* Icon badge — overlaps the photo/panel seam */}
+                    <div className="absolute -top-6 left-4 flex h-12 w-12 items-center justify-center rounded-xl border border-gold/50 bg-navy-dark shadow-gold">
+                      <feature.icon className="h-6 w-6 text-gold" />
+                    </div>
+
+                    <p className="text-sm font-bold leading-tight text-white sm:text-base">{p.label}</p>
+                    <p className="mt-1 text-xs leading-snug text-white/55 sm:text-sm">{feature.desc}</p>
+
+                    {/* Number badge */}
+                    <div className="mt-3 inline-flex h-7 w-9 items-center justify-center rounded-md border border-white/10 bg-navy text-xs font-bold text-gold">
+                      {String(i + 1).padStart(2, "0")}
                     </div>
                   </div>
                 </div>
