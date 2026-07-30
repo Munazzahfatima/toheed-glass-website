@@ -238,7 +238,7 @@ const trustBadges = [
 ];
 
 const wa = getWhatsappLink("Hi! I'd like a free consultation for glass solutions.");
-const AUTOPLAY_MS = 500;
+const AUTOPLAY_MS = 1000;
 
 export default function HeroSlider() {
   const [cur, setCur]       = useState(0);
@@ -346,7 +346,7 @@ export default function HeroSlider() {
                 <button
                   key={i}
                   onClick={() => go(i)}
-                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                  className={`h-1.5 rounded-full transition-all duration-1000 ${
                     i === cur ? "w-6 bg-white" : "w-1.5 bg-white/40 hover:bg-white/60"
                   }`}
                   aria-label={`Slide ${i + 1}`}
