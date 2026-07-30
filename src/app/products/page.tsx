@@ -94,10 +94,9 @@ export default async function ProductsPage({
               `Hi, I'm interested in "${p.name}". Please share details and pricing.`
             );
             return (
-              <Link key={p.id} href={`/products/${p.slug}`}
-                    className="card-product group block overflow-hidden">
+              <div key={p.id} className="card-product group overflow-hidden">
                 {/* Image — fixed height */}
-                <div className="relative h-56 w-full overflow-hidden bg-gray-100">
+                <Link href={`/products/${p.slug}`} className="relative block h-56 w-full overflow-hidden bg-gray-100">
                   {p.images[0] ? (
                     <Image
                       src={p.images[0].url}
@@ -119,28 +118,31 @@ export default async function ProductsPage({
                       Order Online
                     </span>
                   )}
-                </div>
+                </Link>
 
                 {/* Info */}
                 <div className="p-4">
-                  <h3 className="font-serif text-base font-bold text-[#2563eb]">{p.name}</h3>
+                  <Link href={`/products/${p.slug}`}>
+                    <h3 className="font-serif text-base font-bold text-[#2563eb]">{p.name}</h3>
+                  </Link>
                   <p className="mt-1 line-clamp-2 text-xs text-gray-500">{p.description}</p>
 
                   {/* Actions */}
-                  <div className="mt-3 flex flex-wrap gap-2" onClick={(e) => e.preventDefault()}>
+                  <div className="mt-3 flex flex-wrap gap-2">
                     <button className="flex items-center gap-1 rounded border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-600 hover:border-navy hover:text-navy">
                       Compare
                     </button>
-                    <span className="flex-1 rounded bg-navy py-1.5 text-center text-xs font-semibold text-white hover:bg-navy-light cursor-pointer">
+                    <Link href={`/products/${p.slug}`}
+                          className="flex-1 rounded bg-navy py-1.5 text-center text-xs font-semibold text-white hover:bg-navy-light">
                       Read More
-                    </span>
+                    </Link>
                     <a href={waLink} target="_blank" rel="noopener noreferrer"
                        className="flex items-center gap-1 rounded bg-[#25D366] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#1ebe5d]">
                       <MessageCircle className="h-3.5 w-3.5" /> WhatsApp
                     </a>
                   </div>
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>
