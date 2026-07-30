@@ -43,7 +43,14 @@ export default function ContactPage() {
               <MapPin className="mt-1 h-5 w-5 text-gold" />
               <div>
                 <p className="font-semibold text-navy">Address</p>
-                <p className="text-sm text-navy/60">109-A Satellite Town, Sargodha, Pakistan</p>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=109-A%2C%20near%20Zafar%20Ullah%20Chowk%2C%20Sargodha%2C%2040100%2C%20Pakistan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-navy/60 transition hover:text-navy hover:underline"
+                >
+                  109-A, near Zafar Ullah Chowk, Sargodha, 40100, Pakistan
+                </a>
               </div>
             </div>
             <div className="flex items-start gap-3">
@@ -68,7 +75,7 @@ export default function ContactPage() {
               title="Business Location"
               className="h-full w-full"
               loading="lazy"
-              src="https://www.google.com/maps?q=Satellite+Town,+Sargodha,+Pakistan&output=embed"
+              src="https://www.google.com/maps?q=109-A%2C+near+Zafar+Ullah+Chowk%2C+Sargodha%2C+40100%2C+Pakistan&output=embed"
             />
           </div>
         </div>

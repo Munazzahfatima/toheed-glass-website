@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { prisma } from "@/lib/prisma";
-import { MessageCircle, Phone } from "lucide-react";
+import { MessageCircle, Phone, MapPin } from "lucide-react";
 import { getWhatsappLink } from "@/lib/whatsapp";
 import HeroSlider from "@/components/HeroSlider";
 import WhyChooseUs from "@/components/WhyChooseUs";
@@ -345,27 +345,22 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 11 ── FIND US ON THE MAP */}
+      {/* 11 ── VISIT US */}
       <section className="pb-14">
         <div className="container-luxe">
-          <div className="mb-8 text-center">
+          <div className="text-center">
             <p className="section-tag">Visit Us</p>
-            <h2 className="mt-2 font-serif text-3xl font-bold text-navy">Find Us on the Map</h2>
+            <h2 className="mt-2 font-serif text-3xl font-bold text-navy">Find Us</h2>
             <div className="divider-blue" />
-            <p className="mx-auto mt-3 max-w-xl text-sm text-gray-500">
-              109-A Satellite Town, Sargodha, Pakistan
-            </p>
-          </div>
-          <div className="overflow-hidden rounded-2xl border border-gray-100 shadow-sm">
-            <iframe
-              title="New Toheed Glass & Accessories Location"
-              src="https://maps.google.com/maps?q=109-A%20Satellite%20Town%2C%20Sargodha%2C%20Pakistan&t=&z=15&ie=UTF8&iwloc=&output=embed"
-              width="100%"
-              height="420"
-              style={{ border: 0 }}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=109-A%2C%20near%20Zafar%20Ullah%20Chowk%2C%20Sargodha%2C%2040100%2C%20Pakistan"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mx-auto mt-3 flex max-w-xl items-center justify-center gap-2 text-sm text-gray-500 transition hover:text-navy hover:underline"
+            >
+              <MapPin className="h-4 w-4 text-gold" />
+              109-A, near Zafar Ullah Chowk, Sargodha, 40100, Pakistan
+            </a>
           </div>
         </div>
       </section>

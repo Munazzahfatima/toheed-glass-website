@@ -101,9 +101,16 @@ export default function Footer() {
                 mudassirchadhar789@gmail.com
               </a>
             </li>
-            <li className="flex items-start gap-2 text-sm text-white/50">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-              109-A Satellite Town, Sargodha, Pakistan
+            <li>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=109-A%2C%20near%20Zafar%20Ullah%20Chowk%2C%20Sargodha%2C%2040100%2C%20Pakistan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-2 text-sm text-white/50 transition hover:text-white"
+              >
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                109-A, near Zafar Ullah Chowk, Sargodha, 40100, Pakistan
+              </a>
             </li>
           </ul>
 

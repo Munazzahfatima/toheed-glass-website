@@ -255,28 +255,19 @@ export default function HeroSlider() {
     return () => clearInterval(t);
   }, [cur, paused, go]);
 
-  const s = slides[cur];
-
   return (
     <section
-      className="relative overflow-hidden bg-[#f7f5f1]"
+      className="relative overflow-hidden bg-gradient-to-br from-navy via-navy to-navy-dark"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* faint corner texture, matches the rest of the site's paper-like feel */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.035]"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(45deg, transparent, transparent 38px, rgba(26,60,110,0.6) 38px, rgba(26,60,110,0.6) 39px)",
-        }}
-      />
-      <div className="pointer-events-none absolute left-0 top-0 h-2 w-40 bg-gold sm:w-56" style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }} />
+      {/* soft glow accents */}
+      <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-navy-light/30 blur-3xl" />
+      <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-gold/10 blur-3xl" />
 
-      <div className="relative z-10 grid gap-10 pb-0 pt-10 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-0 lg:pt-14">
-
+      <div className="relative z-10 grid gap-10 py-10 lg:grid-cols-2 lg:items-center lg:gap-8 lg:py-16">
         {/* Left — text, crossfades per slide */}
-        <div className="container-luxe relative lg:pr-10">
+        <div className="container-luxe relative lg:pr-4">
           {slides.map((slide, i) => (
             <div
               key={i}
@@ -286,46 +277,51 @@ export default function HeroSlider() {
                   : "absolute inset-0 opacity-0 translate-y-3 pointer-events-none transition-all duration-700 ease-out"
               }
             >
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-gold">{slide.tag}</p>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-white backdrop-blur-sm">
+                <Gem className="h-3.5 w-3.5 text-gold" /> {slide.tag}
+              </span>
 
-              <h1 className="mt-3 font-serif text-4xl font-bold leading-[1.1] text-navy sm:text-5xl lg:text-[3.4rem]">
+              <h1 className="mt-5 font-serif text-4xl font-bold leading-[1.1] text-white sm:text-5xl lg:text-[3.2rem]">
                 {slide.title}
               </h1>
-              <p className="mt-3 font-serif text-xl italic text-gold">{slide.sub}</p>
+              <p className="mt-3 font-serif text-xl italic text-gold-light sm:text-2xl">{slide.sub}</p>
 
-              <div className="mt-5 h-1 w-16 rounded bg-gold" />
+              <div className="mt-5 flex items-center gap-2">
+                <span className="h-px w-14 bg-gradient-to-r from-gold to-transparent" />
+                <Gem className="h-3 w-3 text-gold" />
+              </div>
 
-              <p className="mt-5 max-w-md text-[15px] leading-relaxed text-gray-500">{slide.desc}</p>
+              <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/70">{slide.desc}</p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link href={slide.cta.href}
-                      className="inline-flex items-center gap-2 rounded-full bg-navy px-6 py-3.5 text-sm font-semibold text-white shadow-hover transition hover:bg-navy-light">
+                      className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-hover transition hover:bg-blue-500">
                   <ShoppingCart className="h-4 w-4" /> {slide.cta.label}
                 </Link>
                 <Link href={slide.view.href}
-                      className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-6 py-3.5 text-sm font-semibold text-navy transition hover:border-navy/30 hover:bg-gray-50">
+                      className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-navy transition hover:bg-gray-100">
                   <LayoutGrid className="h-4 w-4" /> {slide.view.label}
                 </Link>
                 <a href={wa} target="_blank" rel="noopener noreferrer"
-                   className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-6 py-3.5 text-sm font-semibold text-navy transition hover:border-[#25D366]/40 hover:bg-gray-50">
+                   className="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10">
                   <MessageCircle className="h-4 w-4 text-[#25D366]" /> WhatsApp
                 </a>
+              </div>
+
+              <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+                {trustBadges.map((b) => (
+                  <span key={b.title} className="inline-flex items-center gap-2 text-sm text-white/80">
+                    <b.icon className="h-4 w-4 text-white/60" /> {b.title}
+                  </span>
+                ))}
               </div>
             </div>
           ))}
         </div>
 
-        {/* Right — full-bleed angled photo panel */}
-        <div className="relative h-[340px] w-full sm:h-[440px] lg:h-[560px]">
-          {/* gold outline shape, slightly larger, sits behind the photo */}
-          <div
-            className="absolute inset-0 bg-gold"
-            style={{ clipPath: "polygon(6% 0%, 100% 0%, 100% 100%, 6% 100%, 0% 50%)" }}
-          />
-          <div
-            className="absolute inset-[3px] overflow-hidden bg-navy-dark sm:inset-1"
-            style={{ clipPath: "polygon(7% 0%, 100% 0%, 100% 100%, 7% 100%, 1.2% 50%)" }}
-          >
+        {/* Right — rounded photo panel */}
+        <div className="container-luxe lg:px-0">
+          <div className="relative h-[320px] w-full overflow-hidden rounded-3xl border border-white/15 shadow-2xl sm:h-[420px] lg:h-[520px] lg:rounded-[2rem]">
             {slides.map((slide, i) => (
               <div
                 key={i}
@@ -336,69 +332,69 @@ export default function HeroSlider() {
                   alt={slide.title}
                   fill
                   priority={i === 0}
-                  sizes="(min-width: 1024px) 55vw, 100vw"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
                   className="object-cover"
                 />
               </div>
             ))}
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent" />
-          </div>
 
-          {/* Slide counter */}
-          <span className="absolute bottom-5 right-5 z-20 rounded-full border border-white/30 bg-black/30 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm sm:bottom-7 sm:right-8">
-            {String(cur + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-          </span>
+            {/* Slide counter */}
+            <span className="absolute bottom-5 right-5 z-20 rounded-full border border-white/30 bg-black/30 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+              {String(cur + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+            </span>
 
-          {/* Prev / Next */}
-          <button
-            onClick={() => go(cur - 1)}
-            className="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-full bg-navy p-2.5 text-white shadow-hover transition hover:bg-navy-light sm:left-4"
-            aria-label="Previous"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button
-            onClick={() => go(cur + 1)}
-            className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-navy p-2.5 text-white shadow-hover transition hover:bg-navy-light sm:right-8"
-            aria-label="Next"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
-        </div>
-      </div>
-
-      {/* Progress dots */}
-      <div className="container-luxe relative z-10 mt-8 flex flex-wrap items-center justify-center gap-1.5 lg:mt-6">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => go(i)}
-            className={`h-1.5 rounded-full transition-all duration-500 ${
-              i === cur ? "w-8 bg-gold" : "w-1.5 bg-navy/15 hover:bg-navy/30"
-            }`}
-            aria-label={`Slide ${i + 1}`}
-          />
-        ))}
-      </div>
-
-      {/* Trust badges — floating card, overlaps into the section below */}
-      <div className="container-luxe relative z-10 mt-10 lg:mt-8">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-8 rounded-2xl border border-gray-100 bg-white p-7 shadow-hover sm:grid-cols-4 sm:gap-8 sm:p-9">
-          {trustBadges.map((b) => (
-            <div key={b.title} className="flex items-start gap-4">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-navy">
-                <b.icon className="h-6 w-6 text-gold" />
-              </div>
-              <div>
-                <p className="text-base font-bold text-navy">{b.title}</p>
-                <p className="mt-1 text-sm leading-snug text-gray-500">{b.desc}</p>
-              </div>
+            {/* Dots */}
+            <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5">
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => go(i)}
+                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                    i === cur ? "w-6 bg-white" : "w-1.5 bg-white/40 hover:bg-white/60"
+                  }`}
+                  aria-label={`Slide ${i + 1}`}
+                />
+              ))}
             </div>
-          ))}
+
+            {/* Prev / Next */}
+            <button
+              onClick={() => go(cur - 1)}
+              className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-navy/80 p-2.5 text-white shadow-hover backdrop-blur-sm transition hover:bg-navy-light"
+              aria-label="Previous"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              onClick={() => go(cur + 1)}
+              className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-navy/80 p-2.5 text-white shadow-hover backdrop-blur-sm transition hover:bg-navy-light"
+              aria-label="Next"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="pb-14 sm:pb-16" />
+      {/* Trust badges — white strip below the hero */}
+      <div className="relative z-10 bg-white pb-10 pt-8 sm:pb-12 sm:pt-10">
+        <div className="container-luxe">
+          <div className="grid grid-cols-1 divide-y divide-gray-100 sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
+            {trustBadges.map((b) => (
+              <div key={b.title} className="flex items-start gap-4 px-0 py-5 sm:px-6 sm:py-0">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-navy">
+                  <b.icon className="h-5 w-5 text-gold" />
+                </div>
+                <div>
+                  <p className="text-base font-bold text-navy">{b.title}</p>
+                  <p className="mt-1 text-sm leading-snug text-gray-500">{b.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
