@@ -29,7 +29,7 @@ export default function Footer() {
                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white/60 transition hover:bg-gold hover:text-white">
               <Facebook className="h-4 w-4" />
             </a>
-            <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white/60 transition hover:bg-gold hover:text-white">
+            <a href="https://www.instagram.com/new_toheed_glass?igsh=MThram0xYW4zbW5wNg==" target="_blank" rel="noopener noreferrer" className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white/60 transition hover:bg-gold hover:text-white">
               <Instagram className="h-4 w-4" />
             </a>
             <a href={wa} target="_blank" rel="noopener noreferrer"
