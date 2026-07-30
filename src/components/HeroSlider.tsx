@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   ChevronLeft, ChevronRight, MessageCircle,
-  ShoppingCart, LayoutGrid, Gem, Lock, PenTool, ShieldCheck,
+  ShoppingCart, LayoutGrid, Gem, Lock, PenTool, ShieldCheck, Shield,
 } from "lucide-react";
 import { getWhatsappLink } from "@/lib/whatsapp";
 
@@ -238,7 +238,7 @@ const trustBadges = [
 ];
 
 const wa = getWhatsappLink("Hi! I'd like a free consultation for glass solutions.");
-const AUTOPLAY_MS = 2000;
+const AUTOPLAY_MS = 4500;
 
 export default function HeroSlider() {
   const [cur, setCur]       = useState(0);
