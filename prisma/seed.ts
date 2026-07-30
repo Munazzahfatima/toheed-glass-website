@@ -112,9 +112,8 @@ async function main() {
       shapes: ["RECTANGLE", "SQUARE", "ROUND", "OVAL"] as const,
       colorCount: 9,
       images: [
-        "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&q=80",
-        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
-        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80",
+        "/images/led-mirror-luxury.jpeg",
+        "/images/led-smart-mirrors-fb.png",
       ],
     },
     {
@@ -129,8 +128,8 @@ async function main() {
       shapes: ["RECTANGLE", "SQUARE"] as const,
       colorCount: 0,
       images: [
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80",
-        "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
+        "/images/beveled-mirror-wall.jpeg",
+        "/images/beveled-mirror-luxury.png",
       ],
     },
     {
@@ -144,10 +143,7 @@ async function main() {
       hasCheckout: false,
       shapes: ["RECTANGLE", "SQUARE"] as const,
       colorCount: 0,
-      images: [
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
-        "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
-      ],
+      images: [] as string[],
     },
     {
       name: "Texture Crystal Glass Door Panel",
@@ -161,8 +157,7 @@ async function main() {
       shapes: ["RECTANGLE"] as const,
       colorCount: 0,
       images: [
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
-        "https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=800&q=80",
+        "/images/texture-crystal-door.jpeg",
       ],
     },
     {
@@ -177,8 +172,8 @@ async function main() {
       shapes: ["RECTANGLE", "SQUARE"] as const,
       colorCount: 0,
       images: [
-        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80",
-        "https://images.unsplash.com/photo-1503174971373-b1f69850bded?w=800&q=80",
+        "/images/texture-crystal-window.jpeg",
+        "/images/texture-crystal-window-2.jpeg",
       ],
     },
     {
@@ -481,3 +476,4 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+
