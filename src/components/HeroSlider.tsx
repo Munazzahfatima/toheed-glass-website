@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   ChevronLeft, ChevronRight, MessageCircle,
-  ShoppingCart, LayoutGrid, Gem, Lock, PenTool, ShieldCheck, Shield,
+  LayoutGrid, Gem, Lock, PenTool, ShieldCheck,
 } from "lucide-react";
 import { getWhatsappLink } from "@/lib/whatsapp";
 
@@ -238,7 +238,7 @@ const trustBadges = [
 ];
 
 const wa = getWhatsappLink("Hi! I'd like a free consultation for glass solutions.");
-const AUTOPLAY_MS = 4500;
+const AUTOPLAY_MS = 2000;
 
 export default function HeroSlider() {
   const [cur, setCur]       = useState(0);
@@ -294,10 +294,6 @@ export default function HeroSlider() {
               <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/70">{slide.desc}</p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Link href={slide.cta.href}
-                      className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-hover transition hover:bg-blue-500">
-                  <ShoppingCart className="h-4 w-4" /> {slide.cta.label}
-                </Link>
                 <Link href={slide.view.href}
                       className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-navy transition hover:bg-gray-100">
                   <LayoutGrid className="h-4 w-4" /> {slide.view.label}
