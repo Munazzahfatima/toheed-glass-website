@@ -238,7 +238,7 @@ const trustBadges = [
 ];
 
 const wa = getWhatsappLink("Hi! I'd like a free consultation for glass solutions.");
-const AUTOPLAY_MS =  1500;
+const AUTOPLAY_MS = 3000;
 
 export default function HeroSlider() {
   const [cur, setCur]       = useState(0);
@@ -293,6 +293,17 @@ export default function HeroSlider() {
 
               <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/70">{slide.desc}</p>
 
+              {/* Mobile-only image — shown after the description, before the buttons */}
+              <div className="relative mt-6 h-56 w-full overflow-hidden rounded-2xl border border-white/15 shadow-xl sm:h-64 lg:hidden">
+                <Image
+                  src={slide.img}
+                  alt={slide.title}
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                />
+              </div>
+
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link href={slide.view.href}
                       className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-navy transition hover:bg-gray-100">
@@ -315,8 +326,8 @@ export default function HeroSlider() {
           ))}
         </div>
 
-        {/* Right — rounded photo panel */}
-        <div className="container-luxe lg:px-0">
+        {/* Right — rounded photo panel (desktop/tablet only; mobile uses the inline image above) */}
+        <div className="hidden container-luxe lg:block lg:px-0">
           <div className="relative h-[320px] w-full overflow-hidden rounded-3xl border border-white/15 shadow-2xl sm:h-[420px] lg:h-[520px] lg:rounded-[2rem]">
             {slides.map((slide, i) => (
               <div
@@ -346,7 +357,7 @@ export default function HeroSlider() {
                 <button
                   key={i}
                   onClick={() => go(i)}
-                  className={`h-1.5 rounded-full transition-all duration- 1500 ${
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
                     i === cur ? "w-6 bg-white" : "w-1.5 bg-white/40 hover:bg-white/60"
                   }`}
                   aria-label={`Slide ${i + 1}`}
@@ -394,4 +405,3 @@ export default function HeroSlider() {
     </section>
   );
 }
-
