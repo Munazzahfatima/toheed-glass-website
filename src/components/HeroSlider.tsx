@@ -238,7 +238,7 @@ const trustBadges = [
 ];
 
 const wa = getWhatsappLink("Hi! I'd like a free consultation for glass solutions.");
-const AUTOPLAY_MS = 2000;
+const AUTOPLAY_MS = 500;
 
 export default function HeroSlider() {
   const [cur, setCur]       = useState(0);
@@ -394,3 +394,4 @@ export default function HeroSlider() {
     </section>
   );
 }
+
