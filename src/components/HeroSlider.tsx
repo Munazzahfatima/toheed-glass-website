@@ -21,6 +21,14 @@ type Slide = {
 
 const slides: Slide[] = [
   {
+    tag: "Decorative Glass", title: "Texture Crystal Glass Door Panel",
+    sub: "Privacy Meets Elegance",
+    desc: "Textured crystal glass door panels combining privacy and elegance. Ideal for interior doors, room dividers, and feature installations.",
+    cta: { label: "Order Online", href: "/products/texture-crystal-glass-door-panel" },
+    view: { label: "View Decorative Glass", href: "/products?category=DECORATIVE" },
+    img: "/images/texture-crystal-door.jpeg",
+  },
+  {
     tag: "Decorative Glass", title: "Decorative LED Smart Mirror",
     sub: "Integrated, Colour-Adjustable LED Lighting",
     desc: "Integrated LED lighting with customizable color temperature. Perfect for modern bathrooms, salons, hotels, and luxury interiors. Available in any custom size.",
@@ -51,14 +59,6 @@ const slides: Slide[] = [
     cta: { label: "Order Online", href: "/products/decorative-beveled-mirror-wall" },
     view: { label: "View Mirror Walls", href: "/products?category=DECORATIVE" },
     img: "/images/beveled-mirror-luxury.png",
-  },
-  {
-    tag: "Decorative Glass", title: "Texture Crystal Glass Door Panel",
-    sub: "Privacy Meets Elegance",
-    desc: "Textured crystal glass door panels combining privacy and elegance. Ideal for interior doors, room dividers, and feature installations.",
-    cta: { label: "Order Online", href: "/products/texture-crystal-glass-door-panel" },
-    view: { label: "View Decorative Glass", href: "/products?category=DECORATIVE" },
-    img: "/images/texture-crystal-door.jpeg",
   },
   {
     tag: "Decorative Glass", title: "Texture Crystal Glass Window Panel",
@@ -238,7 +238,7 @@ const trustBadges = [
 ];
 
 const wa = getWhatsappLink("Hi! I'd like a free consultation for glass solutions.");
-const AUTOPLAY_MS = 4500;
+const AUTOPLAY_MS = 2000;
 
 export default function HeroSlider() {
   const [cur, setCur]       = useState(0);
