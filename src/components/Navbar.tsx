@@ -170,14 +170,14 @@ export default function Navbar() {
 
         {/* Mobile */}
         {open && (
-          <div className="border-t border-gray-100 bg-white md:hidden">
+          <div className="max-h-[calc(100vh-7rem)] overflow-y-auto border-t border-gray-100 bg-white md:hidden">
             <div className="container-luxe flex flex-col gap-1 py-4">
               <Link href="/" onClick={() => setOpen(false)} className="px-3 py-2 text-sm font-semibold text-navy">Home</Link>
               <details className="group">
                 <summary className="flex cursor-pointer list-none items-center justify-between px-3 py-2 text-sm font-semibold text-navy">
                   Products <ChevronDown className="h-4 w-4 text-gold" />
                 </summary>
-                <div className="bg-gray-50 px-4 py-3">
+                <div className="max-h-[60vh] overflow-y-auto bg-gray-50 px-4 py-3">
                   {categoryGroups.map((group) => (
                     <div key={group.key} className="mb-3">
                       <Link href={`/products?category=${group.key}`} onClick={() => setOpen(false)}
