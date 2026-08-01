@@ -75,21 +75,46 @@ export default function Navbar() {
   return (
     <>
       {/* Announcement bar */}
-      <div className="bg-navy py-2 text-center text-xs font-medium text-white/80">
+      <div
+        className={`overflow-hidden bg-navy text-center text-xs font-medium text-white/80 transition-all duration-300 ease-in-out ${
+          scrolled ? "max-h-0 py-0 opacity-0" : "max-h-10 py-2 opacity-100"
+        }`}
+      >
         Best Architectural and Decorative Glass Company in Pakistan
       </div>
 
       {/* Main header */}
       <header className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${scrolled ? "shadow-md" : "border-b border-gray-100"}`}>
-        <div className="container-luxe flex h-28 items-center justify-between">
+        <div
+          className={`container-luxe flex items-center justify-between transition-all duration-300 ease-in-out ${
+            scrolled ? "h-16" : "h-28"
+          }`}
+        >
 
           {/* Logo */}
           <Link href="/" className="flex shrink-0 items-center gap-3">
-            <Image src="/images/logo.png" alt="New Toheed Glass" width={96} height={96}
-                   className="h-20 w-20 shrink-0 object-contain" />
+            <Image
+              src="/images/logo.png"
+              alt="New Toheed Glass"
+              width={96}
+              height={96}
+              className={`shrink-0 object-contain transition-all duration-300 ease-in-out ${
+                scrolled ? "h-11 w-11" : "h-20 w-20"
+              }`}
+            />
             <div className="leading-tight min-w-0">
-              <p className="font-serif text-2xl font-extrabold text-navy leading-none truncate sm:text-[26px]">New Toheed Glass</p>
-              <p className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-gold truncate">
+              <p
+                className={`font-serif font-extrabold text-navy leading-none truncate transition-all duration-300 ease-in-out ${
+                  scrolled ? "text-lg sm:text-xl" : "text-2xl sm:text-[26px]"
+                }`}
+              >
+                New Toheed Glass
+              </p>
+              <p
+                className={`font-bold uppercase tracking-[0.18em] text-gold truncate transition-all duration-300 ease-in-out ${
+                  scrolled ? "mt-0 text-[10px]" : "mt-1 text-xs"
+                }`}
+              >
                 &amp; Accessories
               </p>
             </div>
