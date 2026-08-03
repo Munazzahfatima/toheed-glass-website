@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import OrderWizard from "@/components/OrderWizard";
+import ProductImageGallery from "@/components/ProductImageGallery";
 import { getWhatsappLink } from "@/lib/whatsapp";
 import { MessageCircle, Phone, ArrowLeft, CheckCircle2 } from "lucide-react";
 import type { Metadata } from "next";
@@ -107,38 +108,10 @@ export default async function ProductDetailPage({
 
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Images */}
-          <div>
-            <div className="relative aspect-square overflow-hidden rounded-3xl bg-navy/5 shadow-luxury">
-              {product.images[0] ? (
-                <Image
-                  src={product.images[0].url}
-                  alt={product.name}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              ) : (
-                <div className="flex h-full items-center justify-center text-8xl">🪟</div>
-              )}
-            </div>
-            {product.images.length > 1 && (
-              <div className="mt-4 grid grid-cols-4 gap-3">
-                {product.images.slice(1, 5).map((img, i) => (
-                  <div
-                    key={i}
-                    className="relative aspect-square overflow-hidden rounded-xl bg-navy/5"
-                  >
-                    <Image
-                      src={img.url}
-                      alt={img.altText || `${product.name} ${i + 2}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <ProductImageGallery
+            images={product.images.map((i) => i.url)}
+            title={product.name}
+          />
 
           {/* Details */}
           <div>

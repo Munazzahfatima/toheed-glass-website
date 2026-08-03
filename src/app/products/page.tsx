@@ -113,7 +113,7 @@ export default async function ProductsPage({
                       Featured
                     </span>
                   )}
-                  {p.hasCheckout && (
+                  {p.hasCheckout && !p.slug.includes("led") && (
                     <span className="absolute right-3 top-3 rounded-full bg-navy px-3 py-1 text-xs font-semibold text-white">
                       Order Online
                     </span>
@@ -129,15 +129,12 @@ export default async function ProductsPage({
 
                   {/* Actions */}
                   <div className="mt-3 flex flex-wrap gap-2">
-                    <button className="flex items-center gap-1 rounded border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-600 hover:border-navy hover:text-navy">
-                      Compare
-                    </button>
                     <Link href={`/products/${p.slug}`}
-                          className="flex-1 rounded bg-navy py-1.5 text-center text-xs font-semibold text-white hover:bg-navy-light">
+                          className="flex-1 rounded bg-navy py-2 text-center text-xs font-semibold text-white hover:bg-navy-light">
                       Read More
                     </Link>
                     <a href={waLink} target="_blank" rel="noopener noreferrer"
-                       className="flex items-center gap-1 rounded bg-[#25D366] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#1ebe5d]">
+                       className="flex items-center gap-1.5 rounded bg-[#25D366] px-4 py-2 text-xs font-semibold text-white hover:bg-[#1ebe5d]">
                       <MessageCircle className="h-3.5 w-3.5" /> WhatsApp
                     </a>
                   </div>

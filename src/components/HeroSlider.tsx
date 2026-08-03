@@ -8,6 +8,7 @@ import {
   LayoutGrid, Gem, Lock, PenTool, ShieldCheck,
 } from "lucide-react";
 import { getWhatsappLink } from "@/lib/whatsapp";
+import { syncProductImages } from "@/lib/sync-images";
 
 type Slide = {
   tag:   string;
@@ -23,82 +24,138 @@ const slides: Slide[] = [
   {
     tag: "Decorative Glass", title: "Decorative LED Smart Mirror",
     sub: "Integrated, Colour-Adjustable LED Lighting",
-    desc: "Integrated LED lighting with customizable color temperature. Perfect for modern bathrooms, salons, hotels, and luxury interiors. Available in any custom size.",
+    desc: "Integrated LED lighting with customizable color temperature. Perfect for modern bathrooms, salons, hotels, and luxury interiors.",
     cta: { label: "Order Online", href: "/products/decorative-led-smart-mirror" },
     view: { label: "View Decorative Glass", href: "/products?category=DECORATIVE" },
-    img: "/images/led-mirror-luxury.jpeg",
+    img: "/images/Decorative LED smart mirror 1.jpeg",
   },
   {
-    tag: "Decorative Glass", title: "Beveled Mirror Wall Panels",
+    tag: "Decorative Glass", title: "Decorative Beveled Mirror Wall",
     sub: "Available In Any Panel Size",
     desc: "Premium beveled mirror wall panels available in any panel size. Ideal for feature walls in homes, hotels, restaurants, and commercial spaces.",
     cta: { label: "Order Online", href: "/products/decorative-beveled-mirror-wall" },
     view: { label: "View Mirror Walls", href: "/products?category=DECORATIVE" },
-    img: "/images/beveled-mirror-wall.jpeg",
+    img: "/images/Beveled mirror wall.jpeg",
+  },
+  {
+    tag: "Decorative Glass", title: "Ceiling Glass",
+    sub: "Backlit Overhead Focal Points",
+    desc: "Decorative glass ceiling panels with custom designs, etching, and backlit options. Transform any room with a stunning overhead feature.",
+    cta: { label: "Get Free Quote", href: "/products/ceiling-glass" },
+    view: { label: "View Decorative Glass", href: "/products?category=DECORATIVE" },
+    img: "/images/Ceiling glass.jpg",
+  },
+  {
+    tag: "Decorative Glass", title: "Texture Crystal Glass Door Panel",
+    sub: "Privacy Meets Elegance",
+    desc: "Textured crystal glass door panels combining privacy and elegance. Ideal for interior doors, room dividers, and feature installations.",
+    cta: { label: "Get Free Quote", href: "/products/texture-crystal-glass-door-panel" },
+    view: { label: "View Decorative Glass", href: "/products?category=DECORATIVE" },
+    img: "/images/Texture crystal glass door panel.jpeg",
   },
   {
     tag: "Decorative Glass", title: "Texture Crystal Glass Window Panel",
     sub: "Diffused Natural Light & Privacy",
     desc: "Crystal texture glass window panels offering privacy while allowing diffused natural light. Available in multiple texture patterns.",
-    cta: { label: "Order Online", href: "/products/texture-crystal-glass-window-panel" },
+    cta: { label: "Get Free Quote", href: "/products/texture-crystal-glass-window-panel" },
     view: { label: "View Decorative Glass", href: "/products?category=DECORATIVE" },
-    img: "/images/texture-crystal-window.jpeg",
+    img: "/images/Texture crystal glass window panel.jpeg",
   },
   {
-    tag: "Architectural Glass", title: "Glass Curtain Walls & Façades",
-    sub: "High-Performance Structural Glass",
-    desc: "Structural glass curtain wall systems for office buildings, hotels, and corporate headquarters. Combines aesthetics with structural performance.",
-    cta: { label: "Explore Solutions", href: "/products/glass-curtain-wall" },
-    view: { label: "View Architectural Glass", href: "/products?category=COMMERCIAL" },
-    img: "/images/glass-curtain-wall.jpeg",
-  },
-  {
-    tag: "Commercial Glass", title: "Office Glass Partitions",
-    sub: "Open, Professional Workspaces",
-    desc: "Modern frameless and framed office glass partition systems. Create open, professional workspaces while maintaining privacy.",
-    cta: { label: "Order Online", href: "/products/office-glass-partition" },
-    view: { label: "View Commercial Glass", href: "/products?category=COMMERCIAL" },
-    img: "/images/office-glass-partition.jpeg",
+    tag: "Decorative Glass", title: "Frosted Glass",
+    sub: "Sandblasted Privacy Panels",
+    desc: "Premium sandblasted frosted glass for partitions, shower screens, office dividers, and window panels. Offers privacy with style.",
+    cta: { label: "Get Free Quote", href: "/products/frosted-glass" },
+    view: { label: "View Decorative Glass", href: "/products?category=DECORATIVE" },
+    img: "/images/Frosted glass.jpg",
   },
   {
     tag: "Commercial Glass", title: "ACP Wall Cladding",
     sub: "Lightweight, Durable Façades",
-    desc: "Aluminium Composite Panel (ACP) wall cladding for modern building façades. Lightweight, durable, and available in a wide range of colors and finishes.",
-    cta: { label: "Order Online", href: "/products/acp-wall-cladding" },
+    desc: "Aluminium Composite Panel (ACP) wall cladding for modern building façades. Lightweight, durable, and available in a wide range of finishes.",
+    cta: { label: "Get Free Quote", href: "/products/acp-wall-cladding" },
     view: { label: "View Commercial Glass", href: "/products?category=COMMERCIAL" },
-    img: "/images/acp-wall-cladding.jpeg",
+    img: "/images/ACP wall cladding 1.jpeg",
+  },
+  {
+    tag: "Commercial Glass", title: "Glass Curtain Wall",
+    sub: "High-Performance Structural Glass",
+    desc: "Structural glass curtain wall systems for office buildings, hotels, and corporate headquarters. Combines aesthetics with structural performance.",
+    cta: { label: "Explore Solutions", href: "/products/glass-curtain-wall" },
+    view: { label: "View Architectural Glass", href: "/products?category=COMMERCIAL" },
+    img: "/images/Glass curtain wall.jpeg",
+  },
+  {
+    tag: "Commercial Glass", title: "Glass Shop Front",
+    sub: "Frameless Commercial Storefronts",
+    desc: "Professional glass shop fronts for retail stores, banks, and commercial spaces. Frameless and framed options available.",
+    cta: { label: "Get Free Quote", href: "/products/glass-shop-front" },
+    view: { label: "View Commercial Glass", href: "/products?category=COMMERCIAL" },
+    img: "/images/Office glass front.jpeg",
+  },
+  {
+    tag: "Commercial Glass", title: "Office Glass Partition",
+    sub: "Open, Professional Workspaces",
+    desc: "Modern frameless and framed office glass partition systems. Create open, professional workspaces while maintaining privacy.",
+    cta: { label: "Get Free Quote", href: "/products/office-glass-partition" },
+    view: { label: "View Commercial Glass", href: "/products?category=COMMERCIAL" },
+    img: "/images/Office glass partition 1.jpeg",
   },
   {
     tag: "Safety Glass", title: "Double Glazed Glass",
     sub: "Thermal & Acoustic Insulation",
-    desc: "High-performance double glazed units for superior thermal and acoustic insulation. Ideal for residential, commercial, and industrial applications.",
-    cta: { label: "Order Online", href: "/products/double-glazed-glass" },
+    desc: "High-performance double glazed units for superior thermal and acoustic insulation. Ideal for residential and commercial applications.",
+    cta: { label: "Get Free Quote", href: "/products/double-glazed-glass" },
     view: { label: "View Safety Glass", href: "/products?category=SAFETY" },
-    img: "/images/double-glazed-glass.jpeg",
-  },
-  {
-    tag: "Residential Glass", title: "Shower Cabin",
-    sub: "Designed For Luxury Bathrooms",
-    desc: "Custom frameless and semi-frameless shower cabins with tempered safety glass. Designed for luxury bathrooms.",
-    cta: { label: "Order Online", href: "/products/shower-cabin" },
-    view: { label: "View Residential Glass", href: "/products?category=RESIDENTIAL" },
-    img: "/images/shower-cabin.jpeg",
-  },
-  {
-    tag: "Residential Glass", title: "Stairs Glass Railing",
-    sub: "Frameless & Semi-Frameless Designs",
-    desc: "Elegant toughened glass staircase railings and balustrades. Available in frameless and semi-frameless designs.",
-    cta: { label: "Order Online", href: "/products/stairs-glass-railing" },
-    view: { label: "View Residential Glass", href: "/products?category=RESIDENTIAL" },
-    img: "/images/stairs-glass-railing.jpeg",
+    img: "/images/Double glazed glass 1.jpeg",
   },
   {
     tag: "Safety Glass", title: "Tempered Glass",
     sub: "Four Times Stronger",
     desc: "Heat-treated tempered safety glass for doors, windows, partitions, and furniture. Four times stronger than standard glass.",
-    cta: { label: "Order Online", href: "/products/tempered-glass" },
+    cta: { label: "Get Free Quote", href: "/products/tempered-glass" },
     view: { label: "View Safety Glass", href: "/products?category=SAFETY" },
-    img: "/images/tempered-glass.jpeg",
+    img: "/images/Tempered glass 1.jpeg",
+  },
+  {
+    tag: "Residential Glass", title: "Shower Cabin",
+    sub: "Designed For Luxury Bathrooms",
+    desc: "Custom frameless and semi-frameless shower cabins with tempered safety glass. Designed for luxury bathrooms.",
+    cta: { label: "Get Free Quote", href: "/products/shower-cabin" },
+    view: { label: "View Residential Glass", href: "/products?category=RESIDENTIAL" },
+    img: "/images/Shower cabin 1.jpeg",
+  },
+  {
+    tag: "Residential Glass", title: "Single Glass Door",
+    sub: "Frameless Safety Glass Doors",
+    desc: "Frameless and framed single glass doors for offices, homes, and commercial spaces. Tempered for safety.",
+    cta: { label: "Get Free Quote", href: "/products/single-glass-door" },
+    view: { label: "View Residential Glass", href: "/products?category=RESIDENTIAL" },
+    img: "/images/single glass door.jpeg",
+  },
+  {
+    tag: "Residential Glass", title: "Skylight Glass",
+    sub: "Flood Your Interiors With Light",
+    desc: "Structural skylight glazing systems for residential and commercial roofs. Flood your interiors with natural light.",
+    cta: { label: "Get Free Quote", href: "/products/skylight-glass" },
+    view: { label: "View Residential Glass", href: "/products?category=RESIDENTIAL" },
+    img: "/images/skylight glass.png",
+  },
+  {
+    tag: "Residential Glass", title: "Stairs Glass Railing",
+    sub: "Frameless & Semi-Frameless Designs",
+    desc: "Elegant toughened glass staircase railings and balustrades. Available in frameless and semi-frameless designs.",
+    cta: { label: "Get Free Quote", href: "/products/stairs-glass-railing" },
+    view: { label: "View Residential Glass", href: "/products?category=RESIDENTIAL" },
+    img: "/images/Stairs glass railing 1.jpeg",
+  },
+  {
+    tag: "Residential Glass", title: "Terrace Glass Railing",
+    sub: "Unobstructed Views, Maximum Safety",
+    desc: "Weather-resistant toughened glass terrace railings and balustrades. Provides unobstructed views with maximum safety.",
+    cta: { label: "Get Free Quote", href: "/products/terrace-glass-railing" },
+    view: { label: "View Residential Glass", href: "/products?category=RESIDENTIAL" },
+    img: "/images/Terrace glass railing.jpeg",
   },
 ];
 
@@ -110,12 +167,16 @@ const trustBadges = [
 ];
 
 const wa = getWhatsappLink("Hi! I'd like a free consultation for glass solutions.");
-const AUTOPLAY_MS = 3000;
+const AUTOPLAY_MS = 4000;
 
 export default function HeroSlider() {
   const [cur, setCur]       = useState(0);
   const [paused, setPaused] = useState(false);
   const total = slides.length;
+
+  useEffect(() => {
+    syncProductImages();
+  }, []);
 
   const go = useCallback((to: number) => {
     setCur(((to % total) + total) % total);
@@ -138,16 +199,16 @@ export default function HeroSlider() {
       <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-gold/10 blur-3xl" />
 
       <div className="relative z-10 grid gap-10 py-10 lg:grid-cols-2 lg:items-center lg:gap-8 lg:py-16">
-        {/* Left — text, crossfades per slide */}
+        {/* Left — text, smooth crossfade per slide */}
         <div className="container-luxe relative lg:pr-4">
           {slides.map((slide, i) => (
             <div
               key={i}
-              className={
+              className={`transform-gpu transition-all duration-1000 ease-in-out ${
                 i === cur
-                  ? "relative opacity-100 translate-y-0 transition-all duration-700 ease-out"
-                  : "absolute inset-0 opacity-0 translate-y-3 pointer-events-none transition-all duration-700 ease-out"
-              }
+                  ? "relative opacity-100 translate-y-0"
+                  : "absolute inset-0 opacity-0 translate-y-2 pointer-events-none"
+              }`}
             >
               <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-white backdrop-blur-sm">
                 <Gem className="h-3.5 w-3.5 text-gold" /> {slide.tag}
@@ -165,14 +226,14 @@ export default function HeroSlider() {
 
               <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/70">{slide.desc}</p>
 
-              {/* Mobile-only image — shown after the description, before the buttons */}
+              {/* Mobile-only image */}
               <div className="relative mt-6 h-56 w-full overflow-hidden rounded-2xl border border-white/15 shadow-xl sm:h-64 lg:hidden">
                 <Image
                   src={slide.img}
                   alt={slide.title}
                   fill
                   sizes="100vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-1000 ease-in-out"
                 />
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/40 to-transparent" />
 
@@ -187,7 +248,7 @@ export default function HeroSlider() {
                     <button
                       key={di}
                       onClick={() => go(di)}
-                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                      className={`h-1.5 rounded-full transition-all duration-500 ${
                         di === cur ? "w-5 bg-white" : "w-1.5 bg-white/40 hover:bg-white/60"
                       }`}
                       aria-label={`Slide ${di + 1}`}
@@ -212,6 +273,7 @@ export default function HeroSlider() {
                 </button>
               </div>
 
+              {/* Side-by-side buttons on mobile */}
               <div className="mt-8 grid grid-cols-2 gap-2.5 sm:flex sm:items-center sm:gap-3">
                 <Link href={slide.view.href}
                       className="inline-flex items-center justify-center gap-1.5 rounded-full bg-white px-3 py-3 text-xs font-semibold text-navy transition hover:bg-gray-100 sm:px-6 sm:py-3.5 sm:text-sm">
@@ -236,13 +298,15 @@ export default function HeroSlider() {
           ))}
         </div>
 
-        {/* Right — rounded photo panel (desktop/tablet only; mobile uses the inline image above) */}
+        {/* Right — rounded photo panel desktop/tablet */}
         <div className="hidden container-luxe lg:block lg:px-0">
           <div className="relative h-[320px] w-full overflow-hidden rounded-3xl border border-white/15 shadow-2xl sm:h-[420px] lg:h-[520px] lg:rounded-[2rem]">
             {slides.map((slide, i) => (
               <div
                 key={i}
-                className={`absolute inset-0 transition-opacity duration-700 ease-out ${i === cur ? "opacity-100" : "opacity-0"}`}
+                className={`absolute inset-0 transform-gpu transition-all duration-1000 ease-in-out ${
+                  i === cur ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
+                }`}
               >
                 <Image
                   src={slide.img}
@@ -267,7 +331,7 @@ export default function HeroSlider() {
                 <button
                   key={i}
                   onClick={() => go(i)}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                  className={`h-1.5 rounded-full transition-all duration-500 ${
                     i === cur ? "w-6 bg-white" : "w-1.5 bg-white/40 hover:bg-white/60"
                   }`}
                   aria-label={`Slide ${i + 1}`}
@@ -294,7 +358,7 @@ export default function HeroSlider() {
         </div>
       </div>
 
-      {/* Trust badges — white strip below the hero */}
+      {/* Trust badges — white strip */}
       <div className="relative z-10 bg-white pb-10 pt-8 sm:pb-12 sm:pt-10">
         <div className="container-luxe">
           <div className="grid grid-cols-1 divide-y divide-gray-100 sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">

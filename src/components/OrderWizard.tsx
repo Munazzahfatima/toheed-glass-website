@@ -5,6 +5,7 @@ import Image from "next/image";
 import { formatPKR } from "@/lib/pricing";
 import { getWhatsappLink, buildCustomSizeWhatsappMessage } from "@/lib/whatsapp";
 import { CheckCircle2 } from "lucide-react";
+import ProductImageGallery from "@/components/ProductImageGallery";
 
 type Color = {
   id: string;
@@ -152,22 +153,7 @@ Please contact customer for confirmation.`;
     <div className="grid gap-12 lg:grid-cols-2">
       {/* Product images */}
       <div>
-        <div className="relative aspect-square overflow-hidden rounded-3xl bg-navy/5 shadow-luxury">
-          {product.images[0] ? (
-            <Image src={product.images[0]} alt={product.name} fill className="object-cover" />
-          ) : (
-            <div className="flex h-full items-center justify-center text-navy/30">No Image</div>
-          )}
-        </div>
-        {product.images.length > 1 && (
-          <div className="mt-4 grid grid-cols-4 gap-3">
-            {product.images.slice(1, 5).map((img, i) => (
-              <div key={i} className="relative aspect-square overflow-hidden rounded-xl bg-navy/5">
-                <Image src={img} alt={`${product.name} ${i}`} fill className="object-cover" />
-              </div>
-            ))}
-          </div>
-        )}
+        <ProductImageGallery images={product.images} title={product.name} />
         <h1 className="mt-8 font-serif text-3xl font-bold text-navy">{product.name}</h1>
         <p className="mt-3 text-navy/60">{product.description}</p>
         {isFixed && product.fixedSize && (

@@ -7,84 +7,63 @@ const prisma = new PrismaClient();
 
 const productImages: Record<string, string[]> = {
   "decorative-led-smart-mirror": [
-    "/images/glass-5.jpeg",
-    "/images/glass-4.jpeg",
+    "/images/Decorative LED smart mirror 1.jpeg",
+    "/images/Decorative LED smart mirror 2.png",
   ],
   "decorative-beveled-mirror-wall": [
-    "/images/beveled-mirror-wall.jpeg",
-    "/images/glass-5.jpeg",
+    "/images/Beveled mirror wall.jpeg",
   ],
   "ceiling-glass": [
-    "/images/glass-3.jpeg",
-    "/images/skylight-glass.png",
+    "/images/Ceiling glass.jpg",
   ],
   "texture-crystal-glass-door-panel": [
-    "/images/texture-crystal-door.jpeg",
-    "/images/single-glass-door.jpeg",
+    "/images/Texture crystal glass door panel.jpeg",
   ],
   "texture-crystal-glass-window-panel": [
-    "/images/texture-crystal-window.jpeg",
-    "/images/texture-crystal-window-2.jpeg",
+    "/images/Texture crystal glass window panel.jpeg",
   ],
   "frosted-glass": [
-    "/images/office-glass-partition.jpeg",
-    "/images/texture-crystal-window.jpeg",
-  ],
-  "privacy-frosted-glass": [
-    "/images/texture-crystal-window-2.jpeg",
-    "/images/office-glass-partition-2.jpeg",
-  ],
-  "original-stained-glass": [
-    "/images/glass-1.jpeg",
-    "/images/glass-2.jpeg",
-  ],
-  "artistic-stained-glass": [
-    "/images/glass-2.jpeg",
-    "/images/glass-1.jpeg",
+    "/images/Frosted glass.jpg",
   ],
   "acp-wall-cladding": [
-    "/images/acp-wall-cladding.jpeg",
-    "/images/acp-wall-cladding-2.jpeg",
+    "/images/ACP wall cladding 1.jpeg",
+    "/images/ACP wall cladding 2.jpeg",
   ],
   "double-glazed-glass": [
-    "/images/double-glazed-glass.jpeg",
-    "/images/double-glazed-glass-2.jpeg",
+    "/images/Double glazed glass 1.jpeg",
+    "/images/Double glazed glass 2.jpeg",
   ],
   "glass-curtain-wall": [
-    "/images/glass-curtain-wall.jpeg",
-    "/images/acp-wall-cladding.jpeg",
+    "/images/Glass curtain wall.jpeg",
   ],
   "glass-shop-front": [
-    "/images/single-glass-door.jpeg",
-    "/images/glass-curtain-wall.jpeg",
+    "/images/Office glass front.jpeg",
   ],
   "office-glass-partition": [
-    "/images/office-glass-partition.jpeg",
-    "/images/office-glass-partition-2.jpeg",
+    "/images/Office glass partition 1.jpeg",
+    "/images/Office glass partition 2.jpeg",
   ],
   "shower-cabin": [
-    "/images/shower-cabin.jpeg",
-    "/images/shower-cabin-2.jpeg",
+    "/images/Shower cabin 1.jpeg",
+    "/images/Shower cabin 2.jpeg",
   ],
   "skylight-glass": [
-    "/images/skylight-glass.png",
-    "/images/glass-curtain-wall.jpeg",
+    "/images/skylight glass.png",
+    "/images/skylight glass 2.jpg",
   ],
   "single-glass-door": [
-    "/images/single-glass-door.jpeg",
-    "/images/texture-crystal-door.jpeg",
+    "/images/single glass door.jpeg",
   ],
   "stairs-glass-railing": [
-    "/images/stairs-glass-railing.jpeg",
-    "/images/stairs-glass-railing-2.jpeg",
+    "/images/Stairs glass railing 1.jpeg",
+    "/images/Stairs glass railing 2.jpeg",
   ],
   "tempered-glass": [
-    "/images/tempered-glass.jpeg",
-    "/images/tempered-glass-2.jpeg",
+    "/images/Tempered glass 1.jpeg",
+    "/images/Tempered glass 2.jpeg",
   ],
   "terrace-glass-railing": [
-    "/images/terrace-glass-railing.jpeg",
-    "/images/stairs-glass-railing.jpeg",
+    "/images/Terrace glass railing.jpeg",
   ],
 };
 

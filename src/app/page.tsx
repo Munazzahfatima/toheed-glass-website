@@ -375,7 +375,7 @@ function ProductCard({ product }: {
         ) : (
           <div className="flex h-full items-center justify-center text-5xl">🪟</div>
         )}
-        {product.hasCheckout && (
+        {product.hasCheckout && !product.slug.includes("led") && (
           <span className="absolute left-0 top-3 rounded-r-full bg-gold px-4 py-1 text-[10px] font-bold text-white">
             Order Online
           </span>
@@ -384,16 +384,13 @@ function ProductCard({ product }: {
       <div className="p-4">
         <h3 className="font-serif text-base font-semibold text-navy">{product.name}</h3>
         <div className="mt-3 flex flex-wrap gap-2">
-          <button className="flex items-center gap-1 rounded border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-600 hover:border-navy hover:text-navy">
-            Compare
-          </button>
           <Link href={`/products/${product.slug}`}
-                className="flex-1 rounded bg-navy py-1.5 text-center text-xs font-semibold text-white hover:bg-navy-light">
+                className="flex-1 rounded bg-navy py-2 text-center text-xs font-semibold text-white hover:bg-navy-light">
             Read More
           </Link>
           <a href={wa} target="_blank" rel="noopener noreferrer"
-             className="flex items-center gap-1 rounded bg-[#25D366] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#1ebe5d]">
-            <MessageCircle className="h-3.5 w-3.5" />
+             className="flex items-center gap-1.5 rounded bg-[#25D366] px-3.5 py-2 text-xs font-semibold text-white hover:bg-[#1ebe5d]">
+            <MessageCircle className="h-3.5 w-3.5" /> WhatsApp
           </a>
         </div>
       </div>
