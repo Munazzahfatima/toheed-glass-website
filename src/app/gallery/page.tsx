@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { syncAndGetProjects } from "@/lib/projects";
+import InteractivePortfolio from "@/components/InteractivePortfolio";
 
 export const metadata = { title: "Project References" };
 export const revalidate = 0;
@@ -29,29 +30,11 @@ export default async function GalleryPage() {
         </p>
       </div>
 
-      {items.length === 0 && (
+      {items.length === 0 ? (
         <p className="text-center text-gray-400">No gallery items yet.</p>
+      ) : (
+        <InteractivePortfolio items={items} />
       )}
-
-      {/* Grid — 4 columns, all same square size */}
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {items.map((g) => (
-          <div key={g.id}
-               className="group relative aspect-square overflow-hidden rounded-xl bg-gray-100 shadow-sm">
-            <Image
-              src={g.imageUrl}
-              alt={g.title}
-              fill
-              className="object-cover transition duration-500 group-hover:scale-105"
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            />
-            {/* Overlay with title */}
-            <div className="absolute inset-0 flex items-end bg-gradient-to-t from-navy/80 via-navy/20 to-transparent p-4 opacity-0 transition duration-300 group-hover:opacity-100">
-              <p className="text-sm font-semibold text-white">{g.title}</p>
-            </div>
-          </div>
-        ))}
-      </div>
 
       {/* CTA */}
       <div className="mt-14 rounded-2xl bg-navy px-8 py-12 text-center">

@@ -5,6 +5,7 @@ import { MessageCircle, Phone, MapPin } from "lucide-react";
 import { getWhatsappLink } from "@/lib/whatsapp";
 import HeroSlider from "@/components/HeroSlider";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import InteractivePortfolio from "@/components/InteractivePortfolio";
 import { syncAndGetProjects } from "@/lib/projects";
 
 async function getData() {
@@ -293,21 +294,7 @@ export default async function HomePage() {
               <h2 className="mt-2 font-serif text-3xl font-bold text-navy">Projects by New Toheed Glass</h2>
               <div className="divider-blue" />
             </div>
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-              {gallery.map((g: any, i: number) => (
-                <div key={g.id || i} className="group relative aspect-square overflow-hidden rounded-lg bg-gray-100 shadow-sm">
-                  <Image src={g.imageUrl || g.src} alt={g.title} fill
-                         className="object-cover transition duration-500 group-hover:scale-105"
-                         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" />
-                  <div className="absolute inset-0 flex items-end bg-gradient-to-t from-navy/80 via-navy/20 to-transparent p-3 opacity-0 transition group-hover:opacity-100">
-                    <p className="text-xs font-semibold text-white">{g.title}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="mt-8 text-center">
-              <Link href="/gallery" className="btn-primary">View All Projects</Link>
-            </div>
+            <InteractivePortfolio items={gallery} />
           </div>
         </section>
       )}
