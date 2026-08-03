@@ -24,13 +24,13 @@ async function getData() {
         include: { images: { take: 1, orderBy: { sortOrder: "asc" } } },
         take: 4, orderBy: { sortOrder: "asc" },
       }),
-      prisma.galleryItem.findMany({ take: 8, orderBy: { sortOrder: "asc" } }),
+      prisma.galleryItem.findMany({ orderBy: { sortOrder: "asc" } }),
     ]);
     const validDbGallery = dbGallery.filter(item => item.imageUrl && item.imageUrl.includes("/projects/"));
-    const gallery = validDbGallery.length > 0 ? validDbGallery : projects.slice(0, 8);
+    const gallery = validDbGallery.length > 0 ? validDbGallery : projects;
     return { decorative, architectural: other, gallery };
   } catch {
-    return { decorative: [], architectural: [], gallery: projects.slice(0, 8) };
+    return { decorative: [], architectural: [], gallery: projects };
   }
 }
 
@@ -292,11 +292,6 @@ export default async function HomePage() {
               <p className="section-tag">Portfolio</p>
               <h2 className="mt-2 font-serif text-3xl font-bold text-navy">Projects by New Toheed Glass</h2>
               <div className="divider-blue" />
-              <div className="mx-auto mt-3 max-w-2xl text-sm text-gray-500">
-                <p>Islamabad Corporate HQ – Curtain wall façade &amp; office partitions</p>
-                <p>Karachi Luxury Hotel – Decorative media wall &amp; custom mirrors</p>
-                <p>Lahore Villa – Frameless shower cabins &amp; staircase railing</p>
-              </div>
             </div>
             <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
               {gallery.map((g: any, i: number) => (
