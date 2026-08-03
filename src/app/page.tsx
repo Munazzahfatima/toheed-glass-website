@@ -5,10 +5,12 @@ import { MessageCircle, Phone, MapPin } from "lucide-react";
 import { getWhatsappLink } from "@/lib/whatsapp";
 import HeroSlider from "@/components/HeroSlider";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import { syncAndGetProjects } from "@/lib/projects";
 
 async function getData() {
+  const projects = syncAndGetProjects();
   try {
-    const [decorative, other, gallery] = await Promise.all([
+    const [decorative, other, dbGallery] = await Promise.all([
       prisma.product.findMany({
         where: { categories: { has: "DECORATIVE" }, isActive: true, isFeatured: true },
         include: { images: { take: 1, orderBy: { sortOrder: "asc" } } },
@@ -24,8 +26,12 @@ async function getData() {
       }),
       prisma.galleryItem.findMany({ take: 8, orderBy: { sortOrder: "asc" } }),
     ]);
+    const validDbGallery = dbGallery.filter(item => item.imageUrl && item.imageUrl.includes("/projects/"));
+    const gallery = validDbGallery.length > 0 ? validDbGallery : projects.slice(0, 8);
     return { decorative, architectural: other, gallery };
-  } catch { return { decorative: [], architectural: [], gallery: [] }; }
+  } catch {
+    return { decorative: [], architectural: [], gallery: projects.slice(0, 8) };
+  }
 }
 
 const wa = getWhatsappLink("Hi! I'd like a free consultation for glass solutions.");
@@ -293,22 +299,13 @@ export default async function HomePage() {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-              {/* Use client's own photos */}
-              {[
-                { src: "/images/acp-wall-cladding.jpeg",       title: "ACP Wall Cladding" },
-                { src: "/images/beveled-mirror-wall.jpeg",     title: "Beveled Mirror Wall" },
-                { src: "/images/glass-curtain-wall.jpeg",      title: "Glass Curtain Wall" },
-                { src: "/images/office-glass-partition.jpeg",  title: "Office Glass Partition" },
-                { src: "/images/shower-cabin.jpeg",            title: "Shower Cabin" },
-                { src: "/images/stairs-glass-railing.jpeg",    title: "Stairs Glass Railing" },
-                { src: "/images/tempered-glass.jpeg",          title: "Tempered Glass" },
-                { src: "/images/terrace-glass-railing.jpeg",   title: "Terrace Glass Railing" },
-              ].map((g, i) => (
-                <div key={i} className="group relative aspect-square overflow-hidden rounded-lg bg-gray-100">
-                  <Image src={g.src} alt={g.title} fill
-                         className="object-cover transition duration-500 group-hover:scale-105" />
-                  <div className="absolute inset-0 flex items-end bg-gradient-to-t from-navy/60 to-transparent p-3 opacity-0 transition group-hover:opacity-100">
-                    <p className="text-xs font-medium text-white">{g.title}</p>
+              {gallery.map((g: any, i: number) => (
+                <div key={g.id || i} className="group relative aspect-square overflow-hidden rounded-lg bg-gray-100 shadow-sm">
+                  <Image src={g.imageUrl || g.src} alt={g.title} fill
+                         className="object-cover transition duration-500 group-hover:scale-105"
+                         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" />
+                  <div className="absolute inset-0 flex items-end bg-gradient-to-t from-navy/80 via-navy/20 to-transparent p-3 opacity-0 transition group-hover:opacity-100">
+                    <p className="text-xs font-semibold text-white">{g.title}</p>
                   </div>
                 </div>
               ))}

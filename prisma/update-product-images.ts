@@ -107,18 +107,19 @@ async function main() {
   // Replace gallery with client's real project photos
   await prisma.galleryItem.deleteMany({});
   const galleryItems = [
-    { title: "ACP Wall Cladding Project",        imageUrl: "/images/acp-wall-cladding.jpeg" },
-    { title: "Decorative Beveled Mirror Wall",    imageUrl: "/images/beveled-mirror-wall.jpeg" },
-    { title: "Glass Curtain Wall Installation",   imageUrl: "/images/glass-curtain-wall.jpeg" },
-    { title: "Office Glass Partition",            imageUrl: "/images/office-glass-partition.jpeg" },
-    { title: "Shower Cabin Installation",         imageUrl: "/images/shower-cabin.jpeg" },
-    { title: "Stairs Glass Railing Project",      imageUrl: "/images/stairs-glass-railing.jpeg" },
-    { title: "Tempered Glass Work",               imageUrl: "/images/tempered-glass.jpeg" },
-    { title: "Terrace Glass Railing",             imageUrl: "/images/terrace-glass-railing.jpeg" },
-    { title: "Texture Crystal Glass Door",        imageUrl: "/images/texture-crystal-door.jpeg" },
-    { title: "Double Glazed Glass",               imageUrl: "/images/double-glazed-glass.jpeg" },
-    { title: "Single Glass Door",                 imageUrl: "/images/single-glass-door.jpeg" },
-    { title: "Skylight Glass Installation",       imageUrl: "/images/skylight-glass.png" },
+    { title: "ACP Wall Cladding Project",              imageUrl: "/projects/ACP%20wall%20claiding%20proj.jpg" },
+    { title: "Decorative Beveled Mirror Wall",          imageUrl: "/projects/Beveled%20mirrors%20proj%201.jpeg" },
+    { title: "Custom Beveled Mirror Wall",              imageUrl: "/projects/Beveled%20mirrors%20proj%202.jpeg" },
+    { title: "Decorative Glass Door Panel",            imageUrl: "/projects/Decorative%20glass%20door%20pannel%20proj.jpg" },
+    { title: "Frosted Glass Door Installation",        imageUrl: "/projects/Frosted%20glass%20door%20proj%201.jpeg" },
+    { title: "Privacy Frosted Glass Door",             imageUrl: "/projects/Frosted%20glass%20door%20proj%202.jpeg" },
+    { title: "LED Smart Mirror Installation",          imageUrl: "/projects/LED%20mirror%20proj%201.jpeg" },
+    { title: "Backlit LED Mirror Installation",        imageUrl: "/projects/LED%20mirror%20proj%202.jpeg" },
+    { title: "Luxury LED Smart Mirror",                imageUrl: "/projects/LED%20mirror%20proj%203.jpeg" },
+    { title: "Frameless Shower Cabin",                 imageUrl: "/projects/shower%20cabin%20proj%201.jpeg" },
+    { title: "Modern Shower Cabin Installation",       imageUrl: "/projects/shower%20cabin%20proj%202.jpeg" },
+    { title: "Staircase Glass Railing",                imageUrl: "/projects/Stairs%20railing%20%20proj.jpg" },
+    { title: "Texture Crystal Glass Panel",            imageUrl: "/projects/texture%20crestal%20glass%20proj.jpg" },
   ];
   for (let i = 0; i < galleryItems.length; i++) {
     await prisma.galleryItem.create({ data: { ...galleryItems[i], sortOrder: i } });

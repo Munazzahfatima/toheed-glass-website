@@ -436,30 +436,28 @@ async function main() {
 
   // ── Gallery items ──────────────────────────────────────────────────────
   const galleryItems = [
-    { title: "Luxury Villa Staircase Glass Railing",       imageUrl: "https://images.unsplash.com/photo-1558618047-f4e80ccacd02?w=800&q=80" },
-    { title: "Modern Office Glass Partition",              imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" },
-    { title: "Hotel Lobby LED Mirror Installation",        imageUrl: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&q=80" },
-    { title: "Commercial Glass Shop Front",                imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80" },
-    { title: "Artistic Stained Glass Window",              imageUrl: "https://images.unsplash.com/photo-1548263594-a71ea65a8598?w=800&q=80" },
-    { title: "Frameless Shower Cabin Installation",        imageUrl: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800&q=80" },
-    { title: "Glass Curtain Wall Building Facade",         imageUrl: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80" },
-    { title: "Terrace Glass Railing with City View",       imageUrl: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=80" },
-    { title: "Frosted Glass Office Partition",             imageUrl: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&q=80" },
-    { title: "Decorative Beveled Mirror Feature Wall",     imageUrl: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80" },
-    { title: "ACP Cladding Modern Building",               imageUrl: "https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?w=800&q=80" },
-    { title: "Skylight Glass Installation",                imageUrl: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" },
+    { title: "ACP Wall Cladding Project",              imageUrl: "/projects/ACP%20wall%20claiding%20proj.jpg" },
+    { title: "Decorative Beveled Mirror Wall",          imageUrl: "/projects/Beveled%20mirrors%20proj%201.jpeg" },
+    { title: "Custom Beveled Mirror Wall",              imageUrl: "/projects/Beveled%20mirrors%20proj%202.jpeg" },
+    { title: "Decorative Glass Door Panel",            imageUrl: "/projects/Decorative%20glass%20door%20pannel%20proj.jpg" },
+    { title: "Frosted Glass Door Installation",        imageUrl: "/projects/Frosted%20glass%20door%20proj%201.jpeg" },
+    { title: "Privacy Frosted Glass Door",             imageUrl: "/projects/Frosted%20glass%20door%20proj%202.jpeg" },
+    { title: "LED Smart Mirror Installation",          imageUrl: "/projects/LED%20mirror%20proj%201.jpeg" },
+    { title: "Backlit LED Mirror Installation",        imageUrl: "/projects/LED%20mirror%20proj%202.jpeg" },
+    { title: "Luxury LED Smart Mirror",                imageUrl: "/projects/LED%20mirror%20proj%203.jpeg" },
+    { title: "Frameless Shower Cabin",                 imageUrl: "/projects/shower%20cabin%20proj%201.jpeg" },
+    { title: "Modern Shower Cabin Installation",       imageUrl: "/projects/shower%20cabin%20proj%202.jpeg" },
+    { title: "Staircase Glass Railing",                imageUrl: "/projects/Stairs%20railing%20%20proj.jpg" },
+    { title: "Texture Crystal Glass Panel",            imageUrl: "/projects/texture%20crestal%20glass%20proj.jpg" },
   ];
 
-  // Only add gallery items that don't exist yet
-  const existingGallery = await prisma.galleryItem.count();
-  if (existingGallery === 0) {
-    for (let i = 0; i < galleryItems.length; i++) {
-      await prisma.galleryItem.create({
-        data: { ...galleryItems[i], sortOrder: i },
-      });
-    }
-    console.log("   Gallery items added:", galleryItems.length);
+  await prisma.galleryItem.deleteMany({});
+  for (let i = 0; i < galleryItems.length; i++) {
+    await prisma.galleryItem.create({
+      data: { ...galleryItems[i], sortOrder: i },
+    });
   }
+  console.log("   Gallery items updated:", galleryItems.length);
 
   console.log("✅ Seed complete!");
   console.log("   Admin login: admin@newtoheedglass.com / Admin@12345");

@@ -1,11 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { syncAndGetProjects } from "@/lib/projects";
 
 export const metadata = { title: "Project References" };
+export const revalidate = 0;
 
 export default async function GalleryPage() {
-  const items = await prisma.galleryItem.findMany({ orderBy: { sortOrder: "asc" } });
+  const fallbackProjects = syncAndGetProjects();
+  let dbItems: any[] = [];
+  try {
+    dbItems = await prisma.galleryItem.findMany({ orderBy: { sortOrder: "asc" } });
+  } catch (e) {
+    dbItems = [];
+  }
+
+  const validDbItems = dbItems.filter(item => item.imageUrl && item.imageUrl.includes("/projects/"));
+  const items = validDbItems.length > 0 ? validDbItems : fallbackProjects;
 
   return (
     <section className="container-luxe py-16">
