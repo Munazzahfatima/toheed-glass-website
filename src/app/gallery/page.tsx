@@ -46,7 +46,9 @@ export default async function GalleryPage() {
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-4">
           <Link href="/contact" className="btn-gold">Get Free Quote</Link>
-          <Link href="/products" className="btn-secondary">Browse Products</Link>
+          <Link href="/products" prefetch={true} className="inline-flex items-center justify-center rounded-full border border-white/30 px-7 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+            Browse Products
+          </Link>
         </div>
       </div>
     </section>
