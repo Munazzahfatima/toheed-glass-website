@@ -9,9 +9,11 @@
     "lint": "next lint",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "seed": "tsx prisma/seed.ts",
-    "assign-categories": "tsx prisma/assign-categories.ts",
-    "add-images": "tsx prisma/add-images.ts"
+    "seed": "npx tsx prisma/seed.ts",
+    "assign-categories": "npx tsx prisma/assign-categories.ts",
+    "add-images": "npx tsx prisma/add-images.ts",
+    "update-images": "npx tsx prisma/update-product-images.ts",
+    "sync-images": "npx tsx src/lib/sync-images.ts"
   },
   "dependencies": {
     "next": "14.2.5",

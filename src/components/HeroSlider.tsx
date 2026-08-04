@@ -8,7 +8,6 @@ import {
   LayoutGrid, Gem, Lock, PenTool, ShieldCheck,
 } from "lucide-react";
 import { getWhatsappLink } from "@/lib/whatsapp";
-import { syncProductImages } from "@/lib/sync-images";
 
 type Slide = {
   tag:   string;
@@ -173,10 +172,6 @@ export default function HeroSlider() {
   const [cur, setCur]       = useState(0);
   const [paused, setPaused] = useState(false);
   const total = slides.length;
-
-  useEffect(() => {
-    syncProductImages();
-  }, []);
 
   const go = useCallback((to: number) => {
     setCur(((to % total) + total) % total);
