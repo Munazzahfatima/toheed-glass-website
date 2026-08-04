@@ -24,20 +24,24 @@ export default function ProductCarousel({ products }: { products: Product[] }) {
 
   useEffect(() => {
     const track = trackRef.current;
-    if (!track || isPaused) return;
+    if (!track) return;
 
+    let animId: number;
     let pos = 0;
-    const cardWidth = 220; // px — matches card width + gap
+    const cardWidth = 220;
     const total = products.length * cardWidth;
 
     const step = () => {
-      pos += 0.6; // speed — lower = slower
-      if (pos >= total) pos = 0;
-      track.style.transform = `translateX(-${pos}px)`;
+      if (!isPaused) {
+        pos += 0.5;
+        if (pos >= total) pos = 0;
+        track.style.transform = `translate3d(-${pos}px, 0, 0)`;
+      }
+      animId = requestAnimationFrame(step);
     };
 
-    const id = setInterval(step, 10);
-    return () => clearInterval(id);
+    animId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animId);
   }, [isPaused, products.length]);
 
   return (
