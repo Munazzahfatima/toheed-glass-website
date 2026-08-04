@@ -5,7 +5,7 @@ import { syncAndGetProjects } from "@/lib/projects";
 import InteractivePortfolio from "@/components/InteractivePortfolio";
 
 export const metadata = { title: "Project References" };
-export const revalidate = 0;
+export const revalidate = 60;
 
 export default async function GalleryPage() {
   const fallbackProjects = syncAndGetProjects();

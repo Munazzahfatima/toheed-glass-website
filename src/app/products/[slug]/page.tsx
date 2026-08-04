@@ -7,6 +7,8 @@ import { getWhatsappLink } from "@/lib/whatsapp";
 import { MessageCircle, Phone, ArrowLeft, CheckCircle2 } from "lucide-react";
 import type { Metadata } from "next";
 
+export const revalidate = 60;
+
 export async function generateMetadata({
   params,
 }: {

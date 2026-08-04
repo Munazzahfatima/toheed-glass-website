@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { MessageCircle } from "lucide-react";
 import { getWhatsappLink } from "@/lib/whatsapp";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 export const metadata = { title: "Products" };
 
 const categories = [
