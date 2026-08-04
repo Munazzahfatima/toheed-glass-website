@@ -147,12 +147,14 @@ export default function Navbar() {
                     {categoryGroups.map((group) => (
                       <div key={group.key} className="p-4">
                         <Link href={`/products?category=${group.key}`}
+                              prefetch={true}
                               onClick={() => setProdOpen(false)}
                               className="mb-2 block text-xs font-bold uppercase tracking-widest text-gold hover:underline">
                           {group.label}
                         </Link>
                         {group.items.map((i) => (
                           <Link key={i.slug} href={`/products/${i.slug}`}
+                                prefetch={true}
                                 onClick={() => setProdOpen(false)}
                                 className="block rounded py-1.5 px-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-navy">
                             {i.name}
@@ -162,7 +164,7 @@ export default function Navbar() {
                     ))}
                   </div>
                   <div className="border-t border-gray-100 bg-gray-50 px-4 py-2 text-right">
-                    <Link href="/products" onClick={() => setProdOpen(false)}
+                    <Link href="/products" prefetch={true} onClick={() => setProdOpen(false)}
                           className="text-xs font-semibold text-navy hover:text-gold">
                       View all products →
                     </Link>

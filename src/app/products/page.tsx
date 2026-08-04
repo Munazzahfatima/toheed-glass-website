@@ -82,6 +82,7 @@ export default async function ProductsPage({
               <Link
                 key={c.value}
                 href={c.value ? `/products?category=${c.value}` : "/products"}
+                prefetch={true}
                 className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
                   category === c.value
                     ? "bg-navy text-white"

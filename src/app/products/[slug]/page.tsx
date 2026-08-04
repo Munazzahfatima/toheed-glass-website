@@ -9,6 +9,29 @@ import type { Metadata } from "next";
 
 export const revalidate = 60;
 
+export async function generateStaticParams() {
+  const ALLOWED_SLUGS = [
+    "ceiling-glass",
+    "texture-crystal-glass-door-panel",
+    "texture-crystal-glass-window-panel",
+    "decorative-beveled-mirror-wall",
+    "decorative-led-smart-mirror",
+    "frosted-glass",
+    "shower-cabin",
+    "skylight-glass",
+    "single-glass-door",
+    "stairs-glass-railing",
+    "terrace-glass-railing",
+    "acp-wall-cladding",
+    "double-glazed-glass",
+    "glass-curtain-wall",
+    "glass-shop-front",
+    "office-glass-partition",
+    "tempered-glass",
+  ];
+  return ALLOWED_SLUGS.map((slug) => ({ slug }));
+}
+
 export async function generateMetadata({
   params,
 }: {
