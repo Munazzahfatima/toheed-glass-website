@@ -25,6 +25,11 @@ export const metadata: Metadata = {
     "glass railing Pakistan",
     "New Toheed Glass Sargodha",
   ],
+  icons: {
+    icon: "/images/logo.png",
+    shortcut: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
   openGraph: {
     title: "New Toheed Glass & Accessories",
     description: "Architectural & Decorative Glass Solutions in Pakistan",

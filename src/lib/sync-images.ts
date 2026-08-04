@@ -56,7 +56,14 @@ export function syncProductImages() {
       });
     }
 
-    console.log("✅ Successfully synced local images and project assets to public/");
+    // Copy logo to favicon / icon.png for browser tabs
+    const logoSrc = path.join(publicImagesDir, "logo.png");
+    if (fs.existsSync(logoSrc)) {
+      fs.copyFileSync(logoSrc, path.join(process.cwd(), "public", "icon.png"));
+      fs.copyFileSync(logoSrc, path.join(process.cwd(), "public", "favicon.ico"));
+    }
+
+    console.log("✅ Successfully synced local images, project assets, and browser favicons to public/");
   } catch (error) {
     console.error("Error syncing picture folder to public/images:", error);
   }
