@@ -19,9 +19,6 @@ const categoryMap: Record<string, ("DECORATIVE" | "RESIDENTIAL" | "COMMERCIAL" |
   "decorative-beveled-mirror-wall": ["DECORATIVE"],
   "decorative-led-smart-mirror": ["DECORATIVE"],
   "frosted-glass": ["DECORATIVE"],
-  "privacy-frosted-glass": ["DECORATIVE"],
-  "original-stained-glass": ["DECORATIVE"],
-  "artistic-stained-glass": ["DECORATIVE"],
 
   "shower-cabin": ["RESIDENTIAL"],
   "skylight-glass": ["RESIDENTIAL"],
@@ -39,6 +36,11 @@ const categoryMap: Record<string, ("DECORATIVE" | "RESIDENTIAL" | "COMMERCIAL" |
 };
 
 async function main() {
+  const allowedSlugs = Object.keys(categoryMap);
+  await prisma.product.deleteMany({
+    where: { slug: { notIn: allowedSlugs } },
+  });
+
   // ── Admin ──────────────────────────────────────────────────────────────
   const hashedPassword = await bcrypt.hash("Admin@12345", 10);
   await prisma.admin.upsert({
@@ -188,56 +190,7 @@ async function main() {
       shapes: ["RECTANGLE", "SQUARE"] as const,
       colorCount: 0,
       images: [
-        "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&q=80",
-        "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=80",
-      ],
-    },
-    {
-      name: "Privacy Frosted Glass",
-      slug: "privacy-frosted-glass",
-      description:
-        "High-opacity privacy frosted glass ideal for bathroom windows, office cabins, and any space requiring complete privacy.",
-      pricingType: "PER_SQFT" as const,
-      pricePerSqft: 1600,
-      isFeatured: false,
-      hasCheckout: false,
-      shapes: ["RECTANGLE", "SQUARE"] as const,
-      colorCount: 0,
-      images: [
-        "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800&q=80",
-        "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80",
-      ],
-    },
-    {
-      name: "Original Stained Glass",
-      slug: "original-stained-glass",
-      description:
-        "Authentic handcrafted stained glass for windows, doors, skylights, and decorative panels. Custom designs available.",
-      pricingType: "PER_SQFT" as const,
-      pricePerSqft: 4500,
-      isFeatured: true,
-      hasCheckout: false,
-      shapes: ["RECTANGLE", "SQUARE", "ROUND", "OVAL"] as const,
-      colorCount: 0,
-      images: [
-        "https://images.unsplash.com/photo-1548263594-a71ea65a8598?w=800&q=80",
-        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-      ],
-    },
-    {
-      name: "Artistic Stained Glass",
-      slug: "artistic-stained-glass",
-      description:
-        "Bespoke artistic stained glass creations for mosques, churches, homes, and commercial interiors. Fully customized artwork.",
-      pricingType: "PER_SQFT" as const,
-      pricePerSqft: 5500,
-      isFeatured: true,
-      hasCheckout: false,
-      shapes: ["RECTANGLE", "SQUARE", "ROUND", "OVAL"] as const,
-      colorCount: 0,
-      images: [
-        "https://images.unsplash.com/photo-1533158388-350df1a4e5f5?w=800&q=80",
-        "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=800&q=80",
+        "/images/Frosted glass.jpg",
       ],
     },
   ];

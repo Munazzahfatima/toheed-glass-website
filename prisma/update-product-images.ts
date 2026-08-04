@@ -1,18 +1,31 @@
-/**
- * Run: npx tsx prisma/update-product-images.ts
- * Updates all products with client's real images
- */
 import { PrismaClient } from "@prisma/client";
+
 const prisma = new PrismaClient();
 
+const allowedCategoryMap: Record<string, ("DECORATIVE" | "RESIDENTIAL" | "COMMERCIAL" | "SAFETY")[]> = {
+  "ceiling-glass": ["DECORATIVE"],
+  "texture-crystal-glass-door-panel": ["DECORATIVE"],
+  "texture-crystal-glass-window-panel": ["DECORATIVE"],
+  "decorative-beveled-mirror-wall": ["DECORATIVE"],
+  "decorative-led-smart-mirror": ["DECORATIVE"],
+  "frosted-glass": ["DECORATIVE"],
+
+  "shower-cabin": ["RESIDENTIAL"],
+  "skylight-glass": ["RESIDENTIAL"],
+  "single-glass-door": ["RESIDENTIAL"],
+  "stairs-glass-railing": ["RESIDENTIAL"],
+  "terrace-glass-railing": ["RESIDENTIAL"],
+
+  "acp-wall-cladding": ["COMMERCIAL"],
+  "double-glazed-glass": ["COMMERCIAL", "SAFETY"],
+  "glass-curtain-wall": ["COMMERCIAL"],
+  "glass-shop-front": ["COMMERCIAL"],
+  "office-glass-partition": ["COMMERCIAL"],
+
+  "tempered-glass": ["SAFETY"],
+};
+
 const productImages: Record<string, string[]> = {
-  "decorative-led-smart-mirror": [
-    "/images/Decorative LED smart mirror 1.jpeg",
-    "/images/Decorative LED smart mirror 2.png",
-  ],
-  "decorative-beveled-mirror-wall": [
-    "/images/Beveled mirror wall.jpeg",
-  ],
   "ceiling-glass": [
     "/images/Ceiling glass.jpg",
   ],
@@ -22,8 +35,33 @@ const productImages: Record<string, string[]> = {
   "texture-crystal-glass-window-panel": [
     "/images/Texture crystal glass window panel.jpeg",
   ],
+  "decorative-beveled-mirror-wall": [
+    "/images/Beveled mirror wall.jpeg",
+  ],
+  "decorative-led-smart-mirror": [
+    "/images/Decorative LED smart mirror 1.jpeg",
+    "/images/Decorative LED smart mirror 2.png",
+  ],
   "frosted-glass": [
     "/images/Frosted glass.jpg",
+  ],
+  "shower-cabin": [
+    "/images/Shower cabin 1.jpeg",
+    "/images/Shower cabin 2.jpeg",
+  ],
+  "skylight-glass": [
+    "/images/skylight glass.png",
+    "/images/skylight glass 2.jpg",
+  ],
+  "single-glass-door": [
+    "/images/single glass door.jpeg",
+  ],
+  "stairs-glass-railing": [
+    "/images/Stairs glass railing 1.jpeg",
+    "/images/Stairs glass railing 2.jpeg",
+  ],
+  "terrace-glass-railing": [
+    "/images/Terrace glass railing.jpeg",
   ],
   "acp-wall-cladding": [
     "/images/ACP wall cladding 1.jpeg",
@@ -43,47 +81,55 @@ const productImages: Record<string, string[]> = {
     "/images/Office glass partition 1.jpeg",
     "/images/Office glass partition 2.jpeg",
   ],
-  "shower-cabin": [
-    "/images/Shower cabin 1.jpeg",
-    "/images/Shower cabin 2.jpeg",
-  ],
-  "skylight-glass": [
-    "/images/skylight glass.png",
-    "/images/skylight glass 2.jpg",
-  ],
-  "single-glass-door": [
-    "/images/single glass door.jpeg",
-  ],
-  "stairs-glass-railing": [
-    "/images/Stairs glass railing 1.jpeg",
-    "/images/Stairs glass railing 2.jpeg",
-  ],
   "tempered-glass": [
     "/images/Tempered glass 1.jpeg",
     "/images/Tempered glass 2.jpeg",
   ],
-  "terrace-glass-railing": [
-    "/images/Terrace glass railing.jpeg",
-  ],
 };
 
 async function main() {
+  const allowedSlugs = Object.keys(allowedCategoryMap);
+
+  // Delete any old products not in the 17 allowed products list
+  const deleted = await prisma.product.deleteMany({
+    where: {
+      slug: {
+        notIn: allowedSlugs,
+      },
+    },
+  });
+  console.log(`🗑️ Removed ${deleted.count} old products from database.`);
+
   let updated = 0;
 
-  for (const [slug, urls] of Object.entries(productImages)) {
-    const product = await prisma.product.findUnique({ where: { slug } });
-    if (!product) { console.log(`⚠️  Not found: ${slug}`); continue; }
+  for (const slug of allowedSlugs) {
+    const categories = allowedCategoryMap[slug];
+    const urls = productImages[slug] || [];
 
-    // Replace images with client's real photos
-    await prisma.productImage.deleteMany({ where: { productId: product.id } });
-    await prisma.productImage.createMany({
-      data: urls.map((url, i) => ({ productId: product.id, url, sortOrder: i })),
+    const product = await prisma.product.findUnique({ where: { slug } });
+    if (!product) {
+      console.log(`⚠️ Not found in DB: ${slug}`);
+      continue;
+    }
+
+    // Ensure category mapping is up to date
+    await prisma.product.update({
+      where: { slug },
+      data: { categories },
     });
-    console.log(`✅ ${slug} → ${urls.length} images`);
+
+    // Replace images with real photos
+    await prisma.productImage.deleteMany({ where: { productId: product.id } });
+    if (urls.length > 0) {
+      await prisma.productImage.createMany({
+        data: urls.map((url, i) => ({ productId: product.id, url, sortOrder: i })),
+      });
+    }
+    console.log(`✅ ${slug} → [${categories.join(", ")}] → ${urls.length} images`);
     updated++;
   }
 
-  // Replace gallery with client's real project photos
+  // Replace gallery items with real project photos
   await prisma.galleryItem.deleteMany({});
   const galleryItems = [
     { title: "ACP Wall Cladding Project",              imageUrl: "/projects/ACP%20wall%20claiding%20proj.jpg" },
@@ -105,7 +151,7 @@ async function main() {
   }
 
   console.log(`\n✅ Gallery: ${galleryItems.length} real project photos`);
-  console.log(`✅ Products updated: ${updated}`);
+  console.log(`✅ Products updated & cleaned: ${updated}`);
 }
 
 main().catch(console.error).finally(() => prisma.$disconnect());
