@@ -15,6 +15,26 @@ const categories = [
   { value: "SAFETY",       label: "Safety" },
 ];
 
+const ALLOWED_SLUGS = [
+  "ceiling-glass",
+  "texture-crystal-glass-door-panel",
+  "texture-crystal-glass-window-panel",
+  "decorative-beveled-mirror-wall",
+  "decorative-led-smart-mirror",
+  "frosted-glass",
+  "shower-cabin",
+  "skylight-glass",
+  "single-glass-door",
+  "stairs-glass-railing",
+  "terrace-glass-railing",
+  "acp-wall-cladding",
+  "double-glazed-glass",
+  "glass-curtain-wall",
+  "glass-shop-front",
+  "office-glass-partition",
+  "tempered-glass",
+];
+
 export default async function ProductsPage({
   searchParams,
 }: {
@@ -25,6 +45,7 @@ export default async function ProductsPage({
   const products = await prisma.product.findMany({
     where: {
       isActive: true,
+      slug: { in: ALLOWED_SLUGS },
       ...(category ? { categories: { has: category as any } } : {}),
     },
     include: { images: { take: 1, orderBy: { sortOrder: "asc" } } },

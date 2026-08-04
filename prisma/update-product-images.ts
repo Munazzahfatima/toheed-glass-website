@@ -1,4 +1,26 @@
+import fs from "fs";
+import path from "path";
 import { PrismaClient } from "@prisma/client";
+
+// Auto-load .env, .env.local, or .env.example if process.env.DATABASE_URL is not defined
+if (!process.env.DATABASE_URL) {
+  for (const envFile of [".env.local", ".env", ".env.example"]) {
+    const envPath = path.join(process.cwd(), envFile);
+    if (fs.existsSync(envPath)) {
+      const content = fs.readFileSync(envPath, "utf-8");
+      for (const line of content.split("\n")) {
+        const trimmed = line.trim();
+        if (trimmed && !trimmed.startsWith("#") && trimmed.includes("=")) {
+          const [key, ...valParts] = trimmed.split("=");
+          const val = valParts.join("=").replace(/^["']|["']$/g, "");
+          if (key && val && !process.env[key.trim()]) {
+            process.env[key.trim()] = val;
+          }
+        }
+      }
+    }
+  }
+}
 
 const prisma = new PrismaClient();
 

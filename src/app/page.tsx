@@ -8,19 +8,46 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import InteractivePortfolio from "@/components/InteractivePortfolio";
 import { syncAndGetProjects } from "@/lib/projects";
 
+const ALLOWED_SLUGS = [
+  "ceiling-glass",
+  "texture-crystal-glass-door-panel",
+  "texture-crystal-glass-window-panel",
+  "decorative-beveled-mirror-wall",
+  "decorative-led-smart-mirror",
+  "frosted-glass",
+  "shower-cabin",
+  "skylight-glass",
+  "single-glass-door",
+  "stairs-glass-railing",
+  "terrace-glass-railing",
+  "acp-wall-cladding",
+  "double-glazed-glass",
+  "glass-curtain-wall",
+  "glass-shop-front",
+  "office-glass-partition",
+  "tempered-glass",
+];
+
 async function getData() {
   const projects = syncAndGetProjects();
   try {
     const [decorative, other, dbGallery] = await Promise.all([
       prisma.product.findMany({
-        where: { categories: { has: "DECORATIVE" }, isActive: true, isFeatured: true },
+        where: {
+          categories: { has: "DECORATIVE" },
+          isActive: true,
+          isFeatured: true,
+          slug: { in: ALLOWED_SLUGS },
+        },
         include: { images: { take: 1, orderBy: { sortOrder: "asc" } } },
         take: 4, orderBy: { sortOrder: "asc" },
       }),
       prisma.product.findMany({
         where: {
           categories: { hasSome: ["RESIDENTIAL", "COMMERCIAL", "SAFETY"] },
-          isActive: true, isFeatured: true,
+          isActive: true,
+          isFeatured: true,
+          slug: { in: ALLOWED_SLUGS },
         },
         include: { images: { take: 1, orderBy: { sortOrder: "asc" } } },
         take: 4, orderBy: { sortOrder: "asc" },
