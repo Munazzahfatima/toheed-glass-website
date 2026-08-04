@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronLeft, ChevronRight, MessageCircle,
   LayoutGrid, Gem, Lock, PenTool, ShieldCheck,
@@ -166,7 +167,7 @@ const trustBadges = [
 ];
 
 const wa = getWhatsappLink("Hi! I'd like a free consultation for glass solutions.");
-const AUTOPLAY_MS = 4000;
+const AUTOPLAY_MS = 5000;
 
 export default function HeroSlider() {
   const [cur, setCur]       = useState(0);
@@ -183,6 +184,8 @@ export default function HeroSlider() {
     return () => clearInterval(t);
   }, [cur, paused, go]);
 
+  const slide = slides[cur];
+
   return (
     <section
       className="relative overflow-hidden bg-gradient-to-br from-navy via-navy to-navy-dark"
@@ -194,16 +197,16 @@ export default function HeroSlider() {
       <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-gold/10 blur-3xl" />
 
       <div className="relative z-10 grid gap-10 py-10 lg:grid-cols-2 lg:items-center lg:gap-8 lg:py-16">
-        {/* Left — text, smooth crossfade per slide */}
-        <div className="container-luxe relative lg:pr-4">
-          {slides.map((slide, i) => (
-            <div
-              key={i}
-              className={`transform-gpu transition-all duration-1000 ease-in-out ${
-                i === cur
-                  ? "relative opacity-100 translate-y-0"
-                  : "absolute inset-0 opacity-0 translate-y-2 pointer-events-none"
-              }`}
+        {/* Left — text with ultra-smooth Framer Motion animation */}
+        <div className="container-luxe relative min-h-[380px] lg:min-h-[420px] lg:pr-4 flex flex-col justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={cur}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
+              className="w-full"
             >
               <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-white backdrop-blur-sm">
                 <Gem className="h-3.5 w-3.5 text-gold" /> {slide.tag}
@@ -228,7 +231,7 @@ export default function HeroSlider() {
                   alt={slide.title}
                   fill
                   sizes="100vw"
-                  className="object-cover transition-transform duration-1000 ease-in-out"
+                  className="object-cover"
                 />
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/40 to-transparent" />
 
@@ -243,7 +246,7 @@ export default function HeroSlider() {
                     <button
                       key={di}
                       onClick={() => go(di)}
-                      className={`h-1.5 rounded-full transition-all duration-500 ${
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
                         di === cur ? "w-5 bg-white" : "w-1.5 bg-white/40 hover:bg-white/60"
                       }`}
                       aria-label={`Slide ${di + 1}`}
@@ -289,31 +292,34 @@ export default function HeroSlider() {
                   </span>
                 ))}
               </div>
-            </div>
-          ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        {/* Right — rounded photo panel desktop/tablet */}
+        {/* Right — rounded photo panel desktop/tablet with smooth Framer Motion crossfade */}
         <div className="hidden container-luxe lg:block lg:px-0">
           <div className="relative h-[320px] w-full overflow-hidden rounded-3xl border border-white/15 shadow-2xl sm:h-[420px] lg:h-[520px] lg:rounded-[2rem]">
-            {slides.map((slide, i) => (
-              <div
-                key={i}
-                className={`absolute inset-0 transform-gpu transition-all duration-1000 ease-in-out ${
-                  i === cur ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
-                }`}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={cur}
+                initial={{ opacity: 0, scale: 1.03 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                className="absolute inset-0"
               >
                 <Image
                   src={slide.img}
                   alt={slide.title}
                   fill
-                  priority={i === 0}
+                  priority
                   sizes="(min-width: 1024px) 50vw, 100vw"
                   className="object-cover"
                 />
-              </div>
-            ))}
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent" />
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent z-10" />
 
             {/* Slide counter */}
             <span className="absolute bottom-5 right-5 z-20 rounded-full border border-white/30 bg-black/30 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
@@ -326,7 +332,7 @@ export default function HeroSlider() {
                 <button
                   key={i}
                   onClick={() => go(i)}
-                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
                     i === cur ? "w-6 bg-white" : "w-1.5 bg-white/40 hover:bg-white/60"
                   }`}
                   aria-label={`Slide ${i + 1}`}
