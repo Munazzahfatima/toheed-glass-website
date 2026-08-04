@@ -58,6 +58,7 @@ export default function ContactForm() {
       </div>
       <textarea
         required
+        minLength={3}
         placeholder="Tell us about your requirement..."
         rows={5}
         value={form.message}
