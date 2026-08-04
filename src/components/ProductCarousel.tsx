@@ -77,11 +77,6 @@ export default function ProductCarousel({ products }: { products: Product[] }) {
                   ) : (
                     <div className="flex h-full items-center justify-center text-3xl">🪟</div>
                   )}
-                  {p.hasCheckout && (
-                    <span className="absolute left-0 top-2 rounded-r-full bg-gold px-2.5 py-0.5 text-[9px] font-bold text-white">
-                      Order
-                    </span>
-                  )}
                 </div>
               </Link>
 

@@ -362,11 +362,6 @@ function ProductCard({ product }: {
         ) : (
           <div className="flex h-full items-center justify-center text-5xl">🪟</div>
         )}
-        {product.hasCheckout && !product.slug.includes("led") && (
-          <span className="absolute left-0 top-3 rounded-r-full bg-gold px-4 py-1 text-[10px] font-bold text-white">
-            Order Online
-          </span>
-        )}
       </div>
       <div className="p-4">
         <h3 className="font-serif text-base font-semibold text-navy">{product.name}</h3>

@@ -113,11 +113,6 @@ export default async function ProductsPage({
                       Featured
                     </span>
                   )}
-                  {p.hasCheckout && !p.slug.includes("led") && (
-                    <span className="absolute right-3 top-3 rounded-full bg-navy px-3 py-1 text-xs font-semibold text-white">
-                      Order Online
-                    </span>
-                  )}
                 </Link>
 
                 {/* Info */}

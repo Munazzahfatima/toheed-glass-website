@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { prisma } from "@/lib/prisma";
-import OrderWizard from "@/components/OrderWizard";
 import ProductImageGallery from "@/components/ProductImageGallery";
 import { getWhatsappLink } from "@/lib/whatsapp";
 import { MessageCircle, Phone, ArrowLeft, CheckCircle2 } from "lucide-react";
@@ -52,48 +51,7 @@ export default async function ProductDetailPage({
     `Hi, I'm interested in "${product.name}". Please share pricing and availability.`
   );
 
-  // ── Checkout product ─────────────────────────────────────────────────────
-  if (product.hasCheckout) {
-    return (
-      <section className="container-luxe py-16">
-        {/* Breadcrumb */}
-        <nav className="mb-8 flex items-center gap-2 text-xs text-navy/50">
-          <Link href="/" className="hover:text-gold">Home</Link>
-          {" › "}
-          <Link href={categoryHref} className="hover:text-gold">{categoryLabel}</Link>
-          {" › "}
-          <span className="font-medium text-navy">{product.name}</span>
-        </nav>
-        <OrderWizard
-          product={{
-            id: product.id,
-            name: product.name,
-            slug: product.slug,
-            description: product.description,
-            categories: product.categories,
-            pricingType: product.pricingType,
-            pricePerSqft: product.pricePerSqft ? Number(product.pricePerSqft) : null,
-            fixedPrice: product.fixedPrice ? Number(product.fixedPrice) : null,
-            fixedSize: product.fixedSize,
-            shapes: product.shapes,
-            images: product.images.map((i) => i.url),
-            colors: product.colors.map((c) => ({
-              id: c.color.id,
-              name: c.color.name,
-              hexPreview: c.color.hexPreview,
-              previewImage: c.color.previewImage,
-              description: c.color.description,
-              extraCharge: Number(c.color.extraCharge),
-            })),
-          }}
-          installationEnabled={settings?.installationEnabled ?? true}
-          installationCharge={settings ? Number(settings.installationCharge) : 0}
-        />
-      </section>
-    );
-  }
 
-  // ── Info-only product (Read More / Contact on WhatsApp) ─────────────────
   return (
     <>
       <section className="container-luxe py-16">
