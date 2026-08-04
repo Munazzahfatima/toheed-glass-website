@@ -57,7 +57,8 @@ export default function ContactPage() {
               <Clock className="mt-1 h-5 w-5 text-gold" />
               <div>
                 <p className="font-semibold text-navy">Business Hours</p>
-                <p className="text-sm text-navy/60">Sat – Thu: 10:00 AM – 8:00 PM (Friday Off)</p>
+                <p className="text-sm text-navy/60">Sat – Thu: 10:00 AM – 8:00 PM</p>
+                <p className="text-xs font-medium text-amber-600">Friday: Closed (Off)</p>
               </div>
             </div>
             <a
