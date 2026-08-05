@@ -6,9 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   Package,
-  Palette,
   FolderKanban,
-  ShoppingCart,
   MessageSquareText,
   Settings,
   Home,
@@ -19,8 +17,6 @@ const links = [
   { href: "/admin/products", label: "Products", icon: Package },
   { href: "/admin/gallery", label: "Projects", icon: FolderKanban },
   { href: "/admin/inquiries", label: "Quotes & Messages", icon: MessageSquareText },
-  { href: "/admin/orders", label: "Orders", icon: ShoppingCart },
-  { href: "/admin/colors", label: "LED Colors", icon: Palette },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 

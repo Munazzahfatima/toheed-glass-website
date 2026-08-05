@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const CATEGORIES = [
@@ -10,11 +10,8 @@ const CATEGORIES = [
   { value: "SAFETY", label: "Safety" },
 ];
 
-const SHAPES = ["RECTANGLE", "SQUARE", "ROUND", "OVAL"];
-
 export default function ProductForm({ initial, productId }: { initial?: any; productId?: string }) {
   const router = useRouter();
-  const [colors, setColors] = useState<any[]>([]);
   const [form, setForm] = useState({
     name: initial?.name || "",
     categories: initial?.categories && initial.categories.length ? initial.categories : ["DECORATIVE"],
@@ -23,18 +20,11 @@ export default function ProductForm({ initial, productId }: { initial?: any; pro
     pricePerSqft: initial?.pricePerSqft || "",
     fixedPrice: initial?.fixedPrice || "",
     fixedSize: initial?.fixedSize || "",
-    shapes: initial?.shapes || SHAPES,
     isFeatured: initial?.isFeatured || false,
-    hasCheckout: initial?.hasCheckout || false,
     isActive: initial?.isActive ?? true,
     images: initial?.images?.map((i: any) => i.url) || [""],
-    colorIds: initial?.colors?.map((c: any) => c.color?.id || c.colorId) || [],
   });
   const [saving, setSaving] = useState(false);
-
-  useEffect(() => {
-    fetch("/api/colors").then((r) => r.json()).then(setColors);
-  }, []);
 
   function updateImage(i: number, val: string) {
     const imgs = [...form.images];
@@ -49,7 +39,6 @@ export default function ProductForm({ initial, productId }: { initial?: any; pro
       ...form,
       pricePerSqft: form.pricePerSqft ? Number(form.pricePerSqft) : null,
       fixedPrice: form.fixedPrice ? Number(form.fixedPrice) : null,
-      hasCheckout: form.hasCheckout,
       images: form.images.filter(Boolean),
     };
 
@@ -124,51 +113,6 @@ export default function ProductForm({ initial, productId }: { initial?: any; pro
         </div>
       )}
 
-      {form.pricingType === "PER_SQFT" && (
-        <div>
-          <label className="text-sm font-medium text-navy">Available Shapes</label>
-          <div className="mt-2 flex flex-wrap gap-2">
-            {SHAPES.map((s) => (
-              <button
-                type="button"
-                key={s}
-                onClick={() =>
-                  setForm({
-                    ...form,
-                    shapes: form.shapes.includes(s) ? form.shapes.filter((x: string) => x !== s) : [...form.shapes, s],
-                  })
-                }
-                className={`rounded-full border px-4 py-1.5 text-xs font-medium capitalize ${form.shapes.includes(s) ? "border-gold bg-gold/10" : "border-navy/10"}`}
-              >
-                {s.toLowerCase()}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div>
-        <label className="text-sm font-medium text-navy">LED Colors Available</label>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {colors.map((c) => (
-            <button
-              type="button"
-              key={c.id}
-              onClick={() =>
-                setForm({
-                  ...form,
-                  colorIds: form.colorIds.includes(c.id) ? form.colorIds.filter((x: string) => x !== c.id) : [...form.colorIds, c.id],
-                })
-              }
-              className={`rounded-full border px-4 py-1.5 text-xs font-medium ${form.colorIds.includes(c.id) ? "border-gold bg-gold/10" : "border-navy/10"}`}
-            >
-              {c.name}
-            </button>
-          ))}
-          {colors.length === 0 && <p className="text-xs text-navy/40">Add LED colors first from the LED Colors page.</p>}
-        </div>
-      </div>
-
       <div>
         <label className="text-sm font-medium text-navy">Image URLs</label>
         <div className="mt-2 space-y-2">
@@ -181,7 +125,6 @@ export default function ProductForm({ initial, productId }: { initial?: any; pro
 
       <div className="flex gap-6">
         <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={form.isFeatured} onChange={(e) => setForm({ ...form, isFeatured: e.target.checked })} className="accent-gold" /> Featured</label>
-        <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={form.hasCheckout} onChange={(e) => setForm({ ...form, hasCheckout: e.target.checked })} className="accent-gold" /> Has Checkout (Order Wizard)</label>
         <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={form.isActive} onChange={(e) => setForm({ ...form, isActive: e.target.checked })} className="accent-gold" /> Active</label>
       </div>
 

@@ -54,13 +54,10 @@ export default async function ProductDetailPage({
     where: { slug: params.slug },
     include: {
       images: { orderBy: { sortOrder: "asc" } },
-      colors: { include: { color: true }, where: { color: { isActive: true } } },
     },
   });
 
   if (!product || !product.isActive) notFound();
-
-  const settings = await prisma.settings.findUnique({ where: { id: "settings" } });
 
   const categoryNames: Record<string, string> = {
     DECORATIVE: "Decorative",

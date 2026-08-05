@@ -11,7 +11,6 @@ type Product = {
   name: string;
   slug: string;
   description: string;
-  hasCheckout: boolean;
   images: { url: string; altText: string | null }[];
 };
 

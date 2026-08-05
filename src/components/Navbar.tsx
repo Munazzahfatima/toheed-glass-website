@@ -61,15 +61,19 @@ export default function Navbar() {
   useEffect(() => {
     let ticking = false;
     const fn = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setScrolled(window.scrollY > 25);
-          ticking = false;
-        });
-        ticking = true;
-      }
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        const y = window.scrollY;
+        // Hysteresis: turn ON above 80px, OFF below 20px.
+        // A single threshold makes the header flip back and forth
+        // right at the boundary, which is what caused the shaking.
+        setScrolled((prev) => (prev ? y > 20 : y > 80));
+        ticking = false;
+      });
     };
     window.addEventListener("scroll", fn, { passive: true });
+    fn();
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
@@ -82,8 +86,8 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className={`sticky top-0 z-50 bg-white/95 backdrop-blur-md transition-all duration-300 ease-in-out ${scrolled ? "shadow-md py-2.5" : "border-b border-gray-100 py-4 sm:py-5"}`}>
-      <div className="container-luxe flex items-center justify-between transition-all duration-300 ease-in-out">
+    <header className={`sticky top-0 z-50 border-b bg-white/95 py-3.5 backdrop-blur-md transition-shadow duration-300 ease-in-out sm:py-4 ${scrolled ? "border-transparent shadow-md" : "border-gray-100 shadow-none"}`}>
+      <div className="container-luxe flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex shrink-0 items-center gap-3 group">
           <Image
@@ -91,23 +95,13 @@ export default function Navbar() {
             alt="New Toheed Glass"
             width={80}
             height={80}
-            className={`shrink-0 object-contain transition-all duration-300 ease-in-out ${
-              scrolled ? "h-10 w-10 sm:h-11 sm:w-11" : "h-14 w-14 sm:h-16 sm:w-16"
-            }`}
+            className="h-12 w-12 shrink-0 object-contain sm:h-14 sm:w-14"
           />
           <div className="leading-tight min-w-0">
-            <p
-              className={`font-serif font-extrabold text-navy leading-none truncate transition-all duration-300 ease-in-out ${
-                scrolled ? "text-lg sm:text-xl" : "text-xl sm:text-2xl"
-              }`}
-            >
+            <p className="truncate font-serif text-xl font-extrabold leading-none text-navy sm:text-2xl">
               New Toheed Glass
             </p>
-            <p
-              className={`font-bold uppercase tracking-[0.18em] text-gold truncate transition-all duration-300 ease-in-out ${
-                scrolled ? "mt-0.5 text-[10px]" : "mt-1 text-xs"
-              }`}
-            >
+            <p className="mt-1 truncate text-xs font-bold uppercase tracking-[0.18em] text-gold">
               &amp; Accessories
             </p>
           </div>

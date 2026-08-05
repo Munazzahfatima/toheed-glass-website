@@ -81,45 +81,10 @@ async function main() {
     update: {},
     create: {
       id: "settings",
-      installationEnabled: true,
-      installationCharge: 3000,
-      defaultDeliveryCharge: 1500,
-      freeDeliveryThreshold: 50000,
-      estimatedProductionDays: 7,
-      estimatedDeliveryDays: 3,
       whatsappNumber: "923366001040",
       ownerEmail: "mudassirchadhar789@gmail.com",
     },
   });
-
-  // ── LED Colors (used for products with checkout) ───────────────────────
-  const colorData = [
-    { name: "Warm White (3000K)", hexPreview: "#F6D9A0", extraCharge: 0 },
-    { name: "Natural White (4000K)", hexPreview: "#F5EFD9", extraCharge: 0 },
-    { name: "Cool White (6500K)", hexPreview: "#EAF2FB", extraCharge: 0 },
-    { name: "Daylight White", hexPreview: "#FFFFFF", extraCharge: 0 },
-    { name: "Soft Yellow", hexPreview: "#FCE38A", extraCharge: 500 },
-    { name: "Golden Glow", hexPreview: "#D4A64A", extraCharge: 500 },
-    { name: "Ice Blue", hexPreview: "#AEE7F5", extraCharge: 800 },
-    { name: "RGB Multicolor", hexPreview: "#B892FF", extraCharge: 2000 },
-    { name: "RGB Smart LED", hexPreview: "#FF8FB1", extraCharge: 3500 },
-  ];
-
-  const colors = [];
-  for (const c of colorData) {
-    const color = await prisma.ledColor.upsert({
-      where: { slug: slugify(c.name) },
-      update: {},
-      create: {
-        name: c.name,
-        slug: slugify(c.name),
-        hexPreview: c.hexPreview,
-        extraCharge: c.extraCharge,
-        description: `${c.name} LED lighting option.`,
-      },
-    });
-    colors.push(color);
-  }
 
   // ── DECORATIVE GLASS products ──────────────────────────────────────────
   const decorativeProducts = [
@@ -131,9 +96,6 @@ async function main() {
       pricingType: "PER_SQFT" as const,
       pricePerSqft: 3500,
       isFeatured: true,
-      hasCheckout: true,
-      shapes: ["RECTANGLE", "SQUARE", "ROUND", "OVAL"] as const,
-      colorCount: 9,
       images: [
         "/images/led-mirror-luxury.jpeg",
         "/images/led-smart-mirrors-fb.png",
@@ -147,9 +109,6 @@ async function main() {
       pricingType: "PER_SQFT" as const,
       pricePerSqft: 2800,
       isFeatured: true,
-      hasCheckout: true,
-      shapes: ["RECTANGLE", "SQUARE"] as const,
-      colorCount: 0,
       images: [
         "/images/beveled-mirror-wall.jpeg",
         "/images/beveled-mirror-luxury.png",
@@ -163,9 +122,6 @@ async function main() {
       pricingType: "PER_SQFT" as const,
       pricePerSqft: 2200,
       isFeatured: true,
-      hasCheckout: false,
-      shapes: ["RECTANGLE", "SQUARE"] as const,
-      colorCount: 0,
       images: [] as string[],
     },
     {
@@ -176,9 +132,6 @@ async function main() {
       pricingType: "PER_SQFT" as const,
       pricePerSqft: 1900,
       isFeatured: false,
-      hasCheckout: false,
-      shapes: ["RECTANGLE"] as const,
-      colorCount: 0,
       images: [
         "/images/texture-crystal-door.jpeg",
       ],
@@ -191,9 +144,6 @@ async function main() {
       pricingType: "PER_SQFT" as const,
       pricePerSqft: 1700,
       isFeatured: false,
-      hasCheckout: false,
-      shapes: ["RECTANGLE", "SQUARE"] as const,
-      colorCount: 0,
       images: [
         "/images/texture-crystal-window.jpeg",
         "/images/texture-crystal-window-2.jpeg",
@@ -207,9 +157,6 @@ async function main() {
       pricingType: "PER_SQFT" as const,
       pricePerSqft: 1500,
       isFeatured: true,
-      hasCheckout: false,
-      shapes: ["RECTANGLE", "SQUARE"] as const,
-      colorCount: 0,
       images: [
         "/images/Frosted glass.jpg",
       ],
@@ -230,7 +177,6 @@ async function main() {
       await prisma.product.update({
         where: { slug: p.slug },
         data: {
-          hasCheckout: p.hasCheckout,
           isFeatured: p.isFeatured,
           sortOrder: i,
           categories: (categoryMap[p.slug] || ["DECORATIVE"]) as any,
@@ -245,14 +191,9 @@ async function main() {
           description: p.description,
           pricingType: p.pricingType,
           pricePerSqft: p.pricePerSqft,
-          shapes: p.shapes as any,
           isFeatured: p.isFeatured,
-          hasCheckout: p.hasCheckout,
           sortOrder: i,
           images: { create: p.images.map((url, idx) => ({ url, sortOrder: idx })) },
-          colors: p.colorCount > 0
-            ? { create: colors.slice(0, p.colorCount).map((c) => ({ colorId: c.id })) }
-            : undefined,
         },
       });
     }
@@ -400,7 +341,6 @@ async function main() {
           pricingType: "PER_SQFT",
           pricePerSqft: 1500,
           isFeatured: p.isFeatured,
-          hasCheckout: false,
           sortOrder: i,
           images: { create: p.images.map((url, idx) => ({ url, sortOrder: idx })) },
         },

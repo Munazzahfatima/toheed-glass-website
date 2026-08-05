@@ -376,7 +376,7 @@ export default async function HomePage() {
 
 /* ── Product Card — matches competitor style exactly ── */
 function ProductCard({ product }: {
-  product: { id: string; name: string; slug: string; hasCheckout: boolean;
+  product: { id: string; name: string; slug: string;
              images: { url: string; altText: string | null }[] };
 }) {
   const wa = getWhatsappLink(`Hi, I'm interested in "${product.name}". Please share pricing.`);

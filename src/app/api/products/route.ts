@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
       ...(category ? { categories: { has: category as any } } : {}),
       ...(activeOnly ? { isActive: true } : {}),
     },
-    include: { images: { orderBy: { sortOrder: "asc" } }, colors: { include: { color: true } } },
+    include: { images: { orderBy: { sortOrder: "asc" } } },
     orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
   });
 
@@ -39,18 +39,13 @@ export async function POST(req: NextRequest) {
       pricePerSqft: body.pricingType === "PER_SQFT" ? body.pricePerSqft : null,
       fixedPrice: body.pricingType === "FIXED" ? body.fixedPrice : null,
       fixedSize: body.fixedSize || null,
-      shapes: body.shapes || ["RECTANGLE", "SQUARE", "ROUND", "OVAL"],
       isFeatured: !!body.isFeatured,
       isActive: body.isActive !== false,
-      hasCheckout: !!body.hasCheckout,
       images: {
         create: (body.images || []).map((url: string, i: number) => ({ url, sortOrder: i })),
       },
-      colors: {
-        create: (body.colorIds || []).map((colorId: string) => ({ colorId })),
-      },
     },
-    include: { images: true, colors: true },
+    include: { images: true },
   });
 
   return NextResponse.json(product, { status: 201 });
