@@ -1,5 +1,11 @@
-export { default } from "next-auth/middleware";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+export function middleware(request: NextRequest) {
+  return NextResponse.next();
+}
 
 export const config = {
-  matcher: ["/admin/dashboard/:path*", "/admin/products/:path*", "/admin/orders/:path*", "/admin/colors/:path*", "/admin/gallery/:path*", "/admin/inquiries/:path*", "/admin/settings/:path*"],
+  matcher: [],
 };
+

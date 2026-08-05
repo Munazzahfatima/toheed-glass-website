@@ -2,31 +2,31 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { signOut } from "next-auth/react";
+import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   Package,
   Palette,
-  Images,
+  FolderKanban,
   ShoppingCart,
   MessageSquareText,
   Settings,
-  LogOut,
+  Home,
 } from "lucide-react";
 
 const links = [
   { href: "/admin/dashboard", label: "Overview", icon: LayoutDashboard },
   { href: "/admin/products", label: "Products", icon: Package },
-  { href: "/admin/colors", label: "LED Colors", icon: Palette },
+  { href: "/admin/gallery", label: "Projects", icon: FolderKanban },
+  { href: "/admin/inquiries", label: "Quotes & Messages", icon: MessageSquareText },
   { href: "/admin/orders", label: "Orders", icon: ShoppingCart },
-  { href: "/admin/gallery", label: "Gallery", icon: Images },
-  { href: "/admin/inquiries", label: "Inquiries", icon: MessageSquareText },
+  { href: "/admin/colors", label: "LED Colors", icon: Palette },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 
 export default function AdminSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <aside className="hidden w-64 shrink-0 border-r border-navy/10 bg-white lg:block">
@@ -51,13 +51,14 @@ export default function AdminSidebar() {
           );
         })}
         <button
-          onClick={() => signOut({ callbackUrl: "/admin/login" })}
-          className="mt-4 flex w-full items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50"
+          onClick={() => router.push("/")}
+          className="mt-6 flex w-full items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium text-navy/60 hover:bg-navy/5"
         >
-          <LogOut className="h-4 w-4" />
-          Sign Out
+          <Home className="h-4 w-4" />
+          View Website
         </button>
       </nav>
     </aside>
   );
 }
+

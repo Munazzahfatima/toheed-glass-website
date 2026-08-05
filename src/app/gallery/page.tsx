@@ -11,13 +11,16 @@ export default async function GalleryPage() {
   const fallbackProjects = syncAndGetProjects();
   let dbItems: any[] = [];
   try {
-    dbItems = await prisma.galleryItem.findMany({ orderBy: { sortOrder: "asc" } });
+    dbItems = await prisma.galleryItem.findMany({ orderBy: { createdAt: "desc" } });
   } catch (e) {
     dbItems = [];
   }
 
-  const validDbItems = dbItems.filter(item => item.imageUrl && item.imageUrl.includes("/projects/"));
-  const items = validDbItems.length > 0 ? validDbItems : fallbackProjects;
+  const validDbItems = dbItems.filter(item => item.imageUrl);
+  const items = validDbItems.length > 0 
+    ? [...validDbItems, ...fallbackProjects.filter(f => !validDbItems.some(d => d.title === f.title))]
+    : fallbackProjects;
+
 
   return (
     <section className="container-luxe py-16">
